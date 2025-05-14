@@ -8,7 +8,7 @@ import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
 import ohos.state_macro_manage.Watch
 
-const TAG = "vlayout BANNER_LAYOUT "
+private const TAG = "vlayout BANNER_LAYOUT "
 
 @Component
 public class BannerLayout {
@@ -43,29 +43,29 @@ public class BannerLayout {
             layoutItemSpace: this.vLayoutAttribute.layoutItemSpace,
             layoutEffectMode: this.vLayoutAttribute.layoutEffectMode,
             zIndex: this.vLayoutAttribute.zIndex,
-            padding: this.vLayoutAttribute.padding,
-            topPadding: this.vLayoutAttribute.topPadding,
-            rightPadding: this.vLayoutAttribute.rightPadding,
-            bottomPadding: this.vLayoutAttribute.bottomPadding,
-            leftPadding: this.vLayoutAttribute.leftPadding,
             margin: this.vLayoutAttribute.margin,
-            topMargin: this.vLayoutAttribute.topMargin,
-            rightMargin: this.vLayoutAttribute.rightMargin,
-            bottomMargin: this.vLayoutAttribute.bottomMargin,
-            leftMargin: this.vLayoutAttribute.leftMargin
+            topMargin: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[0]
+            } else {
+                this.vLayoutAttribute.topMargin
+            },
+            rightMargin: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[1]
+            } else {
+                this.vLayoutAttribute.rightMargin
+            },
+            bottomMargin: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[2]
+            } else {
+                this.vLayoutAttribute.bottomMargin
+            },
+            leftMargin: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[3]
+            } else {
+                this.vLayoutAttribute.leftMargin
+            }
         )
-        if (this.bannerInfo.padding.size == 4) {
-            this.bannerInfo.topPadding = this.bannerInfo.padding[0]
-            this.bannerInfo.rightPadding = this.bannerInfo.padding[1]
-            this.bannerInfo.bottomPadding = this.bannerInfo.padding[2]
-            this.bannerInfo.leftPadding = this.bannerInfo.padding[3]
-        }
-        if (this.bannerInfo.margin.size == 4) {
-            this.bannerInfo.topMargin = this.bannerInfo.margin[0]
-            this.bannerInfo.rightMargin = this.bannerInfo.margin[1]
-            this.bannerInfo.bottomMargin = this.bannerInfo.margin[2]
-            this.bannerInfo.leftMargin = this.bannerInfo.margin[3]
-        }
+
         this.initComponentSize()
         this.computedRange()
     }
@@ -122,12 +122,6 @@ public class BannerLayout {
 
     func computedHeight() {
         this.layoutHeight = this.itemHeight
-        this.computedExtraHeight()
-    }
-
-    func computedExtraHeight() {
-        this.layoutHeight = this.layoutHeight + this.bannerInfo.topPadding
-        this.layoutHeight = this.layoutHeight + this.bannerInfo.bottomPadding
     }
 
     func build() {
@@ -140,7 +134,7 @@ public class BannerLayout {
                     .onAreaChange({oldValue, newValue =>
                         this.itemWidth = newValue.width
                         this.itemHeight = newValue.height
-                        Hilog.error(0,"",  '${TAG} itemWidth = ${this.itemWidth}, itemHeight = ${this.itemHeight}')
+                        Hilog.info(0,"",  '${TAG} itemWidth = ${this.itemWidth}, itemHeight = ${this.itemHeight}')
                         this.computedHeight()
                     })
                })
@@ -162,12 +156,6 @@ public class BannerLayout {
                 	case 2 => EdgeEffect.Fade
                 	case _ => EdgeEffect.None
                 }
-            )
-            .padding(
-                top: this.bannerInfo.topPadding,
-                right: this.bannerInfo.rightPadding,
-                bottom: this.bannerInfo.bottomPadding,
-                left: this.bannerInfo.leftPadding
             )
         }
         .backgroundColor(this.bannerInfo.bgColor)

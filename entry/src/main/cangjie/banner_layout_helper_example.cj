@@ -5,8 +5,6 @@ package ohos_app_cangjie_entry
 
 import ohos.state_macro_manage.*
 
-import vlayout4cj.*
-
 @Entry
 @Component
 class BannerLayoutHelperExample {
@@ -40,6 +38,7 @@ class BannerLayoutHelperExample {
                     layoutHeight: 200.0,
                     aspectRatio: 5,
                     bgColor: 0xFF0000,
+                    margin: [10.0, 10.0,10.0,10.0]
                 )
             )
         }

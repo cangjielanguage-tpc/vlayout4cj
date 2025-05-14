@@ -12,6 +12,8 @@ internal import ohos.hilog.Hilog
 
 import ohos.state_macro_manage.*
 
+internal import vlayout4cj.*
+
 @Entry
 @Component
 class EntryView {
@@ -23,6 +25,12 @@ class EntryView {
                     .backgroundColor(0x317aff)
                     .onClick { _ =>
                         Router.push(url: "BannerLayoutHelperExample")
+                    }
+                Button("ColumnLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "ColumnLayoutHelperExample")
                     }
              }
             .width(100.percent)

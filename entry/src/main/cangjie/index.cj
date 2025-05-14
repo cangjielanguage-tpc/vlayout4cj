@@ -32,6 +32,12 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "ColumnLayoutHelperExample")
                     }
+                Button("DefaultLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "DefaultLayoutHelperExample")
+                    }
              }
             .width(100.percent)
             .height(100.percent)

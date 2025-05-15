@@ -6,6 +6,9 @@ package vlayout4cj
 import ohos.state_macro_manage.Observed
 import ohos.state_macro_manage.Publish
 
+/*
+ * BannerLayoutHelper
+ */
 @Observed
 public class BannerAttributes {
     @Publish var range: Array<Int64> = [] //可显示的条目，默认值为[0,数据源长度]
@@ -45,6 +48,12 @@ public class layoutDataType {
     @Publish public var tag: String = ""
 }
 
+/*
+ * SingleLayoutHelper
+ * ColumnLayoutHelper
+ * OnePlusNLayoutHelper
+ * OnePlusNLayoutHelperEx
+ */
 @Observed
 public class AbstractFullFillAttributes {
     @Publish var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
@@ -55,6 +64,31 @@ public class AbstractFullFillAttributes {
     @Publish var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish var layoutHeight: Float64 = 0.0 //容器高度
     @Publish var aspectRatio: Float64 = 1.0 //容器纵横比
+    @Publish var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
+    @Publish var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
+    @Publish var zIndex: Int32 = 0 //z序，默认值为0
+    @Publish var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
+    @Publish var topPadding: Float64 = 0.0 //上内边距，默认值为0
+    @Publish var rightPadding: Float64 = 0.0 //右内边距，默认值为0
+    @Publish var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
+    @Publish var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+    @Publish var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
+    @Publish var topMargin: Float64 = 0.0 //上外边距，默认值为0
+    @Publish var rightMargin: Float64 = 0.0 //右外边距，默认值为0
+    @Publish var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
+    @Publish var leftMargin: Float64 = 0.0 //左外边距，默认值为0
+}
+
+/*
+ * LinearLayoutHelper
+ * DefaultLayoutHelper
+ */
+@Observed
+public class LinearAttributes {
+    @Publish var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
+    @Publish var dividerHeight: Int64 = 0 //列表项垂直间距，默认值为0
+    @Publish var layoutHeight: Float64 = 0.0 //容器高度
+    @Publish var aspectRatio: Float64 = 0.0 //ListItem的单行纵横比，默认值为0
     @Publish var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
     @Publish var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
     @Publish var zIndex: Int32 = 0 //z序，默认值为0

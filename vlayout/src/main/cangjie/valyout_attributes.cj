@@ -103,3 +103,38 @@ public class LinearAttributes {
     @Publish var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
     @Publish var leftMargin: Float64 = 0.0 //左外边距，默认值为0
 }
+
+/*
+ * FixLayoutHelper
+ * ScrollFixLayoutHelper
+ * StickyLayoutHelper
+ * FloatLayoutHelper
+ */
+@Observed
+public class FixAreaAttributes {
+    @Publish var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
+    @Publish var layoutWidth: Float64 = 0.0 //容器宽度
+    @Publish var layoutHeight: Float64 = 0.0 //容器高度，当容器纵横比为0时有效
+    @Publish var aspectRatio: Float64 = 0.0 //容器纵横比
+    @Publish var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
+    @Publish var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
+    @Publish var xOffset: Float64 = 0.0 //水平偏移量，默认值为0，只有StickyLayoutHelper不支持
+    @Publish var yOffset: Float64 = 0.0 //竖直偏移量，默认值为0，只有StickyLayoutHelper不支持
+    @Publish var alignType: Int32 = -1 //固定的位置，只有StickyLayoutHelper不支持，优先级比单给xy高，FloatLayoutHelper中与defaultLocation进行累加
+    @Publish var sketchMeasure: Bool = false //宽度占满屏幕，只有FixLayoutHelper, ScrollFixLayoutHelper支持
+    @Publish var stickyStart: Bool = false //true：吸顶，false：吸底，只有StickyLayoutHelper支持
+    @Publish var defaultLocation: Array<Float64> = [] //默认位置，只有FloatLayoutHelper支持，优先级比单给xy高，与alignType进行累加
+    @Publish var zIndex: Int32 = 0 //z序，默认值为0
+    @Publish var padding: Array<Float64> = []  //内边距，默认值为[]，优先级比单给内边距高
+    @Publish var topPadding: Float64 = 0.0 //上内边距，默认值为0
+    @Publish var rightPadding: Float64 = 0.0 //右内边距，默认值为0
+    @Publish var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
+    @Publish var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+    @Publish var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
+    @Publish var topMargin: Float64 = 0.0 //上外边距，默认值为0
+    @Publish var rightMargin: Float64 = 0.0 //右外边距，默认值为0
+    @Publish var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
+    @Publish var leftMargin: Float64 = 0.0 //左外边距，默认值为0
+}
+
+

@@ -38,6 +38,12 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "DefaultLayoutHelperExample")
                     }
+                Button("FixLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "FixLayoutHelperExample")
+                    }
              }
             .width(100.percent)
             .height(100.percent)

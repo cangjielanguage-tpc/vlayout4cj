@@ -44,6 +44,12 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "FixLayoutHelperExample")
                     }
+                Button("FloatLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "FloatLayoutHelperExample")
+                    }
              }
             .width(100.percent)
             .height(100.percent)

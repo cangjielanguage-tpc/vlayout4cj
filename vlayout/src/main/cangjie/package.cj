@@ -10,6 +10,9 @@ internal import ohos.state_manage.*
 internal import ohos.hilog.*
 internal import ohos.display.*
 
+internal import encoding.json.*
+internal import std.convert.*
+
 extend<T> Option<T> {
     operator func ()(): T {
         this.getOrThrow()

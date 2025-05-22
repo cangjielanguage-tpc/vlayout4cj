@@ -12,6 +12,7 @@ internal import ohos.display.*
 
 internal import encoding.json.*
 internal import std.convert.*
+internal import std.math.*
 
 extend<T> Option<T> {
     operator func ()(): T {

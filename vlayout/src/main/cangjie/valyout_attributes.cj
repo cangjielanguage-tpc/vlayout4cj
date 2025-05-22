@@ -137,4 +137,33 @@ public class FixAreaAttributes {
     @Publish var leftMargin: Float64 = 0.0 //左外边距，默认值为0
 }
 
+/*
+ * GridLayoutHelper
+ * RangeGridLayoutHelper
+ */
+@Observed
+public class GridAttributes {
+    @Publish var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
+    @Publish public var spanCount: Int64 = 0 //列数，默认值为0
+    @Publish public var weights: Array<Float64> = [] //列占比集合：数组元素数值约分为占比，默认值为[100]
+    @Publish var autoExpand: Bool = true //余子项宽度自适应，当weights未定义时有效，且与colsSpan存在互斥关系，默认值为true
+    @Publish var aspectRatio: Float64 = 0.0 //GridItem的单行纵横比，默认值为0
+    @Publish var layoutHeight: Float64 = 0.0 //Grid容器高度
+    @Publish var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为白色
+    @Publish var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
+    @Publish var zIndex: Int32 = 0 //z序，默认值为0
+    @Publish var gap: Int64 = 0 //行列间距，默认值为0
+    @Publish var vGap: Int64 = 0 //行与行的间距，默认值为0
+    @Publish var hGap: Int64 = 0 //列与列的间距，默认值为0
+    @Publish var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
+    @Publish var topPadding: Float64 = 0.0 //上内边距，默认值为0
+    @Publish var rightPadding: Float64 = 0.0 //右内边距，默认值为0
+    @Publish var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
+    @Publish var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+    @Publish var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
+    @Publish var topMargin: Float64 = 0.0 //上外边距，默认值为0
+    @Publish var rightMargin: Float64 = 0.0 //右外边距，默认值为0
+    @Publish var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
+    @Publish var leftMargin: Float64 = 0.0 //左外边距，默认值为0
+}
 

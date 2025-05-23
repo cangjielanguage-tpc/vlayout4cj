@@ -63,7 +63,7 @@ public class AbstractFullFillAttributes {
     @Publish var hasFooter: Bool = false //最后一个子项变成一行一列，默认值为false，仅OnePlusNLayoutHelper支持
     @Publish var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish var layoutHeight: Float64 = 0.0 //容器高度
-    @Publish var aspectRatio: Float64 = 1.0 //容器纵横比
+    @Publish var aspectRatio: Float64 = 0.0 //容器纵横比
     @Publish var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
     @Publish var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
     @Publish var zIndex: Int32 = 0 //z序，默认值为0

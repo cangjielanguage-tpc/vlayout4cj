@@ -50,6 +50,12 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "FloatLayoutHelperExample")
                     }
+                Button("GridLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "GridLayoutHelperExample")
+                    }
              }
             .width(100.percent)
             .height(100.percent)

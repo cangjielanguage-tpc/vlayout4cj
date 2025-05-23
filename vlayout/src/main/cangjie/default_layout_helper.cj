@@ -108,7 +108,7 @@ public class DefaultLayout {
             this.oneRowHeight = this.listWidth / this.defaultInfo.aspectRatio
             Hilog.error(0,"", TAG + 'the third case oneRowHeight = ${this.oneRowHeight}, layoutHeight = ${this.defaultInfo.layoutHeight}')
         } else if (this.defaultInfo.layoutHeight != 0.0 && this.defaultInfo.aspectRatio == 0.0) {
-            this.defaultInfo.layoutHeight = this.defaultInfo.layoutHeight
+            oneRowHeight = defaultInfo.layoutHeight / Float64(rowCount)
             Hilog.error(0,"", TAG + 'the fourth case layoutHeight = ${this.defaultInfo.layoutHeight}')
         } else {
             Hilog.error(0,"", TAG + 'something else computedHeight')

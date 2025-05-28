@@ -179,7 +179,7 @@ public class FixLayout {
             this.computedAlignType()
             Hilog.info(0,"", TAG + 'layoutWidth = ${this.layoutWidth}, layoutHeight = ${this.layoutHeight}')
         })
-        .width( if(this.fixInfo.sketchMeasure) { 100.percent }else { this.layoutWidth })
+        .width( if(this.fixInfo.sketchMeasure) { 100.percent }else { this.layoutWidth.vp })
         .height(this.layoutHeight)
         .aspectRatio(this.aspectRatio)
         .backgroundColor(this.fixInfo.bgColor)

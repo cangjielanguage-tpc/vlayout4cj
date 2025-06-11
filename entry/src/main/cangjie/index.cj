@@ -74,6 +74,19 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "StickyLayoutHelperExample")
                     }
+                Button("OnePlusNLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "OnePlusNLayoutHelperExample")
+                    }
+                Button("OnePlusNExLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "OnePlusNExLayoutHelperExample")
+                    }
+
              }
             .width(100.percent)
             .height(100.percent)

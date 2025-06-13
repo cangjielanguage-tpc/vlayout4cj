@@ -9,6 +9,7 @@ internal import ohos.component.*
 internal import ohos.state_manage.*
 internal import ohos.router.Router
 internal import ohos.hilog.Hilog
+internal import ohos.display.*
 internal import std.convert.*
 
 import ohos.state_macro_manage.*
@@ -104,6 +105,12 @@ class EntryView {
                     .backgroundColor(0x317aff)
                     .onClick { _ =>
                         Router.push(url: "JumpBarExample")
+                    }
+                Button("StaggeredGridlayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "StaggeredGridlayoutHelperExample")
                     }
 
              }

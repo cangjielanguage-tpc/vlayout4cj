@@ -92,6 +92,12 @@ class EntryView {
                     .onClick { _ =>
                         Router.push(url: "SingleLayoutHelperExample")
                     }
+                Button("RangeGridLayoutHelperExample Test")
+                    .shape(ShapeType.Capsule)
+                    .backgroundColor(0x317aff)
+                    .onClick { _ =>
+                        Router.push(url: "RangeGridLayoutHelperExample")
+                    }
 
              }
             .width(100.percent)

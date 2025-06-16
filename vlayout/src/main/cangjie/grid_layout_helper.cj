@@ -233,9 +233,11 @@ public class GridLayout {
                 }
 
             }
-            let count: Int64 = Int64(ceil(Float64(sum / gridInfo.spanCount))) //获得实际行数
-            let rows: Array<String> = Array<String>(count, item: '1fr ')
-            rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
+            if(sum != 0) {
+                let count: Int64 = Int64(ceil(Float64(sum / gridInfo.spanCount))) //获得实际行数
+                let rows: Array<String> = Array<String>(count, item: '1fr ')
+                rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
+            }
         }
     }
 

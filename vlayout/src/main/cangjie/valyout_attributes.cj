@@ -43,8 +43,8 @@ public class layoutDataType {
     @Publish public var textSize: Int64 = 25
     @Publish public var textColor: UInt32 = 0x999999
     @Publish public var bgColor: UInt32 = 0xCFCFCF
-    @Publish public var top: Int64 = 0
-    @Publish public var lef: Int64 = 0
+    @Publish public var top: Float64 = 0.0
+    @Publish public var left: Float64 = 0.0
     @Publish public var tag: String = ""
 }
 
@@ -165,5 +165,30 @@ public class GridAttributes {
     @Publish public var rightMargin: Float64 = 0.0 //右外边距，默认值为0
     @Publish public var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
     @Publish public var leftMargin: Float64 = 0.0 //左外边距，默认值为0
+}
+
+@Observed
+public class StaggeredGridAttributes {
+  /*
+   * StaggeredGridLayoutHelper
+   */
+  @Publish public var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
+  @Publish public var staggeredWidth: Float64 = 0.0
+  @Publish public var lanes: Int64 = 1 //列数，默认值为1
+  @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色，默认值为透明
+  @Publish public var zIndex: Int32 = 0 //z序，默认值为0
+  @Publish public var gap: Float64 = 0.0 //行列间距，默认值为0
+  @Publish public var vGap: Float64 = 0.0 //行与行的间距，默认值为0
+  @Publish public var hGap: Float64 = 0.0 //列与列的间距，默认值为0
+  @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
+  @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为0
+  @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为0
+  @Publish public var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
+  @Publish public var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+  @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
+  @Publish public var topMargin: Float64 = 0.0//上外边距，默认值为0
+  @Publish public var rightMargin: Float64 = 0.0//右外边距，默认值为0
+  @Publish public var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
+  @Publish public var leftMargin: Float64 = 0.0//左外边距，默认值为0
 }
 

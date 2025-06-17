@@ -193,7 +193,7 @@ public class GridLayout {
                     let rows: Array<String> = Array<String>(count, item: '1fr ')
                     rowsTemplate = String.join(rows, delimiter: ' ')
                 } else {
-                    Hilog.error(0, "", '${TAG} autoExpand false')
+                    Hilog.error(0x000000, "computedColumnsTemplate", '${TAG} autoExpand false')
                 }
             }
         }
@@ -215,7 +215,7 @@ public class GridLayout {
                     } else if (afda < 1) { //如果合并列小于1，合并项等于1
                         vLayoutData[i].colsSpan = 1
                     } else {
-                        Hilog.info(0, "", '${TAG} colsSpan = ${vLayoutData[i].colsSpan}')
+                        Hilog.error(0x000000, "computedRowsTemplate", '${TAG} colsSpan = ${vLayoutData[i].colsSpan}')
                     }
                     var colsSpan: Int64 = 0
                     if (vLayoutData[i].colsSpan == 0) {
@@ -269,9 +269,9 @@ public class GridLayout {
             oneRowHeight = gridInfo.layoutHeight
             layoutHeight = gridInfo.layoutHeight
         } else {
-            Hilog.info(0, "", '${TAG} something else computedHeight')
+            Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
         }
-
+        Hilog.error(0x000000, "computedHeight", '${TAG}-------- ${oneRowHeight}')
     }
 
     func computedExtraHeight(rowCount: Int64) {
@@ -300,7 +300,7 @@ public class GridLayout {
                         gridItemWidth = px2vp(newValue.width.px)().value
                         gridItemHeight = px2vp(newValue.height.px)().value
                         computedHeight()
-                        Hilog.info(0, "", TAG + 'GridItem gridItemWidth = ${gridItemWidth}, gridItemHeight = ${gridItemHeight}')
+                        Hilog.info(0x000000, "gridItem", TAG + 'GridItem gridItemWidth = ${gridItemWidth}, gridItemHeight = ${gridItemHeight}')
                     })
                     .height(oneRowHeight)
                     .columnStart(1)
@@ -310,7 +310,7 @@ public class GridLayout {
                 gridWidth = px2vp(newValue.width.px)().value
                 gridHeight = px2vp(newValue.height.px)().value
                 computedColumnsTemplate()
-                Hilog.info(0, "", TAG + 'Grid gridWidth = ${gridWidth}, gridHeight = ${gridHeight}')
+                Hilog.info(0x000000, "grid", TAG + 'Grid gridWidth = ${gridWidth}, gridHeight = ${gridHeight}')
             })
             .height(if(gridInfo.layoutHeight == 0.0){ layoutHeight } else { gridInfo.layoutHeight } )
             .columnsTemplate(columnsTemplate)

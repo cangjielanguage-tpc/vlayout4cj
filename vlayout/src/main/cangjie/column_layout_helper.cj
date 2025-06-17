@@ -134,7 +134,7 @@ public class ColumnLayout {
                 }
                 this.colWeightArray = this.colWeightArray.concat(otnerColWeightArray)
             }
-            Hilog.info(0,"", '${TAG} colWeightArray = ${this.colWeightArray}')
+            Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${this.colWeightArray}')
         } else {
             this.colWeightArray = Array<Float64>(this.vLayoutData.size, item: Float64(100/this.vLayoutData.size))
         }
@@ -147,7 +147,7 @@ public class ColumnLayout {
             this.layoutHeight = mHeight
             this.computedExtraHeight()
         } else {
-            this.layoutHeight = this.builderItemHeight
+            this.layoutHeight = this.builderWidth
             this.computedExtraHeight()
         }
     }
@@ -170,14 +170,14 @@ public class ColumnLayout {
                     .onAreaChange({oldValue, newValue =>
                         let builderItemWidth = px2vp(newValue.width.px)().value
                         this.builderItemHeight = px2vp(newValue.height.px)().value
-                        Hilog.info(0,"", TAG + 'builderItemWidth = ${builderItemWidth}, builderItemHeight = ${this.builderItemHeight}')
+                        Hilog.info(0x000000, "builderItem", TAG + 'builderItemWidth = ${builderItemWidth}, builderItemHeight = ${this.builderItemHeight}')
                     })
                 })
             }
             .onAreaChange({oldValue, newValue =>
                 this.builderWidth = px2vp(newValue.width.px)().value
                 let builderHeight = px2vp(newValue.height.px)().value
-                Hilog.info(0,"", TAG + 'builderWidth = ${this.builderWidth}, builderHeight = ${builderHeight}')
+                Hilog.info(0x000000, "builder", TAG + 'builderWidth = ${this.builderWidth}, builderHeight = ${builderHeight}')
                 this.computedHeight()
             })
             .height(this.layoutHeight)

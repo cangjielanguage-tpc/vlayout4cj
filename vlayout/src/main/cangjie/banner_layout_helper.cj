@@ -107,7 +107,7 @@ public class BannerLayout {
             this.bannerInfo.layoutHeight = this.bannerInfo.layoutHeight
             this.bannerInfo.aspectRatio = this.bannerInfo.aspectRatio
         } else {
-            Hilog.error(0, "", TAG + 'initComponentSize else')
+            Hilog.error(0x000000, "initComponentSize", TAG + 'initComponentSize else')
         }
     }
 
@@ -134,7 +134,7 @@ public class BannerLayout {
                     .onAreaChange({oldValue, newValue =>
                         this.itemWidth = newValue.width
                         this.itemHeight = newValue.height
-                        Hilog.info(0,"",  '${TAG} itemWidth = ${this.itemWidth}, itemHeight = ${this.itemHeight}')
+                        Hilog.info(0x000000,"item",  '${TAG} itemWidth = ${this.itemWidth}, itemHeight = ${this.itemHeight}')
                         this.computedHeight()
                     })
                })

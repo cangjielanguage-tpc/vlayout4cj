@@ -15,8 +15,7 @@ public class ColumnLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64, Float64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State @Watch[defaultValueInit] var vLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
-    @State var columnInfo: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
+    @State var vLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
 
     @State var colWeightArray: Array<Float64> = []
     @State var layoutHeight: Float64 = 0.0 //容器高度
@@ -24,94 +23,42 @@ public class ColumnLayout {
     private var builderItemHeight: Float64 = 0.0 //获取的高度
 
     protected override func aboutToAppear() {
-        this.defaultValueInit()
-    }
-
-    func defaultValueInit() {
-        this.columnInfo = AbstractFullFillAttributes(
-            range: if(this.vLayoutAttribute.range == [0, 0] || this.vLayoutAttribute.range[1] > this.vLayoutData.size) {[0, this.vLayoutData.size] } else {this.vLayoutAttribute.range } ,
-            colWeights: this.vLayoutAttribute.colWeights,
-            aspectRatio: this.vLayoutAttribute.aspectRatio,
-            bgColor: this.vLayoutAttribute.bgColor,
-            zIndex: this.vLayoutAttribute.zIndex,
-            padding: this.vLayoutAttribute.padding,
-            topPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[0]
-            } else {
-                this.vLayoutAttribute.topPadding
-            },
-            rightPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[1]
-            } else {
-                this.vLayoutAttribute.rightPadding
-            },
-            bottomPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[2]
-            } else {
-                this.vLayoutAttribute.bottomPadding
-            },
-            leftPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[3]
-            } else {
-                this.vLayoutAttribute.leftPadding
-            },
-            margin: this.vLayoutAttribute.margin,
-            topMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[0]
-            } else {
-                this.vLayoutAttribute.topMargin
-            },
-            rightMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[1]
-            } else {
-                this.vLayoutAttribute.rightMargin
-            },
-            bottomMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[2]
-            } else {
-                this.vLayoutAttribute.bottomMargin
-            },
-            leftMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[3]
-            } else {
-                this.vLayoutAttribute.leftMargin
-            }
-            )
-
         this.computedRange()
         this.computedColWeights()
     }
+
     func computedRange() {
         //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        if (this.columnInfo.range.size == 2 && this.columnInfo.range[0] >= 0 && this.columnInfo.range[1] > this.columnInfo.range[0]) {
-            this.vLayoutData = this.vLayoutData.slice(this.columnInfo.range[0], this.columnInfo.range[1])
+        let range = if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range }
+        if (range.size == 2 && range[0] >= 0 && range[1] > range[0]) {
+            vLayoutData = vLayoutData.slice(range[0], range[1])
         } else {
-            this.vLayoutData = this.vLayoutData
+            vLayoutData = vLayoutData
         }
     }
 
     func computedColWeights() {
         var element: Float64 = 0.0
-        if (this.columnInfo.colWeights.size != 0) {
-            for (index in 0..this.columnInfo.colWeights.size) {
-                element = this.columnInfo.colWeights[index]
+        if (this.vLayoutAttribute.colWeights.size != 0) {
+            for (index in 0..this.vLayoutAttribute.colWeights.size) {
+                element = this.vLayoutAttribute.colWeights[index]
                 if (element < 0.0) {
-                    this.columnInfo.colWeights = []
+                    this.vLayoutAttribute.colWeights = []
                 } else {
-                    this.columnInfo.colWeights = this.columnInfo.colWeights
+                    this.vLayoutAttribute.colWeights = this.vLayoutAttribute.colWeights
                 }
             }
-            if (this.vLayoutData.size == this.columnInfo.colWeights.size) { //数据源数组长度等于列权重数组长度时
-                this.colWeightArray = this.columnInfo.colWeights
-            } else if (this.vLayoutData.size < this.columnInfo.colWeights.size) { //数据源数组长度小于列权重数组长度时
-                this.colWeightArray = this.columnInfo.colWeights
+            if (this.vLayoutData.size == this.vLayoutAttribute.colWeights.size) { //数据源数组长度等于列权重数组长度时
+                this.colWeightArray = this.vLayoutAttribute.colWeights
+            } else if (this.vLayoutData.size < this.vLayoutAttribute.colWeights.size) { //数据源数组长度小于列权重数组长度时
+                this.colWeightArray = this.vLayoutAttribute.colWeights
                 var arr: Array<Float64> = Array<Float64>(this.colWeightArray.size, item: 0.0)
                 for (i in 0..this.vLayoutData.size) {
                     arr[i] = this.colWeightArray[i]
                 }
                 this.colWeightArray = arr
             } else { //数据源数组长度大于列权重数组长度时
-                this.colWeightArray = this.columnInfo.colWeights
+                this.colWeightArray = this.vLayoutAttribute.colWeights
                 var sum: Float64 = 0.0
                 var item: Float64 = 0.0
                 let count: Int64 = this.vLayoutData.size - this.colWeightArray.size
@@ -141,23 +88,6 @@ public class ColumnLayout {
 
     }
 
-    func computedHeight() {
-        if (this.columnInfo.aspectRatio > 0.0) {
-            let mHeight = this.builderWidth / this.columnInfo.aspectRatio
-            this.layoutHeight = mHeight
-            this.computedExtraHeight()
-        } else {
-            this.layoutHeight = this.builderWidth
-            this.computedExtraHeight()
-        }
-    }
-
-    func computedExtraHeight() {
-        this.layoutHeight = this.layoutHeight + this.columnInfo.topPadding
-        this.layoutHeight = this.layoutHeight + this.columnInfo.bottomPadding
-    }
-
-
     func build() {
         Column() {
             Row() {
@@ -178,23 +108,55 @@ public class ColumnLayout {
                 this.builderWidth = px2vp(newValue.width.px)().value
                 let builderHeight = px2vp(newValue.height.px)().value
                 Hilog.info(0x000000, "builder", TAG + 'builderWidth = ${this.builderWidth}, builderHeight = ${builderHeight}')
-                this.computedHeight()
             })
-            .height(this.layoutHeight)
+            .height(vLayoutAttribute.layoutHeight)
+            .width(vLayoutAttribute.layoutWidth)
             .padding(
-                top: this.columnInfo.topPadding,
-                right: this.columnInfo.rightPadding,
-                bottom: this.columnInfo.bottomPadding,
-                left: this.columnInfo.leftPadding
+                top: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[0]
+                } else {
+                    vLayoutAttribute.topPadding
+                },
+                right: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[1]
+                } else {
+                    vLayoutAttribute.rightPadding
+                },
+                bottom: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[2]
+                } else {
+                    vLayoutAttribute.bottomPadding
+                },
+                left: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[3]
+                } else {
+                    vLayoutAttribute.leftPadding
+                }
             )
         }
-        .backgroundColor(this.columnInfo.bgColor)
-        .zIndex(this.columnInfo.zIndex)
+        .backgroundColor(this.vLayoutAttribute.bgColor)
+        .zIndex(this.vLayoutAttribute.zIndex)
         .margin(
-            top: this.columnInfo.topMargin,
-            right: this.columnInfo.rightMargin,
-            bottom: this.columnInfo.bottomMargin,
-            left: this.columnInfo.leftMargin
+            top: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[0]
+            } else {
+                this.vLayoutAttribute.topMargin
+            },
+            right:  if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[1]
+            } else {
+                this.vLayoutAttribute.rightMargin
+            },
+            bottom: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[2]
+            } else {
+                this.vLayoutAttribute.bottomMargin
+            },
+            left: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[3]
+            } else {
+                this.vLayoutAttribute.leftMargin
+            }
         )
 
     }

@@ -48,14 +48,12 @@ public class OneExLayout {
     @BuilderParam var vLayoutContent: (layoutDataType) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State @Watch[defaultValueInit] var vLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
-    @State var onePlusNEXInfo: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
+    @State var vLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
 
     @State var colWeightArray: Array<Float64> = []
     @State var rowWeightArray: Array<Float64> = []
     @State var layoutHeight: Float64 = 0.0 //一拖n布局的高度
-    @State var aspectRatio: Float64 = 0.0 //
-    @State var layoutWidth: Float64 = 0.0 //
+
     private var mWeight: Int32 = 0 //一拖5布局的第二行的权重
     private var itemWidth: Float64 = 0.0 //每个item的宽度
     private var itemHeight: Float64 = 0.0 //第一个item的高度
@@ -66,92 +64,35 @@ public class OneExLayout {
     private var itemHeight5: Float64 = 0.0//第六个item的高度
     private var itemHeight6: Float64 = 0.0//第七个item的高度
 
-    let displayClass: Display = getDefaultDisplaySync()
-    let screenWidth: Float64 = px2vp(Float64(displayClass.width).px)().value
-    let screenHeight: Float64 = px2vp(Float64(displayClass.height).px)().value
 
     protected override func aboutToAppear() {
-        defaultValueInit()
         computedRange()
         computedColWeights()
         computedRowWeights()
         computedSize()
     }
 
-    func defaultValueInit() {
-        onePlusNEXInfo = AbstractFullFillAttributes(
-            range: if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range } ,
-            rowWeights: vLayoutAttribute.rowWeights,
-            colWeights:  vLayoutAttribute.colWeights,
-            layoutWidth: vLayoutAttribute.layoutWidth,
-            layoutHeight: vLayoutAttribute.layoutHeight,
-            aspectRatio: vLayoutAttribute.aspectRatio,
-            bgColor: vLayoutAttribute.bgColor,
-            zIndex: vLayoutAttribute.zIndex,
-            padding: vLayoutAttribute.padding,
-            topPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[0]
-            } else {
-                vLayoutAttribute.topPadding
-            },
-            rightPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[1]
-            } else {
-                vLayoutAttribute.rightPadding
-            },
-            bottomPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[2]
-            } else {
-                vLayoutAttribute.bottomPadding
-            },
-            leftPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[3]
-            } else {
-                vLayoutAttribute.leftPadding
-            },
-            margin: vLayoutAttribute.margin,
-            topMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[0]
-            } else {
-                vLayoutAttribute.topMargin
-            },
-            rightMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[1]
-            } else {
-                vLayoutAttribute.rightMargin
-            },
-            bottomMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[2]
-            } else {
-                vLayoutAttribute.bottomMargin
-            },
-            leftMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[3]
-            } else {
-                vLayoutAttribute.leftMargin
-            }
-            )
-    }
     func computedRange() {
         //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        if (onePlusNEXInfo.range.size == 2 && onePlusNEXInfo.range[0] >= 0 && onePlusNEXInfo.range[1] > onePlusNEXInfo.range[0]) {
-            vLayoutData = vLayoutData.slice(onePlusNEXInfo.range[0], onePlusNEXInfo.range[1])
+        let range = if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range }
+        if (range.size == 2 && range[0] >= 0 && range[1] > range[0]) {
+            vLayoutData = vLayoutData.slice(range[0], range[1])
         } else {
             vLayoutData = vLayoutData
         }
     }
 
     func computedColWeights() {
-        if (onePlusNEXInfo.colWeights.size != 0) {
+        if (vLayoutAttribute.colWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>(vLayoutData.size)
-            weightArray.appendAll(onePlusNEXInfo.colWeights)
+            weightArray.appendAll(vLayoutAttribute.colWeights)
 
-            if (vLayoutData.size > onePlusNEXInfo.colWeights.size) { //数据源数组长度大于列权重数组长度时
-                match (onePlusNEXInfo.colWeights.size) {
+            if (vLayoutData.size > vLayoutAttribute.colWeights.size) { //数据源数组长度大于列权重数组长度时
+                match (vLayoutAttribute.colWeights.size) {
                 	case 1 =>
                         var sum: Float64 = 0.0
-                        for (i in 0..onePlusNEXInfo.colWeights.size) {
-                            let element: Float64 = onePlusNEXInfo.colWeights[i];
+                        for (i in 0..vLayoutAttribute.colWeights.size) {
+                            let element: Float64 = vLayoutAttribute.colWeights[i];
                             sum += element
                         }
                         match (vLayoutData.size) {
@@ -249,23 +190,23 @@ public class OneExLayout {
     }
 
     func computedRowWeights() {
-        if (onePlusNEXInfo.rowWeights.size != 0) {
+        if (vLayoutAttribute.rowWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>()
-            weightArray.appendAll(onePlusNEXInfo.rowWeights)
+            weightArray.appendAll(vLayoutAttribute.rowWeights)
 
-            if (onePlusNEXInfo.rowWeights.size == 1) {
+            if (vLayoutAttribute.rowWeights.size == 1) {
                 if (vLayoutData.size == 5 || vLayoutData.size == 6) {
-                    weightArray.append(onePlusNEXInfo.rowWeights[0])
+                    weightArray.append(vLayoutAttribute.rowWeights[0])
                 }
                 if (vLayoutData.size == 7) {
                     for (j in 0..2) {
                         weightArray.append(weightArray[0])
                     }
-                    weightArray.append(onePlusNEXInfo.rowWeights[0])
+                    weightArray.append(vLayoutAttribute.rowWeights[0])
                 }
-            } else if(onePlusNEXInfo.rowWeights.size == 2) {
+            } else if(vLayoutAttribute.rowWeights.size == 2) {
                 if (vLayoutData.size == 7) {
-                    weightArray.append(onePlusNEXInfo.rowWeights[0])
+                    weightArray.append(vLayoutAttribute.rowWeights[0])
                 }
             } else {
                 Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')
@@ -276,50 +217,8 @@ public class OneExLayout {
     }
 
     func computedSize() {
-        //当容器宽度未定义了，默认屏幕宽度
-        //当容器纵横比定义了就相当于容器宽度定义了
-        if (onePlusNEXInfo.layoutWidth == 0.0 && onePlusNEXInfo.layoutHeight == 0.0 && onePlusNEXInfo.aspectRatio == 0.0) {
-            //当不设置容器宽度、高度、纵横比时，宽度默认屏幕宽度，纵横比默认1；
-            layoutWidth = screenWidth
-            aspectRatio = 1.0
-            layoutHeight = layoutWidth / aspectRatio
-
-            computedLayoutHeight()
-        } else if (onePlusNEXInfo.layoutWidth != 0.0 && onePlusNEXInfo.layoutHeight == 0.0 && onePlusNEXInfo.aspectRatio == 0.0) {
-            //当设置容器宽度，不设置高度、纵横比时，纵横比默认1；
-            layoutWidth = onePlusNEXInfo.layoutWidth
-            aspectRatio = 1.0
-            layoutHeight = layoutWidth / aspectRatio
-            computedLayoutHeight()
-        } else if (onePlusNEXInfo.layoutWidth == 0.0 && onePlusNEXInfo.layoutHeight != 0.0 && onePlusNEXInfo.aspectRatio == 0.0) {
-            layoutWidth = screenWidth
-            layoutHeight = onePlusNEXInfo.layoutHeight
-            aspectRatio = layoutWidth / layoutHeight
-        } else if (onePlusNEXInfo.layoutWidth == 0.0 && onePlusNEXInfo.layoutHeight == 0.0 && onePlusNEXInfo.aspectRatio != 0.0) {
-            layoutWidth = screenWidth
-            layoutHeight = layoutWidth / onePlusNEXInfo.aspectRatio
-            aspectRatio = onePlusNEXInfo.aspectRatio
-            computedLayoutHeight()
-        } else if (onePlusNEXInfo.layoutWidth != 0.0 && onePlusNEXInfo.layoutHeight != 0.0 && onePlusNEXInfo.aspectRatio != 0.0) {
-            layoutWidth = onePlusNEXInfo.layoutWidth
-            layoutHeight = onePlusNEXInfo.layoutHeight
-            aspectRatio = onePlusNEXInfo.aspectRatio
-        } else if (onePlusNEXInfo.layoutWidth != 0.0 && onePlusNEXInfo.layoutHeight != 0.0 && onePlusNEXInfo.aspectRatio == 0.0) {
-            layoutWidth = onePlusNEXInfo.layoutWidth
-            layoutHeight = onePlusNEXInfo.layoutHeight
-            aspectRatio = layoutWidth / layoutHeight
-        } else if (onePlusNEXInfo.layoutWidth != 0.0 && onePlusNEXInfo.layoutHeight == 0.0 && onePlusNEXInfo.aspectRatio != 0.0) {
-            layoutWidth = onePlusNEXInfo.layoutWidth
-            layoutHeight = layoutWidth / onePlusNEXInfo.aspectRatio
-            aspectRatio = onePlusNEXInfo.aspectRatio
-            computedLayoutHeight()
-        } else if (onePlusNEXInfo.layoutWidth == 0.0 && onePlusNEXInfo.layoutHeight != 0.0 && onePlusNEXInfo.aspectRatio != 0.0) {
-            layoutWidth = onePlusNEXInfo.layoutHeight * onePlusNEXInfo.aspectRatio
-            layoutHeight = onePlusNEXInfo.layoutHeight
-            aspectRatio = onePlusNEXInfo.aspectRatio
-        } else {
-            Hilog.error(0x000000, "computedSize", '${TAG}computedSize else')
-        }
+        layoutHeight = vLayoutAttribute.layoutHeight.value
+        computedLayoutHeight()
     }
 
     func computedLayoutHeight() {
@@ -349,8 +248,8 @@ public class OneExLayout {
     }
 
     func computedExtraHeight() {
-        layoutHeight = layoutHeight + onePlusNEXInfo.topPadding
-        layoutHeight = layoutHeight + onePlusNEXInfo.bottomPadding
+        layoutHeight = layoutHeight + vLayoutAttribute.topPadding
+        layoutHeight = layoutHeight + vLayoutAttribute.bottomPadding
     }
 
     func build() {
@@ -748,23 +647,54 @@ public class OneExLayout {
                     }
 
             }
-            .width(layoutWidth)
-            .height(if(onePlusNEXInfo.layoutHeight == 0.0) { layoutHeight } else { onePlusNEXInfo.layoutHeight })
-            .aspectRatio(aspectRatio)
+            .width(vLayoutAttribute.layoutWidth)
+            .height(if(vLayoutAttribute.layoutHeight.value == 0.0) { layoutHeight.vp } else { vLayoutAttribute.layoutHeight })
             .padding(
-                top: onePlusNEXInfo.topPadding,
-                right: onePlusNEXInfo.rightPadding,
-                bottom: onePlusNEXInfo.bottomPadding,
-                left: onePlusNEXInfo.leftPadding
+                top: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[0]
+                } else {
+                    vLayoutAttribute.topPadding
+                },
+                right: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[1]
+                } else {
+                    vLayoutAttribute.rightPadding
+                },
+                bottom: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[2]
+                } else {
+                    vLayoutAttribute.bottomPadding
+                },
+                left: if(vLayoutAttribute.padding.size == 4) {
+                    vLayoutAttribute.padding[3]
+                } else {
+                    vLayoutAttribute.leftPadding
+                }
             )
         }
-        .backgroundColor(onePlusNEXInfo.bgColor)
-        .zIndex(onePlusNEXInfo.zIndex)
+        .backgroundColor(vLayoutAttribute.bgColor)
+        .zIndex(vLayoutAttribute.zIndex)
         .margin(
-          top: onePlusNEXInfo.topMargin,
-          right: onePlusNEXInfo.rightMargin,
-          bottom: onePlusNEXInfo.bottomMargin,
-          left: onePlusNEXInfo.leftMargin
+            top: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[0]
+            } else {
+                this.vLayoutAttribute.topMargin
+            },
+            right:  if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[1]
+            } else {
+                this.vLayoutAttribute.rightMargin
+            },
+            bottom: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[2]
+            } else {
+                this.vLayoutAttribute.bottomMargin
+            },
+            left: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[3]
+            } else {
+                this.vLayoutAttribute.leftMargin
+            }
         )
     }
 }

@@ -15,8 +15,7 @@ public class DefaultLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64, Float64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State @Watch[defaultValueInit] var vLayoutAttribute: LinearAttributes = LinearAttributes() //属性
-    @State var defaultInfo: LinearAttributes = LinearAttributes() //属性
+    @State var vLayoutAttribute: LinearAttributes = LinearAttributes() //属性
 
     @State var oneRowHeight: Float64 = 0.0 //单行高度
     @State var layoutHeight: Float64 = 0.0 //list高度
@@ -26,101 +25,40 @@ public class DefaultLayout {
     private var listItemHeight: Float64 = 0.0 //获取的listItem高度
 
     protected override func aboutToAppear() {
-        this.defaultValueInit()
-    }
-
-    func defaultValueInit() {
-        this.defaultInfo = LinearAttributes(
-            range: if(this.vLayoutAttribute.range == [0, 0] || this.vLayoutAttribute.range[1] > this.vLayoutData.size) {[0, this.vLayoutData.size] } else {this.vLayoutAttribute.range } ,
-            dividerHeight: this.vLayoutAttribute.dividerHeight,
-            layoutHeight: this.vLayoutAttribute.layoutHeight,
-            aspectRatio: this.vLayoutAttribute.aspectRatio,
-            bgColor: this.vLayoutAttribute.bgColor,
-            zIndex: this.vLayoutAttribute.zIndex,
-            padding: this.vLayoutAttribute.padding,
-            topPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[0]
-            } else {
-                this.vLayoutAttribute.topPadding
-            },
-            rightPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[1]
-            } else {
-                this.vLayoutAttribute.rightPadding
-            },
-            bottomPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[2]
-            } else {
-                this.vLayoutAttribute.bottomPadding
-            },
-            leftPadding: if(this.vLayoutAttribute.padding.size == 4) {
-                this.vLayoutAttribute.padding[3]
-            } else {
-                this.vLayoutAttribute.leftPadding
-            },
-            margin: this.vLayoutAttribute.margin,
-            topMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[0]
-            } else {
-                this.vLayoutAttribute.topMargin
-            },
-            rightMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[1]
-            } else {
-                this.vLayoutAttribute.rightMargin
-            },
-            bottomMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[2]
-            } else {
-                this.vLayoutAttribute.bottomMargin
-            },
-            leftMargin: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[3]
-            } else {
-                this.vLayoutAttribute.leftMargin
-            }
-        )
-
         this.computedRange()
     }
+
     func computedRange() {
         //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        if (this.defaultInfo.range.size == 2 && this.defaultInfo.range[0] >= 0 && this.defaultInfo.range[1] > this.defaultInfo.range[0]) {
-            this.vLayoutData = this.vLayoutData.slice(this.defaultInfo.range[0], this.defaultInfo.range[1])
+        let range = if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range }
+        if (range.size == 2 && range[0] >= 0 && range[1] > range[0]) {
+            vLayoutData = vLayoutData.slice(range[0], range[1])
         } else {
-            this.vLayoutData = this.vLayoutData
+            vLayoutData = vLayoutData
         }
     }
 
     func computedHeight() {
         let rowCount: Int64 = this.vLayoutData.size
-        if (this.defaultInfo.layoutHeight == 0.0 && this.defaultInfo.aspectRatio == 0.0) {
-            this.layoutHeight = this.listItemHeight * Float64(rowCount)
-            this.computedExtraHeight(rowCount)
-        } else if (this.defaultInfo.layoutHeight == 0.0 && this.defaultInfo.aspectRatio > 0.0) {
-            this.oneRowHeight = this.listWidth / this.defaultInfo.aspectRatio
-            this.layoutHeight = this.oneRowHeight * Float64(rowCount)
-            this.computedExtraHeight(rowCount)
-        } else if (this.defaultInfo.layoutHeight != 0.0 && this.defaultInfo.aspectRatio > 0.0) {
-            this.oneRowHeight = this.listWidth / this.defaultInfo.aspectRatio
-        } else if (this.defaultInfo.layoutHeight != 0.0 && this.defaultInfo.aspectRatio == 0.0) {
-            oneRowHeight = defaultInfo.layoutHeight / Float64(rowCount)
+         if (this.vLayoutAttribute.layoutHeight.value != 0.0) {
+            this.layoutHeight = vLayoutAttribute.layoutHeight.value
+            oneRowHeight = vLayoutAttribute.layoutHeight.value / Float64(rowCount)
         } else {
             Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
         }
     }
 
     func computedExtraHeight(rowCount: Int64) {
-        if (this.defaultInfo.dividerHeight > 0 && this.layoutHeight > 0.0) {
-            this.layoutHeight = this.layoutHeight + Float64(this.defaultInfo.dividerHeight * (rowCount - 1))
+        if (this.vLayoutAttribute.dividerHeight > 0 && this.layoutHeight > 0.0) {
+            this.layoutHeight = this.layoutHeight + Float64(this.vLayoutAttribute.dividerHeight * (rowCount - 1))
         }
 
-        if (this.defaultInfo.topPadding > 0.0 && this.layoutHeight > 0.0) {
-            this.layoutHeight = this.layoutHeight + this.defaultInfo.topPadding
+        if (this.vLayoutAttribute.topPadding > 0.0 && this.layoutHeight > 0.0) {
+            this.layoutHeight = this.layoutHeight + this.vLayoutAttribute.topPadding
         }
 
-        if (this.defaultInfo.bottomPadding > 0.0 && this.layoutHeight > 0.0) {
-            this.layoutHeight = this.layoutHeight + this.defaultInfo.bottomPadding
+        if (this.vLayoutAttribute.bottomPadding > 0.0 && this.layoutHeight > 0.0) {
+            this.layoutHeight = this.layoutHeight + this.vLayoutAttribute.bottomPadding
         }
     }
 
@@ -146,22 +84,55 @@ public class DefaultLayout {
             this.computedHeight()
             Hilog.info(0x000000, "list", TAG + 'List listWidth = ${this.listWidth}, listHeight = ${this.listHeight}')
         })
-        .height(if(this.defaultInfo.layoutHeight == 0.0) { this.layoutHeight} else { this.defaultInfo.layoutHeight })
+        .width(this.vLayoutAttribute.layoutWidth)
+        .height(this.vLayoutAttribute.layoutHeight)
         .edgeEffect(EdgeEffect.None)
         .padding(
-            top: this.defaultInfo.topPadding,
-            right: this.defaultInfo.rightPadding,
-            bottom: this.defaultInfo.bottomPadding,
-            left: this.defaultInfo.leftPadding
+            top: if(vLayoutAttribute.padding.size == 4) {
+                vLayoutAttribute.padding[0]
+            } else {
+                vLayoutAttribute.topPadding
+            },
+            right: if(vLayoutAttribute.padding.size == 4) {
+                vLayoutAttribute.padding[1]
+            } else {
+                vLayoutAttribute.rightPadding
+            },
+            bottom: if(vLayoutAttribute.padding.size == 4) {
+                vLayoutAttribute.padding[2]
+            } else {
+                vLayoutAttribute.bottomPadding
+            },
+            left: if(vLayoutAttribute.padding.size == 4) {
+                vLayoutAttribute.padding[3]
+            } else {
+                vLayoutAttribute.leftPadding
+            }
         )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
-        .backgroundColor(this.defaultInfo.bgColor)
-        .zIndex(this.defaultInfo.zIndex)
+        .backgroundColor(this.vLayoutAttribute.bgColor)
+        .zIndex(this.vLayoutAttribute.zIndex)
         .margin(
-            top: this.defaultInfo.topMargin,
-            right: this.defaultInfo.rightMargin,
-            bottom: this.defaultInfo.bottomMargin,
-            left: this.defaultInfo.leftMargin
+            top: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[0]
+            } else {
+                this.vLayoutAttribute.topMargin
+            },
+            right:  if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[1]
+            } else {
+                this.vLayoutAttribute.rightMargin
+            },
+            bottom: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[2]
+            } else {
+                this.vLayoutAttribute.bottomMargin
+            },
+            left: if(this.vLayoutAttribute.margin.size == 4) {
+                this.vLayoutAttribute.margin[3]
+            } else {
+                this.vLayoutAttribute.leftMargin
+            }
         )
     }
 }

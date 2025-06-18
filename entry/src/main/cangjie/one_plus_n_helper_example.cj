@@ -34,7 +34,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "18")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xff87e543,
                             margin: [5.0, 5.0, 5.0, 5.0],
                             padding:[5.0, 5.0, 5.0, 5.0]
@@ -49,7 +50,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "19")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutWidth: 200.0,
+                            layoutWidth: 200.0.vp,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xba55d3,
                             margin: [5.0, 5.0, 5.0, 5.0],
                             padding:[5.0, 5.0, 5.0, 5.0]
@@ -64,6 +66,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "18")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0x808000,
                             margin: [5.0, 5.0, 5.0, 5.0],
                             padding:[5.0, 5.0, 5.0, 5.0]
@@ -79,7 +83,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "38")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 120.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 120.0.vp,
                             colWeights: [40.0, 45.0],
                             bgColor: 0xff876384,
                             margin: [5.0, 5.0, 5.0, 5.0],
@@ -98,7 +103,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "42")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             rowWeights: [10.0, 30.0],
                             colWeights: [40.0, 60.0, 30.0, 30.0],
                             bgColor: 0xffef8ba3,
@@ -117,8 +123,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "45")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
-                            layoutWidth: 300.0,
+                            layoutHeight: 200.0.vp,
+                            layoutWidth: 300.0.vp,
                             bgColor: 0xff87e543,
                             colWeights: [33.0, 50.0, 40.0],
                             margin: [5.0, 5.0, 5.0, 5.0],
@@ -137,7 +143,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "21")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xffd700,
                             rowWeights: [20.0, 20.0],
                             margin: [5.0, 5.0, 5.0, 5.0],
@@ -156,7 +163,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "21")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xff00ff,
                             colWeights: [20.0, 20.0],
                             margin: [5.0, 5.0, 5.0, 5.0],
@@ -176,7 +184,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "22")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xffb6c1,
                             rowWeights: [20.0, 20.0],
                             colWeights: [40.0, 20.0],
@@ -200,7 +209,8 @@ class OnePlusNLayoutHelperExample {
                             layoutDataType(layoutText: "23")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.0.vp,
                             bgColor: 0xff0000,
                             margin: [5.0, 5.0, 5.0, 5.0],
                             padding:[5.0, 5.0, 5.0, 5.0]

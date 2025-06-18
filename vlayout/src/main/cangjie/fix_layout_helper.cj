@@ -125,7 +125,7 @@ public class FixLayout {
             this.layoutHeight = this.fixInfo.layoutHeight
             this.aspectRatio = this.fixInfo.aspectRatio
         } else {
-            Hilog.info(0,"", TAG + 'else')
+            Hilog.error(0x000000, "initComponentSize", TAG + 'else')
         }
     }
 
@@ -144,7 +144,6 @@ public class FixLayout {
         let displayClass: Display = getDefaultDisplaySync();
         let screenWidth: Float64 = px2vp(Float64(displayClass.width).px)().value
         let screenHeight: Float64 = px2vp(Float64(displayClass.height).px)().value
-        Hilog.info(0,"", TAG + 'screenWidth： ${screenWidth} screenHeight： ${screenHeight}')
 
         if (this.fixInfo.alignType == 0) { //左上
             this.xOffset = 0.0
@@ -177,7 +176,7 @@ public class FixLayout {
             this.layoutWidth = if(px2vp(newValue.width.px).isSome()) {px2vp(newValue.width.px)().value} else { 0.0}
             this.layoutHeight = if(px2vp(newValue.height.px).isSome()) { px2vp(newValue.height.px)().value} else { 0.0}
             this.computedAlignType()
-            Hilog.info(0,"", TAG + 'layoutWidth = ${this.layoutWidth}, layoutHeight = ${this.layoutHeight}')
+            Hilog.info(0x000000, "layout", TAG + 'layoutWidth = ${this.layoutWidth}, layoutHeight = ${this.layoutHeight}')
         })
         .width( if(this.fixInfo.sketchMeasure) { 100.percent }else { this.layoutWidth.vp })
         .height(this.layoutHeight)

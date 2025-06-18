@@ -154,7 +154,7 @@ public class FloatLayout {
             this.layoutHeight = this.floatInfo.layoutHeight
             this.aspectRatio = this.floatInfo.aspectRatio
         } else {
-            Hilog.info(0,"", TAG + 'else')
+            Hilog.error(0x000000, "initComponentSize", TAG + 'else')
         }
     }
 
@@ -225,9 +225,9 @@ public class FloatLayout {
                     this.yyOffset = this.yOffset
 
                 case TouchType.Cancel =>
-                    Hilog.warn(0,"", "${TAG} Cancel")
+                    Hilog.error(0x000000, "TouchType", "${TAG} Cancel")
                 case _ =>
-                    Hilog.warn(0,"", "${TAG} else")
+                    Hilog.error(0x000000, "TouchType", "${TAG} else")
             }
 
         })

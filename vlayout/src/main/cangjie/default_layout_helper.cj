@@ -94,24 +94,19 @@ public class DefaultLayout {
 
     func computedHeight() {
         let rowCount: Int64 = this.vLayoutData.size
-        Hilog.error(0,"", TAG + 'rowCount = ${rowCount}')
         if (this.defaultInfo.layoutHeight == 0.0 && this.defaultInfo.aspectRatio == 0.0) {
             this.layoutHeight = this.listItemHeight * Float64(rowCount)
             this.computedExtraHeight(rowCount)
-            Hilog.error(0,"", TAG + 'the first case layoutHeight = ${this.layoutHeight}')
         } else if (this.defaultInfo.layoutHeight == 0.0 && this.defaultInfo.aspectRatio > 0.0) {
             this.oneRowHeight = this.listWidth / this.defaultInfo.aspectRatio
             this.layoutHeight = this.oneRowHeight * Float64(rowCount)
             this.computedExtraHeight(rowCount)
-            Hilog.error(0,"", TAG + 'the second case oneRowHeight = ${this.oneRowHeight}, layoutHeight = ${this.layoutHeight}')
         } else if (this.defaultInfo.layoutHeight != 0.0 && this.defaultInfo.aspectRatio > 0.0) {
             this.oneRowHeight = this.listWidth / this.defaultInfo.aspectRatio
-            Hilog.error(0,"", TAG + 'the third case oneRowHeight = ${this.oneRowHeight}, layoutHeight = ${this.defaultInfo.layoutHeight}')
         } else if (this.defaultInfo.layoutHeight != 0.0 && this.defaultInfo.aspectRatio == 0.0) {
             oneRowHeight = defaultInfo.layoutHeight / Float64(rowCount)
-            Hilog.error(0,"", TAG + 'the fourth case layoutHeight = ${this.defaultInfo.layoutHeight}')
         } else {
-            Hilog.error(0,"", TAG + 'something else computedHeight')
+            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
         }
     }
 
@@ -141,7 +136,7 @@ public class DefaultLayout {
                     this.listItemWidth = px2vp(newValue.width.px)().value
                     this.listItemHeight = px2vp(newValue.height.px)().value
                     this.computedHeight()
-                     Hilog.info(0,"", TAG + 'ListItem listItemWidth = ${this.listItemWidth}, listItemHeight = ${this.listItemHeight}')
+                     Hilog.info(0x000000, "listItem", TAG + 'ListItem listItemWidth = ${this.listItemWidth}, listItemHeight = ${this.listItemHeight}')
                 })
             })
         }
@@ -149,7 +144,7 @@ public class DefaultLayout {
             this.listWidth = px2vp(newValue.width.px)().value
             this.listHeight = px2vp(newValue.height.px)().value
             this.computedHeight()
-            Hilog.info(0,"", TAG + 'List listWidth = ${this.listWidth}, listHeight = ${this.listHeight}')
+            Hilog.info(0x000000, "list", TAG + 'List listWidth = ${this.listWidth}, listHeight = ${this.listHeight}')
         })
         .height(if(this.defaultInfo.layoutHeight == 0.0) { this.layoutHeight} else { this.defaultInfo.layoutHeight })
         .edgeEffect(EdgeEffect.None)

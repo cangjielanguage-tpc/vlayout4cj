@@ -122,7 +122,7 @@ public class ScrollFixLayout {
             aspectRatio = scrollFixInfo.aspectRatio
             layoutWidth = layoutHeight * aspectRatio
         } else {
-            Hilog.info(0x000000,"initComponentSize", TAG + 'else')
+            Hilog.error(0x000000, "initComponentSize", TAG + 'else')
         }
     }
 
@@ -141,7 +141,6 @@ public class ScrollFixLayout {
         let displayClass: Display = getDefaultDisplaySync();
         let screenWidth: Float64 = px2vp(Float64(displayClass.width).px)().value
         let screenHeight: Float64 = px2vp(Float64(displayClass.height).px)().value
-        Hilog.info(0x000000,"computedAlignType", TAG + 'screenWidth： ${screenWidth} screenHeight： ${screenHeight}')
 
         if (scrollFixInfo.alignType == 0) { //左上
             xOffset = 0.0

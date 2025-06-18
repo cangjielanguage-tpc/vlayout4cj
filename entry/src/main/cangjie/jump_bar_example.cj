@@ -220,9 +220,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "5")
                         ],
                         vLayoutAttribute: BannerAttributes(
-                            layoutWidth: 1000.0,
-                            layoutHeight: 200.0,
-                            aspectRatio: 5,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 20.percent,
                             bgColor: 0xFF0000,
                             margin: [10.0, 10.0,10.0,10.0]
                         )
@@ -281,7 +280,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "17")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xff87e543,
                             margin: [5.0, 5.0, 5.0, 5.0],
                             padding:[5.0, 5.0, 5.0, 5.0]
@@ -300,7 +300,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "22")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             topMargin: 5.0,
                             bottomMargin: 5.0
@@ -319,7 +320,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "27")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             topMargin: 5.0,
                             bottomMargin: 5.0,
@@ -338,7 +340,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "32")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             colWeights: [40.0, 45.0, 15.0, 60.0, 0.0],
                             topMargin: 5.0,
@@ -358,7 +361,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "37")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             colWeights: [20.0, 80.0, 0.0, 60.0, 20.0],
                             topMargin: 5.0,
@@ -379,7 +383,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "43")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             topMargin: 5.0,
                             bottomMargin: 5.0,
@@ -400,7 +405,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "50")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            layoutHeight: 200.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
                             topMargin: 5.0,
                             bottomMargin: 5.0,
@@ -419,7 +425,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "55")
                             ],
                         vLayoutAttribute: AbstractFullFillAttributes(
-                            aspectRatio: 9.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 300.vp,
                             colWeights: [40.0, 5.0, 40.0],
                             bgColor: 0xff00f0f0,
                             bottomMargin: 5.0,
@@ -440,7 +447,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "62")
                         ],
                         vLayoutAttribute: LinearAttributes(
-                            aspectRatio: 4.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 200.vp,
                             dividerHeight: 5,
                             margin: [25.0, 5.0, 2.0, 5.0],
                             padding:[15.0, 10.0, 12.0, 10.0]
@@ -461,7 +469,8 @@ class JumpBarExample {
                             layoutDataType(layoutText: "69")
                         ],
                         vLayoutAttribute: LinearAttributes(
-                            aspectRatio: 4.0
+                            layoutWidth: 100.percent,
+                            layoutHeight: 50.percent,
                         )
                     )
                 }

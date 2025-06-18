@@ -59,7 +59,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "6")
                             ],
                             vLayoutAttribute: LinearAttributes(
-                                aspectRatio: 4.0
+                                layoutWidth: 100.percent,
+                                layoutHeight: 600.vp,
                             )
                         )
                     }
@@ -75,7 +76,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "18")
                                 ],
                             vLayoutAttribute: LinearAttributes(
-                                layoutHeight: 580.0,
+                                layoutWidth: 100.percent,
+                                layoutHeight: 580.vp,
                                 dividerHeight: 5,
                                 bgColor: 0xFFF5A623,
                                 margin: [5.0, 5.0, 5.0, 5.0],
@@ -90,7 +92,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "2")
                                 ],
                             vLayoutAttribute: LinearAttributes(
-                                aspectRatio: 2.0,
+                                layoutWidth: 100.percent,
+                                layoutHeight: 180.vp,
                                 bgColor: 0xffff00,
                                 margin: [5.0, 5.0, 5.0, 5.0],
                                 padding:[5.0, 5.0, 5.0, 5.0]
@@ -130,7 +133,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "6")
                             ],
                             vLayoutAttribute: LinearAttributes(
-                                aspectRatio: 4.0
+                               layoutWidth: 100.percent,
+                                layoutHeight: 380.vp,
                             )
                         )
                     }
@@ -146,7 +150,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "18")
                                 ],
                             vLayoutAttribute: LinearAttributes(
-                                layoutHeight: 580.0,
+                                layoutWidth: 100.percent,
+                                layoutHeight: 580.vp,
                                 dividerHeight: 5,
                                 bgColor: 0xFFF5A623,
                                 margin: [5.0, 5.0, 5.0, 5.0],
@@ -161,7 +166,8 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "2")
                                 ],
                             vLayoutAttribute: LinearAttributes(
-                                aspectRatio: 2.0,
+                                layoutWidth: 100.percent,
+                                layoutHeight: 180.vp,
                                 bgColor: 0xffff00,
                                 margin: [5.0, 5.0, 5.0, 5.0],
                                 padding:[5.0, 5.0, 5.0, 5.0]

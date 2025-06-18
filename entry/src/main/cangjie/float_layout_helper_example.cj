@@ -73,7 +73,8 @@ class FloatLayoutHelperExample {
                             layoutDataType(layoutText: "6")
                         ],
                         vLayoutAttribute: LinearAttributes(
-                            aspectRatio: 4.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 400.vp,
                             dividerHeight: 5,
                             margin: [25.0, 5.0, 2.0, 5.0],
                             padding:[15.0, 10.0, 12.0, 10.0]
@@ -88,7 +89,8 @@ class FloatLayoutHelperExample {
                             layoutDataType(layoutText: "9")
                             ],
                         vLayoutAttribute: LinearAttributes(
-                            aspectRatio: 1.0,
+                            layoutWidth: 100.percent,
+                            layoutHeight: 400.vp,
                             dividerHeight: 5,
                             margin: [13.0, 5.0, 12.0, 5.0],
                             padding:[23.0, 20.0, 22.0, 30.0]

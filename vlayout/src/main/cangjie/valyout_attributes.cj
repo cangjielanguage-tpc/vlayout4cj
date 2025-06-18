@@ -12,9 +12,8 @@ import ohos.state_macro_manage.Publish
 @Observed
 public class BannerAttributes {
     @Publish public var range: Array<Int64> = [] //可显示的条目，默认值为[0,数据源长度]
-    @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
-    @Publish public var layoutHeight: Float64 = 0.0//容器高度
-    @Publish public var aspectRatio: Int64 = 1 //容器纵横比
+    @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
+    @Publish public var layoutHeight: Length = 0.0.vp //容器高度
     @Publish public var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
     @Publish public var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
     @Publish public var layoutIndex: Int64 = 0 //设置当前在容器中显示的子组件的索引值，默认值为0
@@ -61,9 +60,8 @@ public class AbstractFullFillAttributes {
     @Publish public var colWeights: Array<Float64> = [] //列权重，默认值为[]
     @Publish public var hasHeader: Bool = false //第一个子项变成一行一列，默认值为false，仅OnePlusNLayoutHelper支持
     @Publish public var hasFooter: Bool = false //最后一个子项变成一行一列，默认值为false，仅OnePlusNLayoutHelper支持
-    @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
-    @Publish public var layoutHeight: Float64 = 0.0 //容器高度
-    @Publish public var aspectRatio: Float64 = 0.0 //容器纵横比
+    @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
+    @Publish public var layoutHeight: Length = 0.0.vp //容器高度
     @Publish public var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
     @Publish public var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
@@ -87,8 +85,8 @@ public class AbstractFullFillAttributes {
 public class LinearAttributes {
     @Publish public var range: Array<Int64> = [0, 0] //可显示的条目，默认值为[0,数据源长度]
     @Publish public var dividerHeight: Int64 = 0 //列表项垂直间距，默认值为0
-    @Publish public var layoutHeight: Float64 = 0.0 //容器高度
-    @Publish public var aspectRatio: Float64 = 0.0 //ListItem的单行纵横比，默认值为0
+    @Publish public var layoutHeight: Length = 0.0.vp //容器高度
+    @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var bgColor: UInt32 = 0xffffff //Grid容器背景颜色，默认值为透明
     @Publish public var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0

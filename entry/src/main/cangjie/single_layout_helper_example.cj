@@ -12,7 +12,8 @@ class SingleLayoutHelperExample {
     @State var singleLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes()
 
     public override func aboutToAppear() {
-        this.singleLayoutAttribute.aspectRatio = 4.0
+        this.singleLayoutAttribute.layoutWidth = 100.percent
+        this.singleLayoutAttribute.layoutHeight = 20.percent
         this.singleLayoutAttribute.bgColor = 0xffc0cb
         this.singleLayoutAttribute.padding = [5.0, 5.0, 5.0, 5.0]
         this.singleLayoutAttribute.margin = [5.0, 5.0, 5.0, 5.0]

@@ -134,7 +134,8 @@ class NestedSample {
                     layoutDataType(layoutText: "", layoutColor: 0xF0FFF0)
                 ],
                 vLayoutAttribute: AbstractFullFillAttributes(
-                    layoutHeight: gridItemHeight,
+                    layoutHeight: 100.percent,
+                    layoutWidth: 100.percent,
                     bgColor: 0xffffff,
                     padding:[15.0, 15.0, 15.0, 15.0]
                 )
@@ -166,7 +167,8 @@ class NestedSample {
                     layoutDataType(layoutText: "C", layoutColor: 0xF0FFF0)
                 ],
                 vLayoutAttribute: AbstractFullFillAttributes(
-                    layoutHeight: gridItemHeight,
+                    layoutWidth: 100.percent,
+                    layoutHeight: 100.percent,
                     bgColor: 0xffffff,
                     padding:[5.0, 5.0, 5.0, 5.0]
                 )
@@ -180,8 +182,8 @@ class NestedSample {
                 vLayoutContent: this.bannerLayoutContent,
                 vLayoutData: data4,
                 vLayoutAttribute: BannerAttributes(
-                    layoutHeight: gridItemHeight,
-                    layoutWidth: 200.0,
+                    layoutHeight: 100.percent,
+                    layoutWidth:100.percent,
                     bgColor: 0xF0FFF0,
                 )
             )

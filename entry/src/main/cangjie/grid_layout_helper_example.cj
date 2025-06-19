@@ -41,7 +41,7 @@ class GridLayoutHelperExample {
                           layoutDataType(layoutText: "13"),
                           layoutDataType(layoutText: "14", colsSpan: 3)
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             aspectRatio: 3.0,
                             bgColor: 0xFF86345A,
                             spanCount: 3,
@@ -64,7 +64,7 @@ class GridLayoutHelperExample {
                           layoutDataType(layoutText: "18", colsSpan: 3),
                           layoutDataType(layoutText: "19", colsSpan: 1)
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             bgColor: 0x008000,
                             vGap: 10,
 
@@ -82,7 +82,7 @@ class GridLayoutHelperExample {
                           layoutDataType(layoutText: "23", colsSpan: 3),
                           layoutDataType(layoutText: "24", colsSpan: 1)
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             layoutHeight: 500.0,
                             aspectRatio: 3.0,
                             bgColor: 0x008000,
@@ -104,7 +104,7 @@ class GridLayoutHelperExample {
                           layoutDataType(layoutText: "28", colsSpan: 3),
                           layoutDataType(layoutText: "29", colsSpan: 1)
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             layoutHeight: 500.0,
                             bgColor: 0x008000,
                             spanCount: 4,

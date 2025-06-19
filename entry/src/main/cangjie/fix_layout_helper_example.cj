@@ -57,7 +57,7 @@ class FixLayoutHelperExample {
                             layoutDataType(layoutText: "5"),
                             layoutDataType(layoutText: "6")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 400.vp,
                             dividerHeight: 5,
@@ -73,7 +73,7 @@ class FixLayoutHelperExample {
                             layoutDataType(layoutText: "8"),
                             layoutDataType(layoutText: "9")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 800.vp,
                             dividerHeight: 5,
@@ -86,7 +86,7 @@ class FixLayoutHelperExample {
             FixLayout(
                 vLayoutContent: this.fixLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'FIX(1)')],
-                vLayoutAttribute: FixAreaAttributes(
+                fixAttribute: FixAreaAttributes(
                     layoutWidth: 100.0,
                     layoutHeight: 100.0,
                     //aspectRatio: 2.0,
@@ -102,7 +102,7 @@ class FixLayoutHelperExample {
             FixLayout(
                 vLayoutContent: this.fixLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'FIX(1)')],
-                vLayoutAttribute: FixAreaAttributes(
+                fixAttribute: FixAreaAttributes(
                     layoutWidth: 100.0,
                     layoutHeight: 100.0,
                     //aspectRatio: 2.0,

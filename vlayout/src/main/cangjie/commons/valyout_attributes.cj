@@ -1,7 +1,7 @@
 /*
  * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
  */
-package vlayout4cj
+package vlayout4cj.commons
 
 import ohos.state_macro_manage.Observed
 import ohos.state_macro_manage.Publish
@@ -87,14 +87,14 @@ public class LinearAttributes {
     @Publish public var dividerHeight: Int64 = 0 //列表项垂直间距，默认值为0
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
     @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
-    @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为0
     @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为0
     @Publish public var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
     @Publish public var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+    @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
     @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
     @Publish public var topMargin: Float64 = 0.0 //上外边距，默认值为0
     @Publish public var rightMargin: Float64 = 0.0 //右外边距，默认值为0
@@ -128,11 +128,11 @@ public class FixAreaAttributes {
     @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为0
     @Publish public var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
     @Publish public var leftPadding: Float64 = 0.0 //左内边距，默认值为0
-    @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
     @Publish public var topMargin: Float64 = 0.0 //上外边距，默认值为0
     @Publish public var rightMargin: Float64 = 0.0 //右外边距，默认值为0
     @Publish public var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
     @Publish public var leftMargin: Float64 = 0.0 //左外边距，默认值为0
+    @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
 }
 
 /*
@@ -155,9 +155,9 @@ public class GridAttributes {
     @Publish public var hGap: Int64 = 0 //列与列的间距，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，优先级比单给内边距高
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为0
-    @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为0
     @Publish public var bottomPadding: Float64 = 0.0 //下内边距，默认值为0
     @Publish public var leftPadding: Float64 = 0.0 //左内边距，默认值为0
+    @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为0
     @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
     @Publish public var topMargin: Float64 = 0.0 //上外边距，默认值为0
     @Publish public var rightMargin: Float64 = 0.0 //右外边距，默认值为0
@@ -185,8 +185,8 @@ public class StaggeredGridAttributes {
   @Publish public var leftPadding: Float64 = 0.0 //左内边距，默认值为0
   @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，优先级比单给外边距高
   @Publish public var topMargin: Float64 = 0.0//上外边距，默认值为0
-  @Publish public var rightMargin: Float64 = 0.0//右外边距，默认值为0
   @Publish public var bottomMargin: Float64 = 0.0 //下外边距，默认值为0
   @Publish public var leftMargin: Float64 = 0.0//左外边距，默认值为0
+  @Publish public var rightMargin: Float64 = 0.0//右外边距，默认值为0
 }
 

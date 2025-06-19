@@ -33,7 +33,7 @@ class BannerLayoutHelperExample {
             BannerLayout(
                 vLayoutContent: this.bannerLayoutContent,
                 vLayoutData: data,
-                vLayoutAttribute: BannerAttributes(
+                bannerAttribute: BannerAttributes(
                     layoutWidth: 100.percent,
                     layoutHeight: 50.percent,
                     bgColor: 0xFF0000,

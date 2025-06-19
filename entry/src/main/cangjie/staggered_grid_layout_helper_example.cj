@@ -87,7 +87,7 @@ class StaggeredGridlayoutHelperExample {
                         layoutDataType(layoutText: "32"),
                         layoutDataType(layoutText: "33")
                     ],
-                    vLayoutAttribute: StaggeredGridAttributes(
+                    staggeredGridAttribute: StaggeredGridAttributes(
                         staggeredWidth: screenWidth,
                         lanes: 3,
                         gap: 5.0,

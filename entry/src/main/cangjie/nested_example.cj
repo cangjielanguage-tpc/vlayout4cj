@@ -133,7 +133,7 @@ class NestedSample {
                     layoutDataType(layoutText: "", layoutColor: 0xFFF0F5),
                     layoutDataType(layoutText: "", layoutColor: 0xF0FFF0)
                 ],
-                vLayoutAttribute: AbstractFullFillAttributes(
+                oneAttribute: AbstractFullFillAttributes(
                     layoutHeight: 100.percent,
                     layoutWidth: 100.percent,
                     bgColor: 0xffffff,
@@ -166,7 +166,7 @@ class NestedSample {
                     layoutDataType(layoutText: "B", layoutColor: 0xFFF0F5),
                     layoutDataType(layoutText: "C", layoutColor: 0xF0FFF0)
                 ],
-                vLayoutAttribute: AbstractFullFillAttributes(
+                oneAttribute: AbstractFullFillAttributes(
                     layoutWidth: 100.percent,
                     layoutHeight: 100.percent,
                     bgColor: 0xffffff,
@@ -181,7 +181,7 @@ class NestedSample {
             BannerLayout(
                 vLayoutContent: this.bannerLayoutContent,
                 vLayoutData: data4,
-                vLayoutAttribute: BannerAttributes(
+                bannerAttribute: BannerAttributes(
                     layoutHeight: 100.percent,
                     layoutWidth:100.percent,
                     bgColor: 0xF0FFF0,
@@ -230,7 +230,7 @@ class NestedSample {
                 GridLayout(
                     vLayoutContent: this.gridLayoutContent1,
                     vLayoutData: this.data,
-                    vLayoutAttribute: GridAttributes(
+                    gridAttribute: GridAttributes(
                         spanCount: 4,
                         weights: [25.0, 25.0, 25.0, 25.0],
                         aspectRatio: 2.0 ,
@@ -245,7 +245,7 @@ class NestedSample {
                 GridLayout(
                     vLayoutContent: this.gridLayoutContent2,
                     vLayoutData: this.data,
-                    vLayoutAttribute: GridAttributes(
+                    gridAttribute: GridAttributes(
                         spanCount: 2,
                         weights: [46.665, 53.335],
                         aspectRatio: 2.0 ,
@@ -263,7 +263,7 @@ class NestedSample {
                 GridLayout(
                     vLayoutContent: this.gridLayoutContent3,
                     vLayoutData: this.data2,
-                    vLayoutAttribute: GridAttributes(
+                    gridAttribute: GridAttributes(
                         spanCount: 3,
                         aspectRatio: 2.0 ,
                         bgColor: 0xCFCFCF,
@@ -280,7 +280,7 @@ class NestedSample {
                 GridLayout(
                     vLayoutContent: this.gridLayoutContent4,
                     vLayoutData: this.data3,
-                    vLayoutAttribute: GridAttributes(
+                    gridAttribute: GridAttributes(
                         spanCount: 3,
                         weights: [50.0],
                         aspectRatio: 2.0 ,

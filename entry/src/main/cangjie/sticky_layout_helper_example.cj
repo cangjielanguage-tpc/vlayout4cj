@@ -58,7 +58,7 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "5"),
                                 layoutDataType(layoutText: "6")
                             ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                 layoutWidth: 100.percent,
                                 layoutHeight: 600.vp,
                             )
@@ -75,7 +75,7 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "17"),
                                 layoutDataType(layoutText: "18")
                                 ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                 layoutWidth: 100.percent,
                                 layoutHeight: 580.vp,
                                 dividerHeight: 5,
@@ -91,7 +91,7 @@ class StickyLayoutHelperExample {
                             vLayoutData: [
                                 layoutDataType(layoutText: "2")
                                 ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                 layoutWidth: 100.percent,
                                 layoutHeight: 180.vp,
                                 bgColor: 0xffff00,
@@ -107,7 +107,7 @@ class StickyLayoutHelperExample {
                             vLayoutData: [
                                 layoutDataType(layoutText: "Sticky")
                             ],
-                            vLayoutAttribute: FixAreaAttributes(
+                            stickyAttribute: FixAreaAttributes(
                                 layoutHeight: 200.0,
                                 layoutWidth: 200.0,
                                 bgColor: 0xffff00,
@@ -132,7 +132,7 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "5"),
                                 layoutDataType(layoutText: "6")
                             ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                layoutWidth: 100.percent,
                                 layoutHeight: 380.vp,
                             )
@@ -149,7 +149,7 @@ class StickyLayoutHelperExample {
                                 layoutDataType(layoutText: "17"),
                                 layoutDataType(layoutText: "18")
                                 ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                 layoutWidth: 100.percent,
                                 layoutHeight: 580.vp,
                                 dividerHeight: 5,
@@ -165,7 +165,7 @@ class StickyLayoutHelperExample {
                             vLayoutData: [
                                 layoutDataType(layoutText: "2")
                                 ],
-                            vLayoutAttribute: LinearAttributes(
+                            linearAttribute: LinearAttributes(
                                 layoutWidth: 100.percent,
                                 layoutHeight: 180.vp,
                                 bgColor: 0xffff00,
@@ -193,7 +193,7 @@ class StickyLayoutHelperExample {
                     vLayoutData: [
                         layoutDataType(layoutText: "Sticky")
                     ],
-                    vLayoutAttribute: FixAreaAttributes(
+                    stickyAttribute: FixAreaAttributes(
                         layoutHeight: 200.0,
                         layoutWidth: 200.0,
                         bgColor: 0xffff00,

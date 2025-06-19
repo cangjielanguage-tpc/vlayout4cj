@@ -16,7 +16,7 @@ public class LinearLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64, Float64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State var vLayoutAttribute: LinearAttributes = LinearAttributes() //属性
+    @State var linearAttribute: LinearAttributes = LinearAttributes() //属性
 
     @State var oneRowHeight: Float64 = 0.0 //单行高度
     @State var layoutHeight: Float64 = 0.0 //单行高度
@@ -26,43 +26,33 @@ public class LinearLayout {
     private var listItemHeight: Float64 = 0.0 //获取的gridItem高度
 
     protected override func aboutToAppear() {
-        computedRange()
-    }
-
-    func computedRange() {
-        //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        let range = if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range }
-        if (range.size == 2 && range[0] >= 0 && range[1] > range[0]) {
-            vLayoutData = vLayoutData.slice(range[0], range[1])
-        } else {
-            vLayoutData = vLayoutData
-        }
+        vLayoutData = CommonFunc.computedRange(linearAttribute.range, vLayoutData)
     }
 
    func computedHeight() {
         let rowCount: Int64 = vLayoutData.size
-        layoutHeight = vLayoutAttribute.layoutHeight.value
-        oneRowHeight = vLayoutAttribute.layoutHeight.value / Float64(rowCount)
+        layoutHeight = linearAttribute.layoutHeight.value
+        oneRowHeight = linearAttribute.layoutHeight.value / Float64(rowCount)
         computedExtraHeight(rowCount)
 
     }
 
     func computedExtraHeight(rowCount: Int64) {
-        if (vLayoutAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + Float64(vLayoutAttribute.dividerHeight * (rowCount - 1))
+        if (linearAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
+            layoutHeight = layoutHeight + Float64(linearAttribute.dividerHeight * (rowCount - 1))
         }
 
-        if (vLayoutAttribute.topPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + vLayoutAttribute.topPadding
+        if (linearAttribute.topPadding > 0.0 && layoutHeight > 0.0) {
+            layoutHeight = layoutHeight + linearAttribute.topPadding
         }
 
-        if (vLayoutAttribute.bottomPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + vLayoutAttribute.bottomPadding
+        if (linearAttribute.bottomPadding > 0.0 && layoutHeight > 0.0) {
+            layoutHeight = layoutHeight + linearAttribute.bottomPadding
         }
     }
 
     func build() {
-        List(space: vLayoutAttribute.dividerHeight) {
+        List(space: linearAttribute.dividerHeight) {
             ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
                 ListItem() {
                     vLayoutContent(item, position, oneRowHeight)
@@ -83,53 +73,53 @@ public class LinearLayout {
             Hilog.info(0x008000,"list", TAG + 'List listWidth = ${listWidth}, listHeight = ${listHeight}')
         })
         .height(layoutHeight)
-        .width(vLayoutAttribute.layoutWidth)
+        .width(linearAttribute.layoutWidth)
         .edgeEffect(EdgeEffect.None)
         .padding(
-                top: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[0]
+                top: if(linearAttribute.padding.size == 4) {
+                    linearAttribute.padding[0]
                 } else {
-                    vLayoutAttribute.topPadding
+                    linearAttribute.topPadding
                 },
-                right: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[1]
+                right: if(linearAttribute.padding.size == 4) {
+                    linearAttribute.padding[1]
                 } else {
-                    vLayoutAttribute.rightPadding
+                    linearAttribute.rightPadding
                 },
-                bottom: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[2]
+                bottom: if(linearAttribute.padding.size == 4) {
+                    linearAttribute.padding[2]
                 } else {
-                    vLayoutAttribute.bottomPadding
+                    linearAttribute.bottomPadding
                 },
-                left: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[3]
+                left: if(linearAttribute.padding.size == 4) {
+                    linearAttribute.padding[3]
                 } else {
-                    vLayoutAttribute.leftPadding
+                    linearAttribute.leftPadding
                 }
             )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
-        .backgroundColor(vLayoutAttribute.bgColor)
-        .zIndex(vLayoutAttribute.zIndex)
+        .backgroundColor(linearAttribute.bgColor)
+        .zIndex(linearAttribute.zIndex)
         .margin(
-            top: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[0]
+            top: if(linearAttribute.margin.size == 4) {
+                linearAttribute.margin[0]
             } else {
-                this.vLayoutAttribute.topMargin
+                linearAttribute.topMargin
             },
-            right:  if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[1]
+            right:  if(linearAttribute.margin.size == 4) {
+                linearAttribute.margin[1]
             } else {
-                this.vLayoutAttribute.rightMargin
+                linearAttribute.rightMargin
             },
-            bottom: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[2]
+            bottom: if(linearAttribute.margin.size == 4) {
+                linearAttribute.margin[2]
             } else {
-                this.vLayoutAttribute.bottomMargin
+                linearAttribute.bottomMargin
             },
-            left: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[3]
+            left: if(linearAttribute.margin.size == 4) {
+                linearAttribute.margin[3]
             } else {
-                this.vLayoutAttribute.leftMargin
+                linearAttribute.leftMargin
             }
         )
 

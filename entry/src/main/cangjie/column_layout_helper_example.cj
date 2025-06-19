@@ -42,7 +42,7 @@ class ColumnLayoutHelperExample {
                             layoutDataType(layoutText: "35"),
                             layoutDataType(layoutText: "36")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        columnAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 20.percent,
                             colWeights: [40.0, 5.0, 40.0],
@@ -60,7 +60,7 @@ class ColumnLayoutHelperExample {
                             layoutDataType(layoutText: "48"),
                             layoutDataType(layoutText: "49")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        columnAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xAAAAAA,
@@ -79,7 +79,7 @@ class ColumnLayoutHelperExample {
                             layoutDataType(layoutText: "35"),
                             layoutDataType(layoutText: "36")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        columnAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 20.percent,
                             range: [0, 7],

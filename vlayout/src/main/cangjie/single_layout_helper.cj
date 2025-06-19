@@ -15,23 +15,13 @@ public class SingleLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State var vLayoutAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
+    @State var singleAttribute: AbstractFullFillAttributes = AbstractFullFillAttributes() //属性
 
     private var itemWidth: Float64 = 0.0 //每个item的宽度
     private var itemHeight: Float64 = 0.0 //每个item的高度
 
     protected override func aboutToAppear() {
-        computedRange()
-    }
-
-    func computedRange() {
-        //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        let range = if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range }
-        if (range.size == 2 && range[0] >= 0 && range[1] > range[0]) {
-            vLayoutData = vLayoutData.slice(range[0], range[1])
-        } else {
-            vLayoutData = vLayoutData
-        }
+        vLayoutData = CommonFunc.computedRange(singleAttribute.range, vLayoutData)
     }
 
     func build() {
@@ -48,53 +38,53 @@ public class SingleLayout {
                     })
                 })
             }
-            .width(vLayoutAttribute.layoutWidth)
-            .height(vLayoutAttribute.layoutHeight)
+            .width(singleAttribute.layoutWidth)
+            .height(singleAttribute.layoutHeight)
             .padding(
-                top: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[0]
+                top: if(singleAttribute.padding.size == 4) {
+                    singleAttribute.padding[0]
                 } else {
-                    vLayoutAttribute.topPadding
+                    singleAttribute.topPadding
                 },
-                right: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[1]
+                right: if(singleAttribute.padding.size == 4) {
+                    singleAttribute.padding[1]
                 } else {
-                    vLayoutAttribute.rightPadding
+                    singleAttribute.rightPadding
                 },
-                bottom: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[2]
+                bottom: if(singleAttribute.padding.size == 4) {
+                    singleAttribute.padding[2]
                 } else {
-                    vLayoutAttribute.bottomPadding
+                    singleAttribute.bottomPadding
                 },
-                left: if(vLayoutAttribute.padding.size == 4) {
-                    vLayoutAttribute.padding[3]
+                left: if(singleAttribute.padding.size == 4) {
+                    singleAttribute.padding[3]
                 } else {
-                    vLayoutAttribute.leftPadding
+                    singleAttribute.leftPadding
                 }
             )
         }
-        .backgroundColor(vLayoutAttribute.bgColor)
-        .zIndex(vLayoutAttribute.zIndex)
+        .backgroundColor(singleAttribute.bgColor)
+        .zIndex(singleAttribute.zIndex)
         .margin(
-            top: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[0]
+            top: if(singleAttribute.margin.size == 4) {
+                singleAttribute.margin[0]
             } else {
-                this.vLayoutAttribute.topMargin
+                singleAttribute.topMargin
             },
-            right:  if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[1]
+            right:  if(singleAttribute.margin.size == 4) {
+                singleAttribute.margin[1]
             } else {
-                this.vLayoutAttribute.rightMargin
+                singleAttribute.rightMargin
             },
-            bottom: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[2]
+            bottom: if(singleAttribute.margin.size == 4) {
+                singleAttribute.margin[2]
             } else {
-                this.vLayoutAttribute.bottomMargin
+                singleAttribute.bottomMargin
             },
-            left: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[3]
+            left: if(singleAttribute.margin.size == 4) {
+                singleAttribute.margin[3]
             } else {
-                this.vLayoutAttribute.leftMargin
+                singleAttribute.leftMargin
             }
         )
 

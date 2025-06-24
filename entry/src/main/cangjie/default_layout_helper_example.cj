@@ -41,7 +41,7 @@ class DefaultLayoutHelperExample {
                             layoutDataType(layoutText: "5"),
                             layoutDataType(layoutText: "6")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 400.vp,
                             dividerHeight: 5,
@@ -57,7 +57,7 @@ class DefaultLayoutHelperExample {
                             layoutDataType(layoutText: "8"),
                             layoutDataType(layoutText: "9")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             dividerHeight: 5,

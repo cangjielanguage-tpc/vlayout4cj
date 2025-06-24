@@ -46,7 +46,7 @@ class SingleLayoutHelperExample {
                     vLayoutData: [
                         layoutDataType(layoutText: "32")
                         ],
-                    vLayoutAttribute: this.singleLayoutAttribute
+                    singleAttribute: this.singleLayoutAttribute
                 )
 
 
@@ -58,7 +58,7 @@ class SingleLayoutHelperExample {
                         layoutDataType(layoutText: "48"),
                         layoutDataType(layoutText: "49")
                         ],
-                    vLayoutAttribute: this.singleLayoutAttribute
+                    singleAttribute: this.singleLayoutAttribute
                 )
 
                 SingleLayout(
@@ -70,7 +70,7 @@ class SingleLayoutHelperExample {
                         layoutDataType(layoutText: "35"),
                         layoutDataType(layoutText: "36")
                         ],
-                    vLayoutAttribute: this.singleLayoutAttribute
+                    singleAttribute: this.singleLayoutAttribute
                 )
 
             }

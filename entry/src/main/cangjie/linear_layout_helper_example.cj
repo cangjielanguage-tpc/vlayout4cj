@@ -41,7 +41,7 @@ class LineartLayoutHelperExample {
                             layoutDataType(layoutText: "5555"),
                             layoutDataType(layoutText: "6666")
                         ],
-                        vLayoutAttribute: LinearAttributes()
+                        linearAttribute: LinearAttributes()
                     )
                 }
                 ListItem() {
@@ -56,7 +56,7 @@ class LineartLayoutHelperExample {
                             layoutDataType(layoutText: "5"),
                             layoutDataType(layoutText: "6")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        linearAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 20.percent
                         )
@@ -73,7 +73,7 @@ class LineartLayoutHelperExample {
                             layoutDataType(layoutText: "17"),
                             layoutDataType(layoutText: "18")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        linearAttribute: LinearAttributes(
                             layoutHeight: 580.0.vp,
                             layoutWidth: 100.percent,
                             dividerHeight: 5,
@@ -90,7 +90,7 @@ class LineartLayoutHelperExample {
                         vLayoutData: [
                             layoutDataType(layoutText: "2")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        linearAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 280.0.vp,
                             bgColor: 0xffff00,

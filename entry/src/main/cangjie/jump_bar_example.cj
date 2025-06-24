@@ -219,7 +219,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "4"),
                             layoutDataType(layoutText: "5")
                         ],
-                        vLayoutAttribute: BannerAttributes(
+                        bannerAttribute: BannerAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 20.percent,
                             bgColor: 0xFF0000,
@@ -241,7 +241,7 @@ class JumpBarExample {
                           layoutDataType(layoutText: "7"),
                           layoutDataType(layoutText: "8")
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             aspectRatio: 3.0,
                             bgColor: 0xAAAAAA,
                             spanCount: 4,
@@ -259,7 +259,7 @@ class JumpBarExample {
                           layoutDataType(layoutText: "9"),
                           layoutDataType(layoutText: "10")
                         ],
-                        vLayoutAttribute: GridAttributes(
+                        gridAttribute: GridAttributes(
                             aspectRatio: 3.0,
                             bgColor: 0xAAAAAA,
                             spanCount: 2,
@@ -279,7 +279,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "16"),
                             layoutDataType(layoutText: "17")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xff87e543,
@@ -299,7 +299,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "21"),
                             layoutDataType(layoutText: "22")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -319,7 +319,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "26"),
                             layoutDataType(layoutText: "27")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -339,7 +339,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "31"),
                             layoutDataType(layoutText: "32")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -360,7 +360,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "36"),
                             layoutDataType(layoutText: "37")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -382,7 +382,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "42"),
                             layoutDataType(layoutText: "43")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -404,7 +404,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "49"),
                             layoutDataType(layoutText: "50")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             bgColor: 0xba55d3,
@@ -424,7 +424,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "54"),
                             layoutDataType(layoutText: "55")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        columnAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 300.vp,
                             colWeights: [40.0, 5.0, 40.0],
@@ -446,7 +446,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "61"),
                             layoutDataType(layoutText: "62")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             dividerHeight: 5,
@@ -468,7 +468,7 @@ class JumpBarExample {
                             layoutDataType(layoutText: "68"),
                             layoutDataType(layoutText: "69")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        linearAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 50.percent,
                         )

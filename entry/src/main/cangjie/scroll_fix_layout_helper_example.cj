@@ -57,7 +57,7 @@ class ScrollFixLayoutHelperExample {
                             layoutDataType(layoutText: "5"),
                             layoutDataType(layoutText: "6")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.vp,
                             dividerHeight: 5,
@@ -73,7 +73,7 @@ class ScrollFixLayoutHelperExample {
                             layoutDataType(layoutText: "8"),
                             layoutDataType(layoutText: "9")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 800.vp,
                             dividerHeight: 5,
@@ -86,7 +86,7 @@ class ScrollFixLayoutHelperExample {
             ScrollFixLayout(
                 vLayoutContent: this.fixLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'SCROLL')],
-                vLayoutAttribute: FixAreaAttributes(
+                scrollAttribute: FixAreaAttributes(
 //                    layoutWidth: 100.0,
 //                    layoutHeight: 25.0,
                     aspectRatio: 2.0,
@@ -99,7 +99,7 @@ class ScrollFixLayoutHelperExample {
             FixLayout(
                 vLayoutContent: this.fixLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'FIX')],
-                vLayoutAttribute: FixAreaAttributes(
+                fixAttribute: FixAreaAttributes(
                     layoutWidth: 100.0,
                     layoutHeight: 100.0,
                     //aspectRatio: 2.0,

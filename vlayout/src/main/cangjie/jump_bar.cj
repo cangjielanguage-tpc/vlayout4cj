@@ -22,26 +22,26 @@ public class JumpBar {
     func build(){
         Column() {
             Row() {
-                if (this.textShow) {
-                    Text("First: ${this.textFirst}")
+                if (textShow) {
+                    Text("First: ${textFirst}")
                         .layoutWeight(1)
-                        .fontSize(this.fontSize)
+                        .fontSize(fontSize)
                         .fontColor(Color.WHITE)
                         .maxLines(1)
                         .textAlign(TextAlign.Center)
                         .textOverflow(TextOverflow.Ellipsis)
 
-                    Text("Existing: ${this.textExisting} Created: ${this.textCreated}")
+                    Text("Existing: ${textExisting} Created: ${textCreated}")
                         .layoutWeight(1)
-                        .fontSize(this.fontSize)
+                        .fontSize(fontSize)
                         .fontColor(Color.WHITE)
                         .maxLines(2)
                         .textAlign(TextAlign.Center)
                         .textOverflow(TextOverflow.Ellipsis)
 
-                    Text("Count: ${this.textCount}")
+                    Text("Count: ${textCount}")
                         .layoutWeight(1)
-                        .fontSize(this.fontSize)
+                        .fontSize(fontSize)
                         .fontColor(Color.WHITE)
                         .maxLines(1)
                         .textAlign(TextAlign.Center)
@@ -55,26 +55,26 @@ public class JumpBar {
                 Text('Jump Position')
                 .width(30.percent)
                 .height(100.percent)
-                .fontSize(this.fontSize)
+                .fontSize(fontSize)
                 .maxLines(1)
                 .textAlign(TextAlign.Center)
                 .textOverflow(TextOverflow.Ellipsis)
                 Column() {
-                    TextInput(placeholder: '请输入...', text: "${this.textInput}")
+                    TextInput(placeholder: '请输入...', text: "${textInput}")
                         .width(100.percent)
                         .height(100.percent)
                         .setType(InputType.Number)
                         .placeholderColor(0x000000)
-                        .placeholderFont( size: this.fontSize )
+                        .placeholderFont( size: fontSize )
                         .enterKeyType(EnterKeyType.Go)
                         .caretColor(0x000000)
                         .onChange({value: String =>
                             if (value.size == 0) {
-                                this.textInput = 0
+                                textInput = 0
                             } else if(Int32.parse(value) < 0) {
                                  Hilog.error(0x000000, "value", "error set")
                             } else {
-                                this.textInput = Int32.parse(value)
+                                textInput = Int32.parse(value)
                             }
                         })
                     Divider().borderWidth(1).color(Color.BLACK)
@@ -84,7 +84,7 @@ public class JumpBar {
 
                 Button {
                     Text('JUMP')
-                    .fontSize(this.fontSize)
+                    .fontSize(fontSize)
                     .fontColor(Color.BLACK)
                     .maxLines(1)
                     .textAlign(TextAlign.Center)
@@ -96,13 +96,13 @@ public class JumpBar {
                 .height(85.percent)
                 .backgroundColor(0xD6D7D7)
                 .onClick({evt =>
-                    this.scroller[0].scrollToIndex(this.textInput / 4)
+                    scroller[0].scrollToIndex(textInput / 4)
                 })
 
             }.layoutWeight(2)
         }
-        .aspectRatio(this.jumpBarAspectRatio)
-        .backgroundColor(this.jumpBarColor)
+        .aspectRatio(jumpBarAspectRatio)
+        .backgroundColor(jumpBarColor)
         .zIndex(10)
     }
 }

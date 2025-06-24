@@ -15,6 +15,7 @@ internal import std.convert.*
 import ohos.state_macro_manage.*
 
 internal import vlayout4cj.*
+internal import vlayout4cj.commons.*
 
 @Entry
 @Component

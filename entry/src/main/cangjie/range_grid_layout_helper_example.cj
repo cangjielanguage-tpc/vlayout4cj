@@ -62,7 +62,7 @@ class RangeGridLayoutHelperExample {
                         layoutDataType( layoutText: '29', layoutColor: 0x00FF00 ),
                         layoutDataType( layoutText: '30', layoutColor: 0x00FF00 )
                       ],
-                      vLayoutAttribute: GridAttributes(
+                      rangeGridAttribute: GridAttributes(
                         layoutHeight: 500.0,
                         spanCount: 4,
                         weights: [20.0, 26.6, 26.6, 26.6],

@@ -18,8 +18,7 @@ public class StickyLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State @Watch[defaultValueInit] var vLayoutAttribute: FixAreaAttributes = FixAreaAttributes() //属性
-    @State var stickyInfo: FixAreaAttributes = FixAreaAttributes() //属性
+    @State var stickyAttribute: FixAreaAttributes = FixAreaAttributes() //属性
 
     @Prop var isSticky: Bool
 
@@ -28,163 +27,106 @@ public class StickyLayout {
     private var aspectRatio: Float64 = 0.0 //宽高比
 
     protected override func aboutToAppear() {
-        defaultValueInit()
-        initComponentSize()
-        computedRange()
-    }
-
-    func defaultValueInit() {
-        stickyInfo = FixAreaAttributes(
-            range: if(vLayoutAttribute.range == [0, 0] || vLayoutAttribute.range[1] > vLayoutData.size) {[0, vLayoutData.size] } else {vLayoutAttribute.range } ,
-            layoutWidth: vLayoutAttribute.layoutWidth,
-            layoutHeight: vLayoutAttribute.layoutHeight,
-            aspectRatio: vLayoutAttribute.aspectRatio,
-            bgColor: vLayoutAttribute.bgColor,
-            zIndex: vLayoutAttribute.zIndex,
-            padding: vLayoutAttribute.padding,
-            topPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[0]
-            } else {
-                vLayoutAttribute.topPadding
-            },
-            rightPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[1]
-            } else {
-                vLayoutAttribute.rightPadding
-            },
-            bottomPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[2]
-            } else {
-                vLayoutAttribute.bottomPadding
-            },
-            leftPadding: if(vLayoutAttribute.padding.size == 4) {
-                vLayoutAttribute.padding[3]
-            } else {
-                vLayoutAttribute.leftPadding
-            },
-            margin: vLayoutAttribute.margin,
-            topMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[0]
-            } else {
-                vLayoutAttribute.topMargin
-            },
-            rightMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[1]
-            } else {
-                vLayoutAttribute.rightMargin
-            },
-            bottomMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[2]
-            } else {
-                vLayoutAttribute.bottomMargin
-            },
-            leftMargin: if(vLayoutAttribute.margin.size == 4) {
-                vLayoutAttribute.margin[3]
-            } else {
-                vLayoutAttribute.leftMargin
-            }
-        )
-
-    }
-
-    func initComponentSize() {
-        if (stickyInfo.layoutWidth == 0.0 && stickyInfo.layoutHeight == 0.0 && stickyInfo.aspectRatio == 0.0) {
-            layoutWidth = 0.0
-            layoutHeight = 100.0
-            aspectRatio = 0.0
-        } else if (stickyInfo.layoutWidth != 0.0 && stickyInfo.layoutHeight == 0.0 && stickyInfo.aspectRatio == 0.0) {
-            layoutWidth = stickyInfo.layoutWidth
-            aspectRatio = 1.0
-            layoutHeight = layoutWidth / aspectRatio
-        } else if (stickyInfo.layoutWidth == 0.0 && stickyInfo.layoutHeight != 0.0 && stickyInfo.aspectRatio == 0.0) {
-            layoutHeight = stickyInfo.layoutHeight
-            aspectRatio = 1.0
-            layoutWidth = 0.0
-        } else if (stickyInfo.layoutWidth == 0.0 && stickyInfo.layoutHeight == 0.0 && stickyInfo.aspectRatio != 0.0) {
-            aspectRatio = stickyInfo.aspectRatio
-            layoutHeight = 100.0
-            layoutWidth = 100.0 * aspectRatio
-        } else if (stickyInfo.layoutWidth != 0.0 && stickyInfo.layoutHeight != 0.0 && stickyInfo.aspectRatio != 0.0) {
-            layoutWidth = stickyInfo.layoutWidth
-            layoutHeight = stickyInfo.layoutHeight
-            aspectRatio = stickyInfo.aspectRatio
-        } else if (stickyInfo.layoutWidth != 0.0 && stickyInfo.layoutHeight != 0.0 && stickyInfo.aspectRatio == 0.0) {
-            layoutWidth = stickyInfo.layoutWidth
-            layoutHeight = stickyInfo.layoutHeight
-            aspectRatio = layoutWidth / layoutHeight
-        } else if (stickyInfo.layoutWidth != 0.0 && stickyInfo.layoutHeight == 0.0 && stickyInfo.aspectRatio != 0.0) {
-            layoutWidth = stickyInfo.layoutWidth
-            aspectRatio = stickyInfo.aspectRatio
-            layoutHeight = layoutWidth / aspectRatio
-
-        } else if (stickyInfo.layoutWidth == 0.0 && stickyInfo.layoutHeight != 0.0 && stickyInfo.aspectRatio != 0.0) {
-            layoutHeight = stickyInfo.layoutHeight
-            aspectRatio = stickyInfo.aspectRatio
-            layoutWidth = layoutHeight * aspectRatio
-        } else {
-            Hilog.info(0x000000,"initComponentSize", TAG + 'error')
-        }
-    }
-
-    func computedRange() {
-        //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        if (stickyInfo.range.size == 2 && stickyInfo.range[0] >= 0 && stickyInfo.range[1] > stickyInfo.range[0]) {
-            vLayoutData = vLayoutData.slice(stickyInfo.range[0], stickyInfo.range[1])
-        } else {
-            vLayoutData = vLayoutData
-        }
+        layoutWidth = CommonFunc.initComponentSize(
+            stickyAttribute.layoutWidth,
+            stickyAttribute.layoutHeight,
+            stickyAttribute.aspectRatio
+            )[0]
+        layoutHeight = CommonFunc.initComponentSize(
+            stickyAttribute.layoutWidth,
+            stickyAttribute.layoutHeight,
+            stickyAttribute.aspectRatio
+            )[1]
+        aspectRatio = CommonFunc.initComponentSize(
+            stickyAttribute.layoutWidth,
+            stickyAttribute.layoutHeight,
+            stickyAttribute.aspectRatio
+            )[2]
+        vLayoutData = CommonFunc.computedRange(stickyAttribute.range, vLayoutData)
     }
 
     func build() {
         Column() {
             if(isSticky) {
                 Stack() {
-                    ForEach(this.vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
-                        this.vLayoutContent(item, position)
+                    ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
+                        vLayoutContent(item, position)
                     })
                 }
 
                 .width(layoutWidth)
                 .height(layoutHeight)
                 .aspectRatio(aspectRatio)
-                .backgroundColor(stickyInfo.bgColor)
+                .backgroundColor(stickyAttribute.bgColor)
                 .padding(
-                    top: stickyInfo.topPadding,
-                    right: stickyInfo.rightPadding,
-                    bottom: stickyInfo.bottomPadding,
-                    left: stickyInfo.leftPadding
+                    top: stickyAttribute.topPadding,
+                    right: stickyAttribute.rightPadding,
+                    bottom: stickyAttribute.bottomPadding,
+                    left: stickyAttribute.leftPadding
                 )
-                .zIndex(stickyInfo.zIndex)
+                .zIndex(stickyAttribute.zIndex)
                 .margin(
-                    top: stickyInfo.topMargin,
-                    right: stickyInfo.rightMargin,
-                    bottom: stickyInfo.bottomMargin,
-                    left: stickyInfo.leftMargin
+                    top: stickyAttribute.topMargin,
+                    right: stickyAttribute.rightMargin,
+                    bottom: stickyAttribute.bottomMargin,
+                    left: stickyAttribute.leftMargin
                 )
                 .position(x: 0.0, y: 0.0)
             } else{
                 Stack() {
-                    ForEach(this.vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
-                        this.vLayoutContent(item, position)
+                    ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
+                        vLayoutContent(item, position)
                     })
                 }
 
                 .width(layoutWidth)
                 .height(layoutHeight)
                 .aspectRatio(aspectRatio)
-                .backgroundColor(stickyInfo.bgColor)
+                .backgroundColor(stickyAttribute.bgColor)
                 .padding(
-                    top: stickyInfo.topPadding,
-                    right: stickyInfo.rightPadding,
-                    bottom: stickyInfo.bottomPadding,
-                    left: stickyInfo.leftPadding
+                    top: if(stickyAttribute.padding.size == 4) {
+                        stickyAttribute.padding[0]
+                    } else {
+                        stickyAttribute.topPadding
+                    },
+                    right: if(stickyAttribute.padding.size == 4) {
+                        stickyAttribute.padding[1]
+                    } else {
+                        stickyAttribute.rightPadding
+                    },
+                    bottom: if(stickyAttribute.padding.size == 4) {
+                        stickyAttribute.padding[2]
+                    } else {
+                        stickyAttribute.bottomPadding
+                    },
+                    left: if(stickyAttribute.padding.size == 4) {
+                        stickyAttribute.padding[3]
+                    } else {
+                        stickyAttribute.leftPadding
+                    }
                 )
-                .zIndex(stickyInfo.zIndex)
+                .zIndex(stickyAttribute.zIndex)
                 .margin(
-                    top: stickyInfo.topMargin,
-                    right: stickyInfo.rightMargin,
-                    bottom: stickyInfo.bottomMargin,
-                    left: stickyInfo.leftMargin
+                    top: if(this.stickyAttribute.margin.size == 4) {
+                        this.stickyAttribute.margin[0]
+                    } else {
+                        this.stickyAttribute.topMargin
+                    },
+                    right: if(this.stickyAttribute.margin.size == 4) {
+                        this.stickyAttribute.margin[1]
+                    } else {
+                        this.stickyAttribute.rightMargin
+                    },
+                    bottom: if(this.stickyAttribute.margin.size == 4) {
+                        this.stickyAttribute.margin[2]
+                    } else {
+                        this.stickyAttribute.bottomMargin
+                    },
+                    left: if(this.stickyAttribute.margin.size == 4) {
+                        this.stickyAttribute.margin[3]
+                    } else {
+                        this.stickyAttribute.leftMargin
+                    }
                 )
             }
 

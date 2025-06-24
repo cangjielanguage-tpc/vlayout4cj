@@ -72,7 +72,7 @@ class FloatLayoutHelperExample {
                             layoutDataType(layoutText: "5"),
                             layoutDataType(layoutText: "6")
                         ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 400.vp,
                             dividerHeight: 5,
@@ -88,7 +88,7 @@ class FloatLayoutHelperExample {
                             layoutDataType(layoutText: "8"),
                             layoutDataType(layoutText: "9")
                             ],
-                        vLayoutAttribute: LinearAttributes(
+                        defaultAttribute: LinearAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 400.vp,
                             dividerHeight: 5,
@@ -101,7 +101,7 @@ class FloatLayoutHelperExample {
             FixLayout(
                 vLayoutContent: this.fixLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'FIX(1)')],
-                vLayoutAttribute: FixAreaAttributes(
+                fixAttribute: FixAreaAttributes(
                     layoutWidth: 100.0,
                     layoutHeight: 100.0,
                     //aspectRatio: 2.0,
@@ -117,7 +117,7 @@ class FloatLayoutHelperExample {
             FloatLayout(
                 vLayoutContent: this.floatxLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'Float')],
-                vLayoutAttribute: FixAreaAttributes(
+                floatAttribute: FixAreaAttributes(
                     layoutWidth: 80.0,
                     layoutHeight: 80.0,
                     aspectRatio: 2.0,
@@ -132,7 +132,7 @@ class FloatLayoutHelperExample {
             FloatLayout(
                 vLayoutContent: this.floatxLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'Float')],
-                vLayoutAttribute: FixAreaAttributes(
+                floatAttribute: FixAreaAttributes(
                     layoutWidth: 80.0,
                     layoutHeight: 80.0,
                     aspectRatio: 2.0,
@@ -146,7 +146,7 @@ class FloatLayoutHelperExample {
             FloatLayout(
                 vLayoutContent: this.floatxLayoutContent,
                 vLayoutData: [layoutDataType(layoutText: 'Float')],
-                vLayoutAttribute: FixAreaAttributes(
+                floatAttribute: FixAreaAttributes(
                     layoutWidth: 80.0,
                     layoutHeight: 80.0,
                     aspectRatio: 2.0,

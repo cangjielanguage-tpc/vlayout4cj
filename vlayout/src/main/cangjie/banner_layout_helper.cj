@@ -15,78 +15,69 @@ public class BannerLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64) -> Unit //布局
     var vLayoutData: Array<layoutDataType> = [] //数据源
 
-    @State var vLayoutAttribute: BannerAttributes = BannerAttributes() //属性
+    @State var bannerAttribute: BannerAttributes = BannerAttributes() //属性
 
     private var itemWidth: Float64 = 0.0 //每个item的宽度
     private var itemHeight: Float64 = 0.0 //每个item的高度
 
     protected override func aboutToAppear() {
-        this.computedRange()
-    }
-
-    func computedRange() {
-        //可显示的条目range数组长度为2并且数组元素内第一项大于等于0并且第二项大于第一项
-        if (this.vLayoutAttribute.range.size == 2 && this.vLayoutAttribute.range[0] >= 0 && this.vLayoutAttribute.range[1] > this.vLayoutAttribute.range[0]) {
-            this.vLayoutData = this.vLayoutData.slice(this.vLayoutAttribute.range[0], this.vLayoutAttribute.range[1] - this.vLayoutAttribute.range[0])
-        } else {
-            this.vLayoutData = this.vLayoutData
-        }
+        vLayoutData = CommonFunc.computedRange(bannerAttribute.range, vLayoutData)
     }
 
     func build() {
         Column() {
             Swiper() {
-                ForEach(this.vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
+                ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
                     Column() {
-                       this.vLayoutContent(item, position)
+                       vLayoutContent(item, position)
                     }
                     .onAreaChange({oldValue, newValue =>
-                        this.itemWidth = newValue.width
-                        this.itemHeight = newValue.height
-                        Hilog.info(0x000000,"item",  '${TAG} itemWidth = ${this.itemWidth}, itemHeight = ${this.itemHeight}')
+                        itemWidth = newValue.width
+                        itemHeight = newValue.height
+                        Hilog.info(0x000000,"item",  '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
                     })
                })
             }
-            .width(this.vLayoutAttribute.layoutWidth)
-            .height(this.vLayoutAttribute.layoutHeight)
-            .index(UInt32(this.vLayoutAttribute.layoutIndex))
-            .autoPlay(this.vLayoutAttribute.layoutAutoPlay)
-            .interval(UInt32(this.vLayoutAttribute.layoutInterval))
-            .indicator(this.vLayoutAttribute.layoutIndicator)
-            .loop(this.vLayoutAttribute.layoutLoop)
-            .duration(UInt32(this.vLayoutAttribute.layoutDuration))
-            .vertical(this.vLayoutAttribute.layoutVertical)
-            .itemSpace(this.vLayoutAttribute.layoutItemSpace)
+            .width(bannerAttribute.layoutWidth)
+            .height(bannerAttribute.layoutHeight)
+            .index(UInt32(bannerAttribute.layoutIndex))
+            .autoPlay(bannerAttribute.layoutAutoPlay)
+            .interval(UInt32(bannerAttribute.layoutInterval))
+            .indicator(bannerAttribute.layoutIndicator)
+            .loop(bannerAttribute.layoutLoop)
+            .duration(UInt32(bannerAttribute.layoutDuration))
+            .vertical(bannerAttribute.layoutVertical)
+            .itemSpace(bannerAttribute.layoutItemSpace)
             .effectMode(
-                match (this.vLayoutAttribute.layoutEffectMode) {
+                match (bannerAttribute.layoutEffectMode) {
                 	case 1 => EdgeEffect.Spring
                 	case 2 => EdgeEffect.Fade
                 	case _ => EdgeEffect.None
                 }
             )
         }
-        .backgroundColor(this.vLayoutAttribute.bgColor)
-        .zIndex(Int32(this.vLayoutAttribute.zIndex))
+        .backgroundColor(bannerAttribute.bgColor)
+        .zIndex(Int32(bannerAttribute.zIndex))
         .margin(
-            top: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[0]
+            top: if(bannerAttribute.margin.size == 4) {
+                bannerAttribute.margin[0]
             } else {
-                this.vLayoutAttribute.topMargin
+                bannerAttribute.topMargin
             },
-            right:  if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[1]
+            right:  if(bannerAttribute.margin.size == 4) {
+                bannerAttribute.margin[1]
             } else {
-                this.vLayoutAttribute.rightMargin
+                bannerAttribute.rightMargin
             },
-            bottom: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[2]
+            bottom: if(bannerAttribute.margin.size == 4) {
+                bannerAttribute.margin[2]
             } else {
-                this.vLayoutAttribute.bottomMargin
+                bannerAttribute.bottomMargin
             },
-            left: if(this.vLayoutAttribute.margin.size == 4) {
-                this.vLayoutAttribute.margin[3]
+            left: if(bannerAttribute.margin.size == 4) {
+                bannerAttribute.margin[3]
             } else {
-                this.vLayoutAttribute.leftMargin
+                bannerAttribute.leftMargin
             }
         )
     }

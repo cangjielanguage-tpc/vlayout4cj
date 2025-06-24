@@ -37,7 +37,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "26"),
                             layoutDataType(layoutText: "27")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xff87e543,
@@ -57,7 +57,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "31"),
                             layoutDataType(layoutText: "32")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xba55d3,
@@ -78,7 +78,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "36"),
                             layoutDataType(layoutText: "37")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0x808000,
@@ -100,7 +100,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "42"),
                             layoutDataType(layoutText: "43")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xff876384,
@@ -122,7 +122,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "49"),
                             layoutDataType(layoutText: "50")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xffef8ba3,
@@ -144,7 +144,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "56"),
                             layoutDataType(layoutText: "57")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xff87e543,
@@ -167,7 +167,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "63"),
                             layoutDataType(layoutText: "64")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xffd700,
@@ -185,7 +185,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "20"),
                             layoutDataType(layoutText: "21")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xff00ff,
@@ -206,7 +206,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "21"),
                             layoutDataType(layoutText: "22")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xffb6c1,
@@ -231,7 +231,7 @@ class OnePlusNExLayoutHelperExample {
                             layoutDataType(layoutText: "22"),
                             layoutDataType(layoutText: "23")
                             ],
-                        vLayoutAttribute: AbstractFullFillAttributes(
+                        oneExAttribute: AbstractFullFillAttributes(
                             layoutWidth: 100.percent,
                             layoutHeight: 200.0.vp,
                             bgColor: 0xff0000,

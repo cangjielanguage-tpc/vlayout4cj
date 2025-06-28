@@ -65,6 +65,7 @@ public class ScrollFixFloatLayoutCommon {
         .height(layoutHeight)
         .aspectRatio(aspectRatio)
         .backgroundColor(vLayoutAttribute.bgColor)
+        .opacity(vLayoutAttribute.bgOpacity)
         .position(
             x: if(vLayoutAttribute.sketchMeasure) { 0.0 } else { xOffset } ,
             y: yOffset

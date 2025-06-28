@@ -30,12 +30,10 @@ public class ColumnLayout {
     func computedColWeights() {
         var element: Float64 = 0.0
         if (columnAttribute.colWeights.size != 0) {
-            for (index in 0..columnAttribute.colWeights.size) {
-                element = columnAttribute.colWeights[index]
+            for (idx in 0..columnAttribute.colWeights.size) {
+                element = columnAttribute.colWeights[idx]
                 if (element < 0.0) {
-                    columnAttribute.colWeights = []
-                } else {
-                    columnAttribute.colWeights = columnAttribute.colWeights
+                    columnAttribute.colWeights[idx] = 0.0
                 }
             }
             if (vLayoutData.size == columnAttribute.colWeights.size) { //数据源数组长度等于列权重数组长度时
@@ -73,9 +71,10 @@ public class ColumnLayout {
             }
             Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${colWeightArray}')
         } else {
-            colWeightArray = Array<Float64>(vLayoutData.size, item: Float64(100/vLayoutData.size))
+            if(vLayoutData.size != 0) {
+                colWeightArray = Array<Float64>(vLayoutData.size, item: Float64(100/vLayoutData.size))
+            }
         }
-
     }
 
     func build() {
@@ -83,7 +82,7 @@ public class ColumnLayout {
             Row() {
                 ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
                     Stack() {
-                        vLayoutContent(item, position, layoutHeight)
+                        vLayoutContent(item, position, columnAttribute.layoutHeight)
                     }
                     .width(Length(Float64(colWeightArray[position]), unitType: percent))
                     .layoutWeight(if(colWeightArray.size == 0) { 1 } else { 0})
@@ -125,6 +124,7 @@ public class ColumnLayout {
             )
         }
         .backgroundColor(columnAttribute.bgColor)
+        .opacity(columnAttribute.bgOpacity)
         .zIndex(columnAttribute.zIndex)
         .margin(
             top: if(columnAttribute.margin.size == 4) {

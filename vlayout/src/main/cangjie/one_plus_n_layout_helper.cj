@@ -153,7 +153,6 @@ public class OneLayout {
                 Hilog.error(0x000000, "computedColWeights", '${TAG}computedColWeights error')
 
         }
-
         return weightArray
     }
 
@@ -367,7 +366,7 @@ public class OneLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
                                     computedSize()
                                 })
-                                .width(if(rowWeightArray.size == 0) {50.percent} else {rowWeightArray[1].percent })
+                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent })
 
                                 Column() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
@@ -376,7 +375,7 @@ public class OneLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
                                     computedSize()
                                 })
-                                .width(if(rowWeightArray.size == 0) {50.percent} else {rowWeightArray[2].percent  })
+                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent  })
                             }
                             .layoutWeight(if(rowWeightArray.size == 0) {1 } else {Int32(rowWeightArray[1]) })
 
@@ -682,7 +681,7 @@ public class OneLayout {
                                 .alignItems(HorizontalAlign.Start)
                                 .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
                             }
-                            .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {1} else {Int32(rowWeightArray[1])})
+                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
                         }.alignItems(HorizontalAlign.Start)
                     }else if (!oneAttribute.hasHeader && oneAttribute.hasFooter) {
                         Column() {
@@ -811,7 +810,7 @@ public class OneLayout {
                                 computedSize()
                             })
                             .alignItems(HorizontalAlign.Start)
-                            .width(if (rowWeightArray.size == 0) {50.percent } else {colWeightArray[0].percent})
+                            .width(if (colWeightArray.size == 0) {50.percent } else {colWeightArray[0].percent})
 
                             Column() {
                                 Column() {vLayoutContent(vLayoutData[1])}
@@ -822,7 +821,7 @@ public class OneLayout {
                                     computedSize()
                                 })
                                 .alignItems(HorizontalAlign.Start)
-                                .width(if (rowWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
                                 .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
 
                                 Row() {
@@ -833,7 +832,7 @@ public class OneLayout {
                                         Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
                                         computedSize()
                                     })
-                                    .width(if (rowWeightArray.size == 0) {33.percent} else {colWeightArray[2].percent})
+                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[2].percent})
                                     .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
 
                                     Column() {vLayoutContent(vLayoutData[3])}
@@ -843,7 +842,7 @@ public class OneLayout {
                                         Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
                                         computedSize()
                                     })
-                                    .width(if (rowWeightArray.size == 0) {33.percent} else {colWeightArray[3].percent})
+                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[3].percent})
                                     .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
 
                                     Column() {vLayoutContent(vLayoutData[4])}
@@ -853,11 +852,11 @@ public class OneLayout {
                                         Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
                                         computedSize()
                                     })
-                                    .width(if (rowWeightArray.size == 0) {33.percent} else {colWeightArray[4].percent})
+                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[4].percent})
                                     .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
 
                                 }
-                                .width(if (rowWeightArray.size == 0) {50.percent} else {100.percent})
+                                .width(if (colWeightArray.size == 0) {50.percent} else {100.percent})
                                 .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
                             }
                             .alignItems(HorizontalAlign.Start)
@@ -895,6 +894,7 @@ public class OneLayout {
             )
         }
         .backgroundColor(oneAttribute.bgColor)
+        .opacity(oneAttribute.bgOpacity)
         .zIndex(oneAttribute.zIndex)
         .margin(
             top: if(this.oneAttribute.margin.size == 4) {

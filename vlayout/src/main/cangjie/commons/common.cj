@@ -3,18 +3,29 @@
  */
 package vlayout4cj.commons
 
+let BottomFixesHeight: Float64 = 40.0
 public class CommonFunc {
     public static func computedRange(range: Array<Int64>, vLayoutData: Array<layoutDataType>): Array<layoutDataType> {
         var data: Array<layoutDataType> = vLayoutData
-        if (range.size == 2 && range[0] >= 0 && range[1] > range[0] && range[1] < vLayoutData.size) {
-            return data.slice(range[0], range[1] - range[0])
-        } else {
+        if(range.size != 2) {
             return data
         }
+        if(range[0] >= 0 && range[1] > range[0]) {
+            if(range[0] > vLayoutData.size) {
+                return Array<layoutDataType>()
+            }
+            if(range[1] > (vLayoutData.size - range[0])) {
+                return data.slice(range[0], vLayoutData.size - range[0])
+            } else {
+                return data.slice(range[0], range[1])
+            }
+        }
+        return data
+
     }
 
     public static func spanCountAndWeight(spanCount: Int64, weights: Array<Float64>): (Int64, Array<Float64>) {
-        let spanCounts: Int64 = if (spanCount == 0 && weights.size == 0) {
+        let spanCounts: Int64 = if (spanCount <= 0 && weights.size == 0) {
             4
         } else if(spanCount == 0 && weights.size != 0){
             weights.size
@@ -42,10 +53,10 @@ public class CommonFunc {
                 yOffsets = 0.0
             case 2 =>//左下
                 xOffsets = 0.0
-                yOffsets = screenHeight - layoutHeight 
+                yOffsets = screenHeight - layoutHeight - BottomFixesHeight
             case 3 =>//右下
                 xOffsets = screenWidth - layoutWidth
-                yOffsets = screenHeight - layoutHeight
+                yOffsets = screenHeight - layoutHeight - BottomFixesHeight
             case _ =>
                 xOffsets = xOffset
                 yOffsets = yOffset
@@ -57,38 +68,40 @@ public class CommonFunc {
         var layoutWidths: Float64 = 0.0
         var layoutHeights: Float64 = 0.0
         var aspectRatios: Float64 = 0.0
-        if (layoutWidth == 0.0 && layoutHeight == 0.0 && aspectRatio == 0.0) {
+        if (layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0) {
             layoutHeights = 100.0
             aspectRatios = 1.0
             layoutWidths = layoutHeights * aspectRatios
-        } else if (layoutWidth != 0.0 && layoutHeight == 0.0 && aspectRatio == 0.0) {
+        } else if (layoutWidth > 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0) {
             layoutWidths = layoutWidth
             layoutHeights = 100.0
             aspectRatios = layoutWidths / layoutHeights
-        } else if (layoutWidth == 0.0 && layoutHeight != 0.0 && aspectRatio == 0.0) {
+        } else if (layoutWidth <= 0.0 && layoutHeight > 0.0 && aspectRatio <= 0.0) {
             layoutHeights = layoutHeight
             aspectRatios = 1.0
             layoutWidths = layoutHeights * aspectRatios
-        } else if (layoutWidth == 0.0 && layoutHeight == 0.0 && aspectRatio != 0.0) {
+        } else if (layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio > 0.0) {
             layoutHeights = 100.0
             aspectRatios = aspectRatio
             layoutWidths = layoutHeights * aspectRatios
-        } else if (layoutWidth != 0.0 && layoutHeight != 0.0 && aspectRatio != 0.0) {
+        } else if (layoutWidth > 0.0 && layoutHeight > 0.0 && aspectRatio > 0.0) {
             layoutWidths = layoutWidth
             layoutHeights = layoutHeight
             aspectRatios = aspectRatio
-        } else if (layoutWidth != 0.0 && layoutHeight != 0.0 && aspectRatio == 0.0) {
+        } else if (layoutWidth > 0.0 && layoutHeight > 0.0 && aspectRatio <= 0.0) {
             layoutWidths = layoutWidth
             layoutHeights = layoutHeight
             aspectRatios = layoutWidths / layoutHeights
-        } else if (layoutWidth != 0.0 && layoutHeight == 0.0 && aspectRatio != 0.0) {
+        } else if (layoutWidth > 0.0 && layoutHeight <= 0.0 && aspectRatio > 0.0) {
             layoutWidths = layoutWidth
             aspectRatios = aspectRatio
             layoutHeights = layoutWidths / aspectRatios
-        } else if (layoutWidth == 0.0 && layoutHeight != 0.0 && aspectRatio != 0.0) {
+        } else if (layoutWidth <= 0.0 && layoutHeight > 0.0 && aspectRatio > 0.0) {
             layoutHeights = layoutHeight
             aspectRatios = aspectRatio
             layoutWidths = layoutHeights * aspectRatios
+        } else if(layoutWidth < 0.0 || layoutHeight < 0.0){
+            return (0.0, 0.0, 0.0)
         } else {
             return (0.0, 0.0, 0.0)
         }

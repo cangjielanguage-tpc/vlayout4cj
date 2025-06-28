@@ -523,6 +523,7 @@ public class OneExLayout {
             )
         }
         .backgroundColor(oneExAttribute.bgColor)
+        .opacity(oneExAttribute.bgOpacity)
         .zIndex(oneExAttribute.zIndex)
         .margin(
             top: if(oneExAttribute.margin.size == 4) {

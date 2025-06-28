@@ -110,6 +110,7 @@ public class FloatLayout {
         .height(layoutHeight)
         .aspectRatio(aspectRatio)
         .backgroundColor(floatAttribute.bgColor)
+        .opacity(floatAttribute.bgOpacity)
         .position(
             x: xOffset,
             y: yOffset

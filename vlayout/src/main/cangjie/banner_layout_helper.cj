@@ -40,12 +40,12 @@ public class BannerLayout {
             }
             .width(bannerAttribute.layoutWidth)
             .height(bannerAttribute.layoutHeight)
-            .index(UInt32(bannerAttribute.layoutIndex))
+            .index(bannerAttribute.layoutIndex)
             .autoPlay(bannerAttribute.layoutAutoPlay)
-            .interval(UInt32(bannerAttribute.layoutInterval))
+            .interval(bannerAttribute.layoutInterval)
             .indicator(bannerAttribute.layoutIndicator)
             .loop(bannerAttribute.layoutLoop)
-            .duration(UInt32(bannerAttribute.layoutDuration))
+            .duration(bannerAttribute.layoutDuration)
             .vertical(bannerAttribute.layoutVertical)
             .itemSpace(bannerAttribute.layoutItemSpace)
             .effectMode(
@@ -57,7 +57,8 @@ public class BannerLayout {
             )
         }
         .backgroundColor(bannerAttribute.bgColor)
-        .zIndex(Int32(bannerAttribute.zIndex))
+        .opacity(bannerAttribute.bgOpacity)
+        .zIndex(bannerAttribute.zIndex)
         .margin(
             top: if(bannerAttribute.margin.size == 4) {
                 bannerAttribute.margin[0]

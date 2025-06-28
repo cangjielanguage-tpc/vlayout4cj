@@ -64,6 +64,7 @@ public class SingleLayout {
             )
         }
         .backgroundColor(singleAttribute.bgColor)
+        .opacity(singleAttribute.bgOpacity)
         .zIndex(singleAttribute.zIndex)
         .margin(
             top: if(singleAttribute.margin.size == 4) {

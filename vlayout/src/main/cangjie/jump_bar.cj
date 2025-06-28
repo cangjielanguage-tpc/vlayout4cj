@@ -8,10 +8,13 @@ import ohos.state_macro_manage.Link
 
 @Component
 public class JumpBar {
+    var jumpBarWidth: Length = 100.percent
+    var jumpBarHeight: Length = 100.percent
     var jumpBarColor: UInt32 = 0x33000000
     var jumpBarAspectRatio: Float64 = 4.0
     var fontSize: Float64 = 17.0
-    var textShow: Bool = true
+    var btBgColor: UInt32 = 0xD6D7D7
+    @Link var textShow: Bool
     @Link var scroller: Array<Scroller>
     @Link var textFirst: Int64
     @Link var textExisting: Int64
@@ -21,8 +24,8 @@ public class JumpBar {
 
     func build(){
         Column() {
-            Row() {
-                if (textShow) {
+            if(textShow) {
+                Row() {
                     Text("First: ${textFirst}")
                         .layoutWeight(1)
                         .fontSize(fontSize)
@@ -46,11 +49,8 @@ public class JumpBar {
                         .maxLines(1)
                         .textAlign(TextAlign.Center)
                         .textOverflow(TextOverflow.Ellipsis)
-                } else {
-                    Blank()
-                }
-            }.layoutWeight(1)
-
+                }.layoutWeight(1)
+            }
             Row() {
                 Text('Jump Position')
                 .width(30.percent)
@@ -94,15 +94,16 @@ public class JumpBar {
                 .stateEffect(true)
                 .width(20.percent)
                 .height(85.percent)
-                .backgroundColor(0xD6D7D7)
+                .backgroundColor(btBgColor)
                 .onClick({evt =>
                     scroller[0].scrollToIndex(textInput / 4)
                 })
 
-            }.layoutWeight(2)
+            }.layoutWeight(if(textShow) { 2 }else { 1 } )
         }
         .aspectRatio(jumpBarAspectRatio)
-        .backgroundColor(jumpBarColor)
         .zIndex(10)
+        .width(jumpBarWidth)
+        .height(jumpBarHeight)
     }
 }

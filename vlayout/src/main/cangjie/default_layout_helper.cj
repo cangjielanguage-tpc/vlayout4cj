@@ -24,6 +24,9 @@ public class DefaultLayout {
     private var listItemWidth: Float64 = 0.0 //获取的listItem宽度
     private var listItemHeight: Float64 = 0.0 //获取的listItem高度
 
+    private var displayClass: Display = getDefaultDisplaySync()
+    private var screenHeight: Float64 = px2vp(Float64(displayClass.height).px)().value
+
     protected override func aboutToAppear() {
         vLayoutData = CommonFunc.computedRange(defaultAttribute.range, vLayoutData)
     }
@@ -31,8 +34,11 @@ public class DefaultLayout {
     func computedHeight() {
         let rowCount: Int64 = vLayoutData.size
          if (defaultAttribute.layoutHeight.value != 0.0) {
-            layoutHeight = defaultAttribute.layoutHeight.value
-            oneRowHeight = defaultAttribute.layoutHeight.value / Float64(rowCount)
+            match (defaultAttribute.layoutHeight.unitType) {
+            	case percent => layoutHeight = defaultAttribute.layoutHeight.value * screenHeight
+                case _ => layoutHeight = defaultAttribute.layoutHeight.value
+            }
+            oneRowHeight = layoutHeight / Float64(rowCount)
         } else {
             Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
         }
@@ -101,6 +107,7 @@ public class DefaultLayout {
         )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
         .backgroundColor(defaultAttribute.bgColor)
+        .opacity(defaultAttribute.bgOpacity)
         .zIndex(defaultAttribute.zIndex)
         .margin(
             top: if(defaultAttribute.margin.size == 4) {

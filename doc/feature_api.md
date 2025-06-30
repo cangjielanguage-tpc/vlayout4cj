@@ -36,23 +36,25 @@ public class layoutDataType {
 ```cangjie
 @Observed
 public class BannerAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = []
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
-    @Publish public var layoutIndex: Int64 = 0 //设置当前在容器中显示的子组件的索引值，默认值为 0
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
+    @Publish public var layoutIndex: UInt32 = 0 //设置当前在容器中显示的子组件的索引值，默认值为 0
     @Publish public var layoutAutoPlay: Bool = false //子组件是否自动播放，自动播放状态下，导航点不可操作，默认值为 false
-    @Publish public var layoutInterval: Int64 = 1000 //使用自动播放时播放的时间间隔，单位为毫秒，默认值为 1000
+    @Publish public var layoutInterval: UInt32 = 1000 //使用自动播放时播放的时间间隔，单位为毫秒，默认值为 1000
     @Publish public var layoutIndicator: Bool = false //是否启用导航点指示器，默认值为 false
     @Publish public var layoutLoop: Bool = false //是否开启循环，默认值为 false
-    @Publish public var layoutDuration: Int64 = 400 //子组件切换的动画时长，单位为毫秒，默认值为 400
+    @Publish public var layoutDuration: UInt32 = 400 //子组件切换的动画时长，单位为毫秒，默认值为 400
     @Publish public var layoutVertical: Bool = false //是否为纵向滑动，默认值为 false
     @Publish public var layoutItemSpace: Int64 = 0 //设置子组件与子组件之间间隙，默认值为 0
     @Publish public var layoutEffectMode: Int32 = 0 //滑动效果，默认值为 None
-    @Publish public var zIndex: Int64 = 0 //z序，默认值为 0
+    @Publish public var zIndex: Int32 = 0 //z序，默认值为 0
     @Publish public var margin: Array<Float64> = [] //外边距，默认值为[]，长度设置为 4，优先级比单给外边距高，设置其他无效
     @Publish public var topMargin: Float64 = 0.0 //上外边距，默认值为 0.0
     @Publish public var rightMargin: Float64 = 0.0 //右外边距，默认值为 0.0
@@ -78,14 +80,16 @@ public class ColumnLayout {
 ```cangjie
 @Observed
 public class AbstractFullFillAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64>
     @Publish public var colWeights: Array<Float64> = [] //列权重，默认值为[]，条目所占比例相同
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -117,14 +121,16 @@ public class DefaultLayout {
 ```cangjie
 @Observed
 public class LinearAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var dividerHeight: Int64 = 0 //列表项垂直间距，默认值为0
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为 0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -156,14 +162,23 @@ public class FixLayout {
 ```cangjie
 @Observed
 public class FixAreaAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
+    /*
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0  =====> 默认 layoutHeights = 100.0 aspectRatios = 1.0
+     * layoutWidth > 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0   =====> 默认 layoutHeights = 100.0 aspectRatios = layoutWidth / layoutHeight
+     * layoutWidth <= 0.0 && layoutHeight > 0.0 && aspectRatio <= 0.0   =====> 默认 aspectRatios = 1.0 layoutWidth = layoutHeight * aspectRatios
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio > 0.0   =====> 默认 layoutHeights = 100.0 layoutWidth = layoutHeight * aspectRatios
+     * 其余 aspectRatios = layoutWidths / layoutHeights
+     */
     @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish public var layoutHeight: Float64 = 0.0 //容器高度，当容器纵横比为0时有效
     @Publish public var aspectRatio: Float64 = 0.0 //容器纵横比
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var xOffset: Float64 = 0.0 //水平偏移量，默认值为0.0
     @Publish public var yOffset: Float64 = 0.0 //竖直偏移量，默认值为0.0
     @Publish public var alignType: Int32 = -1 //固定的位置，优先级比单给xy高
@@ -199,14 +214,23 @@ public class FloatLayout {
 ```cangjie
 @Observed
 public class FixAreaAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
+    /*
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0  =====> 默认 layoutHeights = 100.0 aspectRatios = 1.0
+     * layoutWidth > 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0   =====> 默认 layoutHeights = 100.0 aspectRatios = layoutWidth / layoutHeight
+     * layoutWidth <= 0.0 && layoutHeight > 0.0 && aspectRatio <= 0.0   =====> 默认 aspectRatios = 1.0 layoutWidth = layoutHeight * aspectRatios
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio > 0.0   =====> 默认 layoutHeights = 100.0 layoutWidth = layoutHeight * aspectRatios
+     * 其余 aspectRatios = layoutWidths / layoutHeights
+     */
     @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish public var layoutHeight: Float64 = 0.0 //容器高度
     @Publish public var aspectRatio: Float64 = 0.0 //容器纵横比
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var xOffset: Float64 = 0.0 //水平偏移量
     @Publish public var yOffset: Float64 = 0.0 //竖直偏移量
     @Publish public var alignType: Int32 = -1 //固定的位置
@@ -242,17 +266,24 @@ public class GridLayout {
 ```cangjie
 @Observed
 public class GridAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
-    @Publish public var spanCount: Int64 = 0 //列数
-    //列占比集合：数组元素数值约分为占比
-    //spanCount 为 0，weights 长度为0时，默认 [25.0, 25.0, 25.0, 25.0]
+    @Publish public var spanCount: Int64 = 0 //spanCount < 0,weights 缺省时，默认显示4列
+    /*
+     * 列占比集合：数组元素数值约分为占比
+     * spanCount 为 0，weights 长度为 0 时，默认 [25.0, 25.0, 25.0, 25.0]
+     * spanCount > weights.size 且 weights 中值等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount
+    */
     @Publish public var weights: Array<Float64> = []
-    @Publish public var aspectRatio: Float64 = 0.0 //GridItem 的单行纵横比
-    @Publish public var layoutHeight: Float64 = 0.0 //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为白色
-    @Publish public var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
+    //aspectRatio 纵横比。缺省时高度默认屏幕高度
+    @Publish public var aspectRatio: Float64 = 0.0
+    // layoutHeight 缺省，高度默认屏幕高度
+    @Publish public var layoutHeight: Float64 = 0.0 
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //Grid容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var gap: Int64 = 0 //行列间距，默认值为0
     @Publish public var vGap: Int64 = 0 //行与行的间距，默认值为0
@@ -287,14 +318,16 @@ public class LinearLayout {
 ```cangjie
 @Observed
 public class LinearAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var dividerHeight: Int64 = 0 //列表项垂直间距，默认值为0
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -321,13 +354,15 @@ public class OneLayout {
     @State var vLayoutAttribute: AbstractFullFillAttributes //属性
 }
 ```
-### 8.2 滑动容器布局组件属性 AbstractFullFillAttributes
+### 8.2 一拖 N 容器布局组件属性 AbstractFullFillAttributes
 
 ```cangjie
 @Observed
 public class AbstractFullFillAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var rowWeights: Array<Float64> = [] //行权重，默认值为[]
     @Publish public var colWeights: Array<Float64> = [] //列权重，默认值为[]
@@ -335,8 +370,8 @@ public class AbstractFullFillAttributes {
     @Publish public var hasFooter: Bool = false //最后一个子项变成一行一列，默认值为false
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -368,17 +403,17 @@ public class OneExLayout {
 ```cangjie
 @Observed
 public class AbstractFullFillAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var rowWeights: Array<Float64> = [] //行权重，默认值为[]
     @Publish public var colWeights: Array<Float64> = [] //列权重，默认值为[]
-    @Publish public var hasHeader: Bool = false //第一个子项变成一行一列，默认值为false
-    @Publish public var hasFooter: Bool = false //最后一个子项变成一行一列，默认值为false
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -410,21 +445,28 @@ public class RangeGridLayout {
 ```cangjie
 @Observed
 public class GridAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
-    @Publish public var spanCount: Int64 = 0 //列数
-    //列占比集合：数组元素数值约分为占比
-    //spanCount 为 0，weights 长度为0时，默认 [25.0, 25.0, 25.0, 25.0]
+    @Publish public var spanCount: Int64 = 0 //spanCount < 0,weights 缺省时，默认显示4列
+    /*
+     * 列占比集合：数组元素数值约分为占比
+     * spanCount 为 0，weights 长度为 0 时，默认 [25.0, 25.0, 25.0, 25.0]
+     * spanCount > weights.size 且 weights 中值等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount
+     */
     @Publish public var weights: Array<Float64> = []
-    @Publish public var aspectRatio: Float64 = 0.0 //GridItem 的单行纵横比
+    //aspectRatio 纵横比。缺省时高度默认屏幕高度
+    @Publish public var aspectRatio: Float64 = 0.0
+    // layoutHeight 缺省，高度默认屏幕高度
     @Publish public var layoutHeight: Float64 = 0.0 //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为白色
-    @Publish public var bgOpacity: Float64 = 0.0 //Grid容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //Grid容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
-    @Publish public var gap: Int64 = 0 //行列间距，默认值为0
-    @Publish public var vGap: Int64 = 0 //行与行的间距，默认值为0
-    @Publish public var hGap: Int64 = 0 //列与列的间距，默认值为0
+    @Publish public var gap: Int64 = 0 //行列间距，默认值为 0,优先级高于vGap、hGap
+    @Publish public var vGap: Int64 = 0 //行与行的间距，默认值为 0
+    @Publish public var hGap: Int64 = 0 //列与列的间距，默认值为 0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
     @Publish public var rightPadding: Float64 = 0.0 //右内边距，默认值为 0.0
@@ -455,14 +497,23 @@ public class ScrollFixLayout {
 ```cangjie
 @Observed
 public class FixAreaAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
+    /*
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0  =====> 默认 layoutHeights = 100.0 aspectRatios = 1.0
+     * layoutWidth > 0.0 && layoutHeight <= 0.0 && aspectRatio <= 0.0   =====> 默认 layoutHeights = 100.0 aspectRatios = layoutWidth / layoutHeight
+     * layoutWidth <= 0.0 && layoutHeight > 0.0 && aspectRatio <= 0.0   =====> 默认 aspectRatios = 1.0 layoutWidth = layoutHeight * aspectRatios
+     * layoutWidth <= 0.0 && layoutHeight <= 0.0 && aspectRatio > 0.0   =====> 默认 layoutHeights = 100.0 layoutWidth = layoutHeight * aspectRatios
+     * 其余 aspectRatios = layoutWidths / layoutHeights
+     */
     @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish public var layoutHeight: Float64 = 0.0 //容器高度，当容器纵横比为0时有效
     @Publish public var aspectRatio: Float64 = 0.0 //容器纵横比
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var xOffset: Float64 = 0.0 //水平偏移量，默认值为0.0
     @Publish public var yOffset: Float64 = 0.0 //竖直偏移量，默认值为0.0
     @Publish public var alignType: Int32 = -1 //固定的位置，优先级比单给xy高
@@ -485,6 +536,8 @@ public class FixAreaAttributes {
 
 ### 12.1 通栏容器布局组件 SingleLayout
 
+通栏容器布局组件建议数据长度设置为 1 
+
 ```cangjie
 @Component
 public class SingleLayout {
@@ -498,14 +551,15 @@ public class SingleLayout {
 ```cangjie
 @Observed
 public class AbstractFullFillAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64>
-    @Publish public var colWeights: Array<Float64> = [] //列权重，默认值为[]，条目所占比例相同
     @Publish public var layoutWidth: Length = 0.0.vp //容器宽度
     @Publish public var layoutHeight: Length = 0.0.vp //容器高度
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -530,6 +584,7 @@ public class StaggeredGridLayout {
     @BuilderParam var vLayoutContent: (layoutDataType, Int64) -> Unit  //布局
     var vLayoutData: Array<layoutDataType> //数据源
     @State var vLayoutAttribute: FixAreaAttributes //属性
+    @State var vLayoutId: String = '' //组件标识，必传
 }
 ```
 ### 13.2 交错网格容器布局组件 StaggeredGridAttributes
@@ -537,14 +592,16 @@ public class StaggeredGridLayout {
 ```cangjie
 @Observed
 public class StaggeredGridAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+    /*
+     * 可显示的条目，默认 [0,0]显示全部条目。
+     * 注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
+     */
     @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var staggeredWidth: Float64 = 0.0
     @Publish public var lanes: Int64 = 1 //列数，默认值为1
     @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
-    @Publish public var gap: Float64 = 0.0 //行列间距
+    @Publish public var gap: Float64 = 0.0 //行列间距，优先级高于 vGap、hGap
     @Publish public var vGap: Float64 = 0.0 //行与行的间距
     @Publish public var hGap: Float64 = 0.0 //列与列的间距
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
@@ -577,14 +634,11 @@ public class StickyLayout {
 ```cangjie
 @Observed
 public class FixAreaAttributes {
-    //可显示的条目，默认 [0,0]显示全部条目。
-    //注意：数组长度为 2 并且数组元素内第一项大于等于 0 并且第二项大于第一项
-    @Publish public var range: Array<Int64> = [0, 0]
     @Publish public var layoutWidth: Float64 = 0.0 //容器宽度
     @Publish public var layoutHeight: Float64 = 0.0 //容器高度，当容器纵横比为0时有效
     @Publish public var aspectRatio: Float64 = 0.0 //容器纵横比
-    @Publish public var bgColor: UInt32 = 0x00ffffff //容器背景颜色，默认值为透明
-    @Publish public var bgOpacity: Float64 = 0.0 //容器背景颜色，默认值为透明
+    @Publish public var bgColor: UInt32 = 0xffffff //容器背景颜色
+    @Publish public var bgOpacity: Float64 = 1.0 //容器背景颜色
     @Publish public var zIndex: Int32 = 0 //z序，默认值为0
     @Publish public var padding: Array<Float64> = [] //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效
     @Publish public var topPadding: Float64 = 0.0 //上内边距，默认值为 0.0
@@ -606,13 +660,19 @@ public class FixAreaAttributes {
 ```cangjie
 @Component
 public class JumpBar {
-    var textShow: Bool = true            //是否显示文本条目
-    @Link var scroller: Array<Scroller>  //滑动控制器数据
-    @Link var textFirst: Int64           //item 首次出现位置
-    @Link var textExisting: Int64        //item 偏移
-    @Link var textCreated: Int64         //滑动时 item 累加
-    @Link var textCount: Int64           //item 数目
-    @Link var textInput: Int32           //输入跳转位置
+    var jumpBarWidth: Length = 100.percent  //宽度
+    var jumpBarHeight: Length = 100.percent //高度
+    var jumpBarColor: UInt32 = 0x33000000   //背景色
+    var jumpBarAspectRatio: Float64 = 4.0   //大小
+    var fontSize: Float64 = 17.0            //字体大小  
+    var btBgColor: UInt32 = 0xD6D7D7        //按钮颜色
+    var textShow: Bool = true               //是否显示文本条目
+    @Link var scroller: Array<Scroller>     //滑动控制器数据
+    @Link var textFirst: Int64              //item 首次出现位置
+    @Link var textExisting: Int64           //item 偏移
+    @Link var textCreated: Int64            //滑动时 item 累加
+    @Link var textCount: Int64              //item 数目
+    @Link var textInput: Int32              //输入跳转位置
 }
 ```
-
+      

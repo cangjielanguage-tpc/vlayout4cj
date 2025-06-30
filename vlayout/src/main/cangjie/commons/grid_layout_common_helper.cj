@@ -37,6 +37,10 @@ public class GridLayoutCommon {
         spanCount = CommonFunc.spanCountAndWeight(gridLayoutAttribute.spanCount, gridLayoutAttribute.weights)[0]
         weights = CommonFunc.spanCountAndWeight(gridLayoutAttribute.spanCount, gridLayoutAttribute.weights)[1]
         vLayoutData = CommonFunc.computedRange(gridLayoutAttribute.range, vLayoutData)
+        if (this.gridLayoutAttribute.gap > 0) {
+            this.gridLayoutAttribute.vGap = this.gridLayoutAttribute.gap
+            this.gridLayoutAttribute.hGap = this.gridLayoutAttribute.gap
+        }
         computedColumnsTemplate()
         if(layoutType == "grid") {
             computedRowsTemplateGrid()
@@ -178,6 +182,8 @@ public class GridLayoutCommon {
                     } else {
                         temp = temp + colsSpan
                     }
+                } else {
+                    sum = spanCount
                 }
 
             }
@@ -196,7 +202,7 @@ public class GridLayoutCommon {
             let columnCount: Int64 = spanCount
             for (item in vLayoutData) {
                 let colsSpan: Int64 = min(max(item.colsSpan, 1), columnCount)
-                //item.colsSpan = colsSpan
+                item.colsSpan = colsSpan
                 if (line[line.size -1] + colsSpan > columnCount) {
                     lines.append(colsSpan)
                 } else {
@@ -231,7 +237,6 @@ public class GridLayoutCommon {
         } else {
             Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
         }
-        Hilog.error(0x000000, "computedHeight", '${TAG}-------- ${oneRowHeight}')
     }
 
     func computedExtraHeight(rowCount: Int64) {
@@ -299,6 +304,7 @@ public class GridLayoutCommon {
                 }
             )
             .backgroundColor(gridLayoutAttribute.bgColor)
+            .opacity(gridLayoutAttribute.bgOpacity)
             .zIndex(gridLayoutAttribute.zIndex)
             .margin(
                 top: if(this.gridLayoutAttribute.margin.size == 4) {

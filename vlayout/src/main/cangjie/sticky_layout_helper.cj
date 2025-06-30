@@ -42,7 +42,6 @@ public class StickyLayout {
             stickyAttribute.layoutHeight,
             stickyAttribute.aspectRatio
             )[2]
-        vLayoutData = CommonFunc.computedRange(stickyAttribute.range, vLayoutData)
     }
 
     func build() {
@@ -83,6 +82,7 @@ public class StickyLayout {
                 .height(layoutHeight)
                 .aspectRatio(aspectRatio)
                 .backgroundColor(stickyAttribute.bgColor)
+                .opacity(stickyAttribute.bgOpacity)
                 .padding(
                     top: if(stickyAttribute.padding.size == 4) {
                         stickyAttribute.padding[0]

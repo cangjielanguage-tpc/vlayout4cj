@@ -18,6 +18,8 @@ public class LinearLayout {
 
     @State var linearAttribute: LinearAttributes = LinearAttributes() //属性
 
+    private var displayClass: Display = getDefaultDisplaySync()
+    private var screenHeight: Float64 = px2vp(Float64(displayClass.height).px)().value
     @State var oneRowHeight: Float64 = 0.0 //单行高度
     @State var layoutHeight: Float64 = 0.0 //单行高度
     private var listWidth: Float64 = 0.0 //获取的grid宽度
@@ -31,9 +33,15 @@ public class LinearLayout {
 
    func computedHeight() {
         let rowCount: Int64 = vLayoutData.size
-        layoutHeight = linearAttribute.layoutHeight.value
-        oneRowHeight = linearAttribute.layoutHeight.value / Float64(rowCount)
-        computedExtraHeight(rowCount)
+         if (linearAttribute.layoutHeight.value != 0.0) {
+            match (linearAttribute.layoutHeight.unitType) {
+            	case percent => layoutHeight = linearAttribute.layoutHeight.value * screenHeight
+                case _ => layoutHeight = linearAttribute.layoutHeight.value
+            }
+            oneRowHeight = layoutHeight / Float64(rowCount)
+        } else {
+            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
+        }
 
     }
 
@@ -99,6 +107,7 @@ public class LinearLayout {
             )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
         .backgroundColor(linearAttribute.bgColor)
+        .opacity(linearAttribute.bgOpacity)
         .zIndex(linearAttribute.zIndex)
         .margin(
             top: if(linearAttribute.margin.size == 4) {

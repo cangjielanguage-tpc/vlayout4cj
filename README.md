@@ -19,7 +19,7 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 <p align="left">
 <img src="./doc/assets/example.gif"  width="30%">
 </p>
-
+  
 ## 特性
 
 - BANNER_LAYOUT 滑动容器布局组件
@@ -43,14 +43,14 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 ```shell
 ├─AppScope
 ├─doc                   # API文档和使用手册存放目录                   
-├─entry                 # 示例代码文件夹                  
+├─entry                 # 示例代码文件夹
+├─hvigor                # 构建工具目录              
 ├─vlayout               # vlayout 库源目录                  
 │  └─src
 │      └─main
 │          ├─cangjie    # vlayout 源码     
 │          └─resources  # 资源文件
-├─hvigor     # 构建工具目录
-├─README.md  # vlayout4cj 介绍及使用说明
+└─README.md             # vlayout4cj 介绍及使用说明
 ```
 ## 接口说明
 
@@ -61,13 +61,14 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 1. 通过 module 引入
     1. 克隆下载项目
     2. 将 vlayout 模块拷贝到应用项目下
-       3. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，在 [dependencies] 字段下添加:
-           ```toml
-          [dependencies]
-               [dependencies.vlayout4cj]
-                    path = "../../../../vlayout/src/main/cangjie"
-          ```
-    5. 在项目中使用 import vlayout4cj.* 引用 vlayout 项目
+    3. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，在 [dependencies] 字段下添加:
+    
+        ```toml
+       [dependencies]
+            [dependencies.vlayout4cj]
+                 path = "../../../../vlayout/src/main/cangjie"
+       ```
+    4. 在项目中使用 import vlayout4cj.* 引用 vlayout 项目
        ```cangjie
        import vlayout4cj.*
        ```
@@ -84,7 +85,7 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
    ```toml
     [dependencies]
         [dependencies.highlightguide]
-            path = "../../../../third-party/newbie-guide-cj/highlightguide/src/main/cangjie"
+            path = "../../../../third-party/vlayout4cj/vlayout/src/main/cangjie"
             version = "1.0.0"
    ```
     3. 在项目中使用 vlayout 组件

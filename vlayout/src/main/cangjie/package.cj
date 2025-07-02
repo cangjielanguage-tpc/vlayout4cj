@@ -7,13 +7,14 @@ package vlayout4cj
 internal import ohos.base.*
 internal import ohos.component.*
 internal import ohos.state_manage.*
-internal import ohos.hilog.*
+internal import ohos.hilog.Hilog
 internal import ohos.display.*
-internal import vlayout4cj.commons.*
 
-internal import encoding.json.*
+internal import stdx.encoding.json.JsonValue
 internal import std.convert.*
 internal import std.math.*
+internal import std.collection.ArrayList
+internal import vlayout4cj.commons.*
 
 extend<T> Option<T> {
     operator func ()(): T {

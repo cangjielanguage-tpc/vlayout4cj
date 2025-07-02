@@ -75,7 +75,7 @@ public class OneExLayout {
     func computedColWeights() {
         if (oneExAttribute.colWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>(vLayoutData.size)
-            weightArray.appendAll(oneExAttribute.colWeights)
+            weightArray.add(all: oneExAttribute.colWeights)
 
             if (vLayoutData.size > oneExAttribute.colWeights.size) { //数据源数组长度大于列权重数组长度时
                 match (oneExAttribute.colWeights.size) {
@@ -109,26 +109,27 @@ public class OneExLayout {
             let element: Float64 = oneExAttribute.colWeights[i];
             sum += element
         }
+
         match (vLayoutData.size) {
             case 5 =>
                 if (sum <= 100.0) {
                     for (j in 0..4) {
-                        weightArray.append((100.0 - sum)/2.0)
+                        weightArray.add((100.0 - sum)/2.0)
                     }
                 }
             case 6 =>
                 if (sum < 100.0) {
-                    weightArray.append(100.0 - sum)
-                    for (j in 0..2) {
-                        weightArray.append((100.0 - sum))
+                    weightArray.add(100.0 - sum)
+                    for (j in 0..4) {
+                        weightArray.add((100.0 - sum)/4.0)
                     }
                     mWeight = 1
                 }
             case 7 =>
                 if (sum < 100.0) {
-                    weightArray.append(100.0 - sum)
-                    for (j in 0..6) {
-                        weightArray.append((100.0 - sum) / 2.0)
+                    weightArray.add(100.0 - sum)
+                    for (j in 0..5) {
+                        weightArray.add((100.0 - sum) / 5.0)
                     }
                 }
             case _ =>
@@ -140,19 +141,23 @@ public class OneExLayout {
     func computedColWeights2(weightArrays: ArrayList<Float64>): ArrayList<Float64> {
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 5) {
-            weightArray.append(100.0 - weightArray[0] - weightArray[1])
+            weightArray.add(100.0 - weightArray[0] - weightArray[1])
             for (j in 0..2) {
-              weightArray.append((100.0 - weightArray[0]) / 2.0)
+              weightArray.add((100.0 - weightArray[0]) / 2.0)
             }
         }
         if (vLayoutData.size == 6) {
-            weightArray.append(100.0 - weightArray[0])
+            weightArray.add(100.0 - weightArray[0] - weightArray[1])
+            for (j in 0..3) {
+              weightArray.add((100.0 - weightArray[0]) / 3.0)
+            }
+//            weightArray.add(100.0 - weightArray[0])
             mWeight = 1
         }
         if (vLayoutData.size == 7) {
-            weightArray.append(100.0 - weightArray[0] - weightArray[1])
+            weightArray.add(100.0 - weightArray[0] - weightArray[1])
             for (j in 0..4) {
-                weightArray.append((100.0 - weightArray[0]) / 2.0)
+                weightArray.add((100.0 - weightArray[0]) / 4.0)
             }
         }
         return weightArray
@@ -162,15 +167,18 @@ public class OneExLayout {
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 5) {
             for (j in 0..2) {
-                weightArray.append((100.0 - weightArray[0] - weightArray[2]) / 2.0)
+                weightArray.add((100.0 - weightArray[0] - weightArray[2]) / 2.0)
             }
         }
         if (vLayoutData.size == 6) {
+            for (j in 0..3) {
+                weightArray.add((100.0 - weightArray[0] - weightArray[2]) / 3.0)
+            }
             mWeight = 1
         }
         if (vLayoutData.size == 7) {
             for (j in 0..4) {
-                weightArray.append((100.0 - weightArray[0]) / 2.0)
+                weightArray.add((100.0 - weightArray[0]) / 2.0)
             }
         }
         return weightArray
@@ -179,17 +187,17 @@ public class OneExLayout {
     func computedColWeights4(weightArrays: ArrayList<Float64>): ArrayList<Float64> {
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 5) {
-            weightArray.append(100.0 - weightArray[0] - weightArray[3])
+            weightArray.add(100.0 - weightArray[0] - weightArray[3])
         }
         if (vLayoutData.size == 6) {
             for (j in 0..2) {
-                weightArray.append((100.0 - weightArray[3]) / 2.0)
+                weightArray.add((100.0 - weightArray[3]) / 2.0)
             }
         }
         if (vLayoutData.size == 7) {
-            weightArray.append((100.0 - weightArray[0] - weightArray[3]))
+            weightArray.add((100.0 - weightArray[0] - weightArray[3]))
             for (j in 0..2) {
-                weightArray.append((100.0 - weightArray[0]) / 2.0)
+                weightArray.add((100.0 - weightArray[0]) / 2.0)
             }
         }
         return weightArray
@@ -198,17 +206,19 @@ public class OneExLayout {
     func computedColWeights5(weightArrays: ArrayList<Float64>): ArrayList<Float64> {
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 6) {
-            weightArray.append((100.0 - weightArray[3]- weightArray[4]))
+            weightArray.add((100.0 - weightArray[3]- weightArray[4]))
         }
         if (vLayoutData.size == 7) {
-            weightArray.append((100.0 - weightArray[0]) / 2.0)
+            for (j in 0..2) {
+                weightArray.add((100.0 - weightArray[0]) / 2.0)
+            }
         }
         return weightArray
     }
     func computedColWeights6(weightArrays: ArrayList<Float64>): ArrayList<Float64> {
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 7) {
-            weightArray.append((100.0 - weightArray[0]- weightArray[5]))
+            weightArray.add((100.0 - weightArray[0]- weightArray[5]))
         }
         return weightArray
     }
@@ -216,21 +226,21 @@ public class OneExLayout {
     func computedRowWeights() {
         if (oneExAttribute.rowWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>()
-            weightArray.appendAll(oneExAttribute.rowWeights)
+            weightArray.add(all: oneExAttribute.rowWeights)
 
             if (oneExAttribute.rowWeights.size == 1) {
                 if (vLayoutData.size == 5 || vLayoutData.size == 6) {
-                    weightArray.append(oneExAttribute.rowWeights[0])
+                    weightArray.add(oneExAttribute.rowWeights[0])
                 }
                 if (vLayoutData.size == 7) {
                     for (j in 0..2) {
-                        weightArray.append(weightArray[0])
+                        weightArray.add(weightArray[0])
                     }
-                    weightArray.append(oneExAttribute.rowWeights[0])
+                    weightArray.add(oneExAttribute.rowWeights[0])
                 }
             } else if(oneExAttribute.rowWeights.size == 2) {
                 if (vLayoutData.size == 7) {
-                    weightArray.append(oneExAttribute.rowWeights[0])
+                    weightArray.add(oneExAttribute.rowWeights[0])
                 }
             } else {
                 Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')

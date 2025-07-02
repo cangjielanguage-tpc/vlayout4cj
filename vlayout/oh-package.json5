@@ -1,11 +1,11 @@
 {
   "name": "vlayout",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
+  "version": "1.0.1",
+  "description": "vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂情况，使用者可以使用已设定好的容器布局组件，也可以在此基础上自定义容器布局组件。",
   "main": "",
-  "author": "",
+  "author": "cangjie-tpc",
   "types": "./Index.d.ets",
-  "license": "Apache-2.0",
+  "license": "MIT License",
   "dependencies": {
   }
 }

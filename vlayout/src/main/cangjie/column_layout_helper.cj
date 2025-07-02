@@ -40,7 +40,7 @@ public class ColumnLayout {
                 colWeightArray = columnAttribute.colWeights
             } else if (vLayoutData.size < columnAttribute.colWeights.size) { //数据源数组长度小于列权重数组长度时
                 colWeightArray = columnAttribute.colWeights
-                var arr: Array<Float64> = Array<Float64>(colWeightArray.size, item: 0.0)
+                var arr: Array<Float64> = Array<Float64>(colWeightArray.size, repeat: 0.0)
                 for (i in 0..vLayoutData.size) {
                     arr[i] = colWeightArray[i]
                 }
@@ -50,7 +50,7 @@ public class ColumnLayout {
                 var sum: Float64 = 0.0
                 var item: Float64 = 0.0
                 let count: Int64 = vLayoutData.size - colWeightArray.size
-                var otnerColWeightArray: Array<Float64> = Array<Float64>(count, item: 0.0)
+                var otnerColWeightArray: Array<Float64> = Array<Float64>(count, repeat: 0.0)
                 if (colWeightArray.size == 0) {
                     colWeightArray = []
                 } else {
@@ -72,7 +72,7 @@ public class ColumnLayout {
             Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${colWeightArray}')
         } else {
             if(vLayoutData.size != 0) {
-                colWeightArray = Array<Float64>(vLayoutData.size, item: Float64(100/vLayoutData.size))
+                colWeightArray = Array<Float64>(vLayoutData.size, repeat: Float64(100/vLayoutData.size))
             }
         }
     }
@@ -84,7 +84,7 @@ public class ColumnLayout {
                     Stack() {
                         vLayoutContent(item, position, columnAttribute.layoutHeight)
                     }
-                    .width(Length(Float64(colWeightArray[position]), unitType: percent))
+                    .width(colWeightArray[position].percent)
                     .layoutWeight(if(colWeightArray.size == 0) { 1 } else { 0})
                     .onAreaChange({oldValue, newValue =>
                         let builderItemWidth = px2vp(newValue.width.px)().value

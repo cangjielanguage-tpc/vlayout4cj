@@ -54,7 +54,7 @@ public class GridLayoutCommon {
     func computedColumnsTemplate() {
         var element: Float64 = 0.0
         if (weights.size != 0 && spanCount != 0) { //当weights定义了，autoExpand失效
-            var cols: Array<String> = Array<String>(weights.size, item: "")
+            var cols: Array<String> = Array<String>(weights.size, repeat: "")
             if (weights.size == spanCount) { //当weights数组长度等于列数时，若数组内元素之和小于100，右侧则空出剩余部分，否则不进行空出
                 computedColumnsTemplateWeightEqualSpanCount()
             } else if (weights.size < spanCount) { //当weights数组长度小于列数时，若数组内元素之和小于100，则自动填充剩余占比
@@ -64,7 +64,7 @@ public class GridLayoutCommon {
             }
         } else { //当weight未定义时，autoExpand才有效
             if (spanCount != 0) {
-                let cols: Array<String> = Array<String>(spanCount, item: "")
+                let cols: Array<String> = Array<String>(spanCount, repeat: "")
                 for (i in 0..spanCount) {
                     element = 100.0 / Float64(spanCount)
                     cols[i] = round(Float64(element)).toString() + 'fr'
@@ -79,7 +79,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightEqualSpanCount(){
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(weights.size, item: "")
+        var cols: Array<String> = Array<String>(weights.size, repeat: "")
         for (i in 0..weights.size) {
             cols[i] = round(Float64(weights[i])).toString() + 'fr'
             element += weights[i]
@@ -95,7 +95,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightLessSpanCount(){
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(spanCount, item: "")
+        var cols: Array<String> = Array<String>(spanCount, repeat: "")
         for (i in 0..weights.size) {
             cols[i] = round(Float64(weights[i])).toString() + 'fr'
             element += weights[i]
@@ -114,7 +114,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightElseSpanCount() {
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(weights.size, item: "")
+        var cols: Array<String> = Array<String>(weights.size, repeat: "")
         for (i in 0..spanCount) {
             cols[i] = (round(Float64(weights[i])).toString() + 'fr')
             element += weights[i]
@@ -136,7 +136,7 @@ public class GridLayoutCommon {
                 columnsTemplate = String.join(cols, delimiter: ' ')
             } else {
                 let temp: Int64 = spanCount * mod //列数和余子项数的公倍数
-                let newCols: Array<String> = Array<String>(temp, item: '')
+                let newCols: Array<String> = Array<String>(temp, repeat: '')
                 for (i in 0..temp) {
                     newCols[i] = trunc(Float64(100 / temp)).toString() + 'fr'
                 }
@@ -144,7 +144,7 @@ public class GridLayoutCommon {
                 columnsTemplate = String.join(cols, delimiter: ' ')
             }
             let count: Int64 = Int64(ceil(Float64(vLayoutData.size / spanCount)))
-            let rows: Array<String> = Array<String>(count, item: '1fr ')
+            let rows: Array<String> = Array<String>(count, repeat: '1fr ')
             rowsTemplate = String.join(rows, delimiter: ' ')
         } else {
             Hilog.error(0x000000, "computedColumnsTemplate", '${TAG} autoExpand false')
@@ -189,7 +189,7 @@ public class GridLayoutCommon {
             }
             if(sum != 0) {
                 let count: Int64 = Int64(ceil(Float64(sum / spanCount))) //获得实际行数
-                let rows: Array<String> = Array<String>(count, item: '1fr ')
+                let rows: Array<String> = Array<String>(count, repeat: '1fr ')
                 rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
             }
         }
@@ -204,7 +204,7 @@ public class GridLayoutCommon {
                 let colsSpan: Int64 = min(max(item.colsSpan, 1), columnCount)
                 item.colsSpan = colsSpan
                 if (line[line.size -1] + colsSpan > columnCount) {
-                    lines.append(colsSpan)
+                    lines.add(colsSpan)
                 } else {
                     lines[lines.size-1] += colsSpan
                 }
@@ -212,7 +212,7 @@ public class GridLayoutCommon {
             }
         }
 
-        let rows: Array<String> = Array<String>(line.size, item: '1fr ')
+        let rows: Array<String> = Array<String>(line.size, repeat: '1fr ')
         rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
     }
 

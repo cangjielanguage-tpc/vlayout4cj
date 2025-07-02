@@ -6,3 +6,5 @@
 /.test
 cjpm.lock
 BuildProfile.ets
+**/IDL_Dependencies_List~
+**/build-script-cache

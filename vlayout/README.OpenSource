@@ -1,0 +1,11 @@
+[
+    {
+        "Name": "vlayout",
+        "License": "MIT license",
+        "License File": " LICENSE ",
+        "Version Number": "v1.2.36",
+        "Owner" : ""
+        "Upstream URL": "https://github.com/alibaba/vlayout ",
+        "Description": "A lightweight indicator like in nexus 5 launcher"
+    }
+]

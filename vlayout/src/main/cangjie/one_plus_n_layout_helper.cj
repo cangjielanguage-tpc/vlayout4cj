@@ -94,7 +94,7 @@ public class OneLayout {
     func computedColWeights() {
         if (oneAttribute.colWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>(vLayoutData.size)
-            weightArray.appendAll(oneAttribute.colWeights)
+            weightArray.add(all: oneAttribute.colWeights)
 
             if (vLayoutData.size > oneAttribute.colWeights.size) { //数据源数组长度大于列权重数组长度时
                 match (oneAttribute.colWeights.size) {
@@ -127,26 +127,26 @@ public class OneLayout {
         match (vLayoutData.size) {
             case 2 =>
                 if (sum <= 100.0) {
-                    weightArray.append(100.0 - sum)
+                    weightArray.add(100.0 - sum)
                 }
             case 3 =>
                 if (sum <= 100.0) {
                     for (j in 0..2) {
-                        weightArray.append(100.0 - sum)
+                        weightArray.add(100.0 - sum)
                     }
                 }
             case 4 =>
                 if (sum < 100.0) {
-                    weightArray.append(100.0 - sum)
+                    weightArray.add(100.0 - sum)
                     for (j in 0..2) {
-                        weightArray.append((100.0 - sum) / 2.0)
+                        weightArray.add((100.0 - sum) / 2.0)
                     }
                 }
             case 5 =>
                 if (sum < 100.0) {
-                    weightArray.append(100.0 - sum)
+                    weightArray.add(100.0 - sum)
                     for (j in 0..3) {
-                        weightArray.append((100.0 - sum) / 3.0)
+                        weightArray.add((100.0 - sum) / 3.0)
                     }
                 }
             case _ =>
@@ -159,16 +159,16 @@ public class OneLayout {
     func computedColWeightsSize2(weightArrays: ArrayList<Float64>): ArrayList<Float64>{
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 3) {
-            weightArray.append(100.0 - weightArray[0])
+            weightArray.add(100.0 - weightArray[0])
         }
         if (vLayoutData.size == 4) {
             for (j in 0..2) {
-                weightArray.append((100.0 - weightArray[0]) / 2.0)
+                weightArray.add((100.0 - weightArray[0]) / 2.0)
             }
         }
         if (vLayoutData.size == 5) {
             for (j in 0..3) {
-                weightArray.append((100.0 - weightArray[0]) / 3.0)
+                weightArray.add((100.0 - weightArray[0]) / 3.0)
             }
         }
         return weightArray
@@ -177,11 +177,11 @@ public class OneLayout {
     func computedColWeightsSize3(weightArrays: ArrayList<Float64>): ArrayList<Float64>{
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 4) {
-            weightArray.append(100.0 - weightArray[0] - weightArray[2])
+            weightArray.add(100.0 - weightArray[0] - weightArray[2])
         }
         if (vLayoutData.size == 5) {
             for (j in 0..2) {
-                weightArray.append((100.0 - weightArray[0] - weightArray[2]) / 2.0)
+                weightArray.add((100.0 - weightArray[0] - weightArray[2]) / 2.0)
             }
         }
         return weightArray
@@ -190,7 +190,7 @@ public class OneLayout {
     func computedColWeightsSize4(weightArrays: ArrayList<Float64>): ArrayList<Float64>{
         var weightArray: ArrayList<Float64> = weightArrays
         if (vLayoutData.size == 5) {
-            weightArray.append(100.0 - weightArray[0] - weightArray[2] - weightArray[3])
+            weightArray.add(100.0 - weightArray[0] - weightArray[2] - weightArray[3])
         }
         return weightArray
     }
@@ -198,11 +198,11 @@ public class OneLayout {
     func computedRowWeights() {
         if (oneAttribute.rowWeights.size != 0) {
             var weightArray: ArrayList<Float64> = ArrayList<Float64>()
-            weightArray.appendAll(oneAttribute.rowWeights)
+            weightArray.add(all: oneAttribute.rowWeights)
 
             if (oneAttribute.rowWeights.size == 1) {
                 if (vLayoutData.size == 3 || vLayoutData.size == 4 || vLayoutData.size == 5) {
-                    weightArray.append(100.0 - oneAttribute.rowWeights[0])
+                    weightArray.add(100.0 - oneAttribute.rowWeights[0])
                 }
             } else {
                 Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')

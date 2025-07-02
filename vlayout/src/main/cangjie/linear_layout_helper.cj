@@ -31,20 +31,6 @@ public class LinearLayout {
         vLayoutData = CommonFunc.computedRange(linearAttribute.range, vLayoutData)
     }
 
-   func computedHeight() {
-        let rowCount: Int64 = vLayoutData.size
-         if (linearAttribute.layoutHeight.value != 0.0) {
-            match (linearAttribute.layoutHeight.unitType) {
-            	case percent => layoutHeight = linearAttribute.layoutHeight.value * screenHeight
-                case _ => layoutHeight = linearAttribute.layoutHeight.value
-            }
-            oneRowHeight = layoutHeight / Float64(rowCount)
-        } else {
-            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
-        }
-
-    }
-
     func computedExtraHeight(rowCount: Int64) {
         if (linearAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
             layoutHeight = layoutHeight + Float64(linearAttribute.dividerHeight * (rowCount - 1))
@@ -69,15 +55,17 @@ public class LinearLayout {
                 .onAreaChange({oldValue, newValue =>
                     listItemWidth = px2vp(newValue.width.px)().value
                     listItemHeight = px2vp(newValue.height.px)().value
-                    computedHeight()
-                     Hilog.info(0x008000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
+                    layoutHeight = CommonFunc.computedHeight(vLayoutData, linearAttribute.layoutHeight, screenHeight, TAG)[0]
+                    oneRowHeight = CommonFunc.computedHeight(vLayoutData, linearAttribute.layoutHeight, screenHeight, TAG)[1]
+                    Hilog.info(0x008000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
                 })
             })
         }
         .onAreaChange({oldValue, newValue =>
             listWidth = px2vp(newValue.width.px)().value
             listHeight = px2vp(newValue.height.px)().value
-            computedHeight()
+            layoutHeight = CommonFunc.computedHeight(vLayoutData, linearAttribute.layoutHeight, screenHeight, TAG)[0]
+            oneRowHeight = CommonFunc.computedHeight(vLayoutData, linearAttribute.layoutHeight, screenHeight, TAG)[1]
             Hilog.info(0x008000,"list", TAG + 'List listWidth = ${listWidth}, listHeight = ${listHeight}')
         })
         .height(layoutHeight)

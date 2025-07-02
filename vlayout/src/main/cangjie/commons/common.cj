@@ -108,4 +108,23 @@ public class CommonFunc {
         return (layoutWidths, layoutHeights, aspectRatios)
     }
 
+    public static func computedHeight(vLayoutData: Array<layoutDataType>, layoutH: Length, screenHeight: Float64, tag: String): (Float64, Float64) {
+        let rowCount: Int64 = vLayoutData.size
+        var layoutHeight: Float64 = 0.0
+        var oneRowHeight: Float64 = 0.0
+        if (layoutH.value != 0.0) {
+            layoutHeight = match (layoutH.unitType) {
+                case LengthType.px(v) => v
+                case LengthType.vp(v) => v
+                case LengthType.fp(v) => v
+                case LengthType.lpx(v) => v
+                case LengthType.percent(v) => v * screenHeight
+                case _ => 0.0
+            }
+            oneRowHeight = layoutHeight / Float64(rowCount)
+        } else {
+            Hilog.error(0x000000, "computedHeight", '${tag}something else computedHeight')
+        }
+        return (layoutHeight, oneRowHeight)
+    }
 }

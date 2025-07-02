@@ -31,18 +31,22 @@ public class DefaultLayout {
         vLayoutData = CommonFunc.computedRange(defaultAttribute.range, vLayoutData)
     }
 
-    func computedHeight() {
-        let rowCount: Int64 = vLayoutData.size
-         if (defaultAttribute.layoutHeight.value != 0.0) {
-            match (defaultAttribute.layoutHeight.unitType) {
-            	case percent => layoutHeight = defaultAttribute.layoutHeight.value * screenHeight
-                case _ => layoutHeight = defaultAttribute.layoutHeight.value
-            }
-            oneRowHeight = layoutHeight / Float64(rowCount)
-        } else {
-            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
-        }
-    }
+//    func computedHeight() {
+//        let rowCount: Int64 = vLayoutData.size
+//         if (defaultAttribute.layoutHeight.value != 0.0) {
+//            layoutHeight = match (defaultAttribute.layoutHeight.unitType) {
+//                case LengthType.px(v) => v
+//                case LengthType.vp(v) => v
+//                case LengthType.fp(v) => v
+//                case LengthType.lpx(v) => v
+//                case LengthType.percent(v) => v * screenHeight
+//                case _ => 0.0
+//            }
+//            oneRowHeight = layoutHeight / Float64(rowCount)
+//        } else {
+//            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
+//        }
+//    }
 
     func computedExtraHeight(rowCount: Int64) {
         if (defaultAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
@@ -69,15 +73,17 @@ public class DefaultLayout {
                 .onAreaChange({oldValue, newValue =>
                     listItemWidth = px2vp(newValue.width.px)().value
                     listItemHeight = px2vp(newValue.height.px)().value
-                    computedHeight()
-                     Hilog.info(0x000000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
+                    layoutHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[0]
+                    oneRowHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[1]
+                    Hilog.info(0x000000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
                 })
             })
         }
         .onAreaChange({oldValue, newValue =>
             listWidth = px2vp(newValue.width.px)().value
             listHeight = px2vp(newValue.height.px)().value
-            computedHeight()
+            layoutHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[0]
+            oneRowHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[1]
             Hilog.info(0x000000, "list", TAG + 'List listWidth = ${listWidth}, listHeight = ${listHeight}')
         })
         .width(defaultAttribute.layoutWidth)

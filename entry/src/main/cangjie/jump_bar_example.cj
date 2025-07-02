@@ -484,7 +484,7 @@ class JumpBarExample {
                 //获取Count
                 var afArr: ArrayList<Int64> = ArrayList<Int64>()
                 for (i in start..=end) {
-                    afArr.append(this.data[Int64(i)].size)
+                    afArr.add(this.data[Int64(i)].size)
                 }
                 if (this.num == 0) {
                     this.beArr = afArr.toArray()

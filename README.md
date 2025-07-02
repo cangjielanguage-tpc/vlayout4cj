@@ -3,9 +3,9 @@
 </div>
 
 <p align="center">
-<img alt="" src="https://img.shields.io/badge/release-v0.0.1-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/release-v1.0.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjc-v0.53.19-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjc-v1.0.0-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjcov-NA-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
@@ -41,16 +41,16 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 ### 源码目录
 
 ```shell
-├─AppScope
-├─doc                   # API文档和使用手册存放目录                   
-├─entry                 # 示例代码文件夹
-├─hvigor                # 构建工具目录              
-├─vlayout               # vlayout 库源目录                  
-│  └─src
-│      └─main
-│          ├─cangjie    # vlayout 源码     
-│          └─resources  # 资源文件
-└─README.md             # vlayout4cj 介绍及使用说明
+├─ AppScope
+├─ doc                   # API文档和使用手册存放目录                   
+├─ entry                 # 示例代码文件夹
+├─ hvigor                # 构建工具目录              
+├─ vlayout               # vlayout 库源目录                  
+│  └─ src
+│      └─ main
+│          ├─ cangjie    # vlayout 源码     
+│          └─ resources  # 资源文件
+└─ README.md             # vlayout4cj 介绍及使用说明
 ```
 ## 接口说明
 
@@ -337,9 +337,8 @@ class OnePlusNLayoutHelperExample {
 
 在下述版本验证通过：
 
-    DevEco Studio 5.0.13.200
-    Cangjie Support Plugin 5.0.13.200
-    Cangjie Compiler: 0.53.19 (cjnative)
+    DevEco Studio 5.1.0.828SP1
+    Cangjie Support Plugin 5.1.0.828
 
 ## 开源协议
 

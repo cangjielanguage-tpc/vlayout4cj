@@ -57,7 +57,7 @@ public class layoutDataType {
 public class BannerAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = []
     //容器宽度。
@@ -66,7 +66,7 @@ public class BannerAttributes {
     @Publish public var layoutHeight: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //设置当前在容器中显示的子组件的索引值，默认值为 0。
     @Publish public var layoutIndex: UInt32 = 0 
@@ -130,7 +130,7 @@ public class ColumnLayout {
 public class AbstractFullFillAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64>
     //列权重，默认值为[]时表示条目所占比例相同，取值大于等于0.0。
@@ -141,11 +141,11 @@ public class AbstractFullFillAttributes {
     @Publish public var layoutHeight: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -197,7 +197,7 @@ public class DefaultLayout {
 public class LinearAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //列表项垂直间距，默认值为0。
@@ -208,11 +208,11 @@ public class LinearAttributes {
     @Publish public var layoutWidth: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -263,7 +263,7 @@ public class FixLayout {
 public class FixAreaAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     /*
@@ -280,7 +280,7 @@ public class FixAreaAttributes {
     @Publish public var aspectRatio: Float64 = 0.0 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //水平偏移量，默认值为0.0。
     @Publish public var xOffset: Float64 = 0.0 
@@ -292,11 +292,11 @@ public class FixAreaAttributes {
     @Publish public var sketchMeasure: Bool = false 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -347,7 +347,7 @@ public class FloatLayout {
 public class FixAreaAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     /*
@@ -372,11 +372,11 @@ public class FixAreaAttributes {
     @Publish public var defaultLocation: Array<Float64> = [] 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -428,7 +428,7 @@ public class GridLayout {
 public class GridAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //列数，取值大于等于0，weights 缺省时，默认显示4列。
@@ -436,7 +436,7 @@ public class GridAttributes {
     /*
      * 列占比集合：数组元素数值约分为占比。
      * spanCount 为 0，weights 长度为 0 时，默认 [25.0, 25.0, 25.0, 25.0]。
-     * spanCount > weights.size 且 weights 中值等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount。
+     * spanCount > weights.size 且 weights 元素之和等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount。
     */
     @Publish public var weights: Array<Float64> = []
     //aspectRatio 纵横比。缺省时高度默认屏幕高度，取值大于等于0.0。
@@ -451,11 +451,11 @@ public class GridAttributes {
     @Publish public var hGap: Int64 = 0 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -507,7 +507,7 @@ public class LinearLayout {
 public class LinearAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //列表项垂直间距，默认值为0
@@ -518,11 +518,11 @@ public class LinearAttributes {
     @Publish public var layoutWidth: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -572,7 +572,7 @@ public class OneLayout {
 public class AbstractFullFillAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //行权重，默认值为[]，取值大于等于0.0。
@@ -589,11 +589,11 @@ public class AbstractFullFillAttributes {
     @Publish public var layoutHeight: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -643,7 +643,7 @@ public class OneExLayout {
 public class AbstractFullFillAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //行权重，默认值为[]，取值大于等于0.0。
@@ -656,11 +656,11 @@ public class AbstractFullFillAttributes {
     @Publish public var layoutHeight: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -712,7 +712,7 @@ public class RangeGridLayout {
 public class GridAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //列数，取值大于等于0。weights 缺省时，默认显示4列。
@@ -720,7 +720,7 @@ public class GridAttributes {
     /*
      * 列占比集合：数组元素数值约分为占比。
      * spanCount 为 0，weights 长度为 0 时，默认 [25.0, 25.0, 25.0, 25.0]。
-     * spanCount > weights.size 且 weights 中值等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount。
+     * spanCount > weights.size 且 weights 元素之和等于100%，则 列数为 weights 的长度，反之为 列数为 spanCount。
      */
     @Publish public var weights: Array<Float64> = []
     //aspectRatio 纵横比。缺省时高度默认屏幕高度，取值大于等于0。
@@ -735,11 +735,11 @@ public class GridAttributes {
     @Publish public var hGap: Int64 = 0 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -790,7 +790,7 @@ public class ScrollFixLayout {
 public class FixAreaAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     /*
@@ -816,11 +816,11 @@ public class FixAreaAttributes {
     @Publish public var sketchMeasure: Bool = false 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -873,7 +873,7 @@ public class SingleLayout {
 public class AbstractFullFillAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64>
     //容器宽度。
@@ -882,11 +882,11 @@ public class AbstractFullFillAttributes {
     @Publish public var layoutHeight: Length = 0.0.vp 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -939,7 +939,7 @@ public class StaggeredGridLayout {
 public class StaggeredGridAttributes {
     /*
      * 可显示的条目，默认 [0,0]显示全部条目。
-     * 注意：数组长度为 2，并且数组元素内第一项大于等于 0 ，第二项大于第一项。
+     * 注意：数组长度为 2，并且数组元素第一项大于等于 0 ，第二项大于第一项。
      */
     @Publish public var range: Array<Int64> = [0, 0]
     //瀑布流宽度，取值大于等于0。
@@ -954,11 +954,11 @@ public class StaggeredGridAttributes {
     @Publish public var hGap: Float64 = 0.0 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 
@@ -1021,11 +1021,11 @@ public class FixAreaAttributes {
     @Publish public var aspectRatio: Float64 = 0.0 
     //容器背景颜色。
     @Publish public var bgColor: UInt32 = 0xffffff 
-    //容器背景颜色。
+    //容器背景透明度。
     @Publish public var bgOpacity: Float64 = 1.0 
     //组件的Z序，指明了该组件在堆叠组件中的位置，默认值为 0。
     @Publish public var zIndex: Int32 = 0
-    //内边距，默认值为[]，长度设置为 4，优先级比单给内边距高，设置其他无效。
+    //内边距，默认值为[]，长度固定为 4，设置其他无效，优先级比单给边距高。
     @Publish public var padding: Array<Float64> = [] 
     //上内边距，默认值为 0.0。
     @Publish public var topPadding: Float64 = 0.0 

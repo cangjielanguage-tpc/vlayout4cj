@@ -31,20 +31,6 @@ public class LinearLayout {
         vLayoutData = CommonFunc.computedRange(linearAttribute.range, vLayoutData)
     }
 
-    func computedExtraHeight(rowCount: Int64) {
-        if (linearAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + Float64(linearAttribute.dividerHeight * (rowCount - 1))
-        }
-
-        if (linearAttribute.topPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + linearAttribute.topPadding
-        }
-
-        if (linearAttribute.bottomPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + linearAttribute.bottomPadding
-        }
-    }
-
     func build() {
         List(space: linearAttribute.dividerHeight) {
             ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>

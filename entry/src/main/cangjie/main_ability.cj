@@ -30,4 +30,3 @@ class MainAbility <: UIAbility {
         windowStage.loadContent("EntryView")
     }
 }
-

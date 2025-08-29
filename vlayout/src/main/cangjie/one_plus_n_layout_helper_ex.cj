@@ -109,6 +109,7 @@ public class OneExLayout {
             let element: Float64 = oneExAttribute.colWeights[i];
             sum += element
         }
+
         match (vLayoutData.size) {
             case 5 =>
                 if (sum <= 100.0) {
@@ -119,16 +120,16 @@ public class OneExLayout {
             case 6 =>
                 if (sum < 100.0) {
                     weightArray.add(100.0 - sum)
-                    for (j in 0..2) {
-                        weightArray.add((100.0 - sum))
+                    for (j in 0..4) {
+                        weightArray.add((100.0 - sum)/4.0)
                     }
                     mWeight = 1
                 }
             case 7 =>
                 if (sum < 100.0) {
                     weightArray.add(100.0 - sum)
-                    for (j in 0..6) {
-                        weightArray.add((100.0 - sum) / 2.0)
+                    for (j in 0..5) {
+                        weightArray.add((100.0 - sum) / 5.0)
                     }
                 }
             case _ =>
@@ -146,13 +147,17 @@ public class OneExLayout {
             }
         }
         if (vLayoutData.size == 6) {
-            weightArray.add(100.0 - weightArray[0])
+            weightArray.add(100.0 - weightArray[0] - weightArray[1])
+            for (j in 0..3) {
+              weightArray.add((100.0 - weightArray[0]) / 3.0)
+            }
+//            weightArray.add(100.0 - weightArray[0])
             mWeight = 1
         }
         if (vLayoutData.size == 7) {
             weightArray.add(100.0 - weightArray[0] - weightArray[1])
             for (j in 0..4) {
-                weightArray.add((100.0 - weightArray[0]) / 2.0)
+                weightArray.add((100.0 - weightArray[0]) / 4.0)
             }
         }
         return weightArray
@@ -166,6 +171,9 @@ public class OneExLayout {
             }
         }
         if (vLayoutData.size == 6) {
+            for (j in 0..3) {
+                weightArray.add((100.0 - weightArray[0] - weightArray[2]) / 3.0)
+            }
             mWeight = 1
         }
         if (vLayoutData.size == 7) {
@@ -201,7 +209,9 @@ public class OneExLayout {
             weightArray.add((100.0 - weightArray[3]- weightArray[4]))
         }
         if (vLayoutData.size == 7) {
-            weightArray.add((100.0 - weightArray[0]) / 2.0)
+            for (j in 0..2) {
+                weightArray.add((100.0 - weightArray[0]) / 2.0)
+            }
         }
         return weightArray
     }

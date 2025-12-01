@@ -61,12 +61,12 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 1. 通过 module 引入
     1. 克隆下载项目
     2. 将 vlayout 模块拷贝到应用项目下
-    3. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，在 [dependencies] 字段下添加:
+    3. 修改自身应用 entry 下的 cjpm.toml 文件，在 [dependencies] 字段下添加:
     
         ```toml
        [dependencies]
             [dependencies.vlayout4cj]
-                 path = "../../../../vlayout/src/main/cangjie"
+                 path = "../vlayout"
        ```
     4. 在项目中使用 import vlayout4cj.* 引用 vlayout 项目
        ```cangjie
@@ -81,11 +81,11 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
     > cd third-party
     > git submodule add "https://gitcode.com/Cangjie-TPC/vlayout4cj"
     ```
-    2. 修改自身应用 entry/src/main/cangjie 下的 cjpm.toml 文件，添加依赖
+    2. 修改自身应用 entry 下的 cjpm.toml 文件，添加依赖
    ```toml
     [dependencies]
-        [dependencies.highlightguide]
-            path = "../../../../third-party/vlayout4cj/vlayout/src/main/cangjie"
+        [dependencies.vlayout4cj]
+            path = "../third-party/vlayout4cj/vlayout"
             version = "1.0.0"
    ```
     3. 在项目中使用 vlayout 组件

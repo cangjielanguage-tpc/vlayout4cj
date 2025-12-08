@@ -22,7 +22,7 @@ public class BannerLayout {
     //数据源
     var vLayoutData: Array<layoutDataType> 
     //属性
-    @State var vLayoutAttribute: BannerAttributes 
+    @State var bannerAttribute: BannerAttributes 
 }
 
 //数据源类
@@ -120,7 +120,7 @@ public class ColumnLayout {
     //数据源
     var vLayoutData: Array<layoutDataType> 
     //属性
-    @State var vLayoutAttribute: AbstractFullFillAttributes 
+    @State var columnAttribute: AbstractFullFillAttributes 
 }
 ```
 ### 2.2 栏格容器布局组件 AbstractFullFillAttributes
@@ -187,7 +187,7 @@ public class DefaultLayout {
     //数据源
     var vLayoutData: Array<layoutDataType> 
     //属性
-    @State var vLayoutAttribute: LinearAttributes 
+    @State var defaultAttribute: LinearAttributes 
 }
 ```
 ### 3.2 默认容器布局组件 LinearAttributes
@@ -253,7 +253,7 @@ public class FixLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: FixAreaAttributes 
+    @State var fixAttribute: FixAreaAttributes 
 }
 ```
 ### 4.2 固定容器布局组件 FixAreaAttributes
@@ -337,7 +337,7 @@ public class FloatLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: FixAreaAttributes 
+    @State var floatAttribute: FixAreaAttributes 
 }
 ```
 ### 5.2 浮动容器布局组件 FixAreaAttributes
@@ -418,7 +418,7 @@ public class GridLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: GridAttributes
+    @State var gridAttribute: GridAttributes
 }
 ```
 ### 6.2 复杂网格容器布局组件 GridAttributes 
@@ -497,7 +497,7 @@ public class LinearLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: LinearAttributes 
+    @State var linearAttribute: LinearAttributes 
 }
 ```
 ### 7.2 列表容器布局组件 LinearAttributes
@@ -562,7 +562,7 @@ public class OneLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: AbstractFullFillAttributes 
+    @State var oneAttribute: AbstractFullFillAttributes 
 }
 ```
 ### 8.2 一拖 N 容器布局组件属性 AbstractFullFillAttributes
@@ -633,7 +633,7 @@ public class OneExLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: AbstractFullFillAttributes 
+    @State var oneExAttribute: AbstractFullFillAttributes 
 }
 ```
 ### 9.2 一拖 N 拓展容器布局组件 AbstractFullFillAttributes
@@ -702,7 +702,7 @@ public class RangeGridLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: GridAttributes 
+    @State var rangeGridAttribute: GridAttributes 
 }
 ```
 ### 10.2 区域网格容器布局组件 GridAttributes
@@ -780,7 +780,7 @@ public class ScrollFixLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var vLayoutAttribute: FixAreaAttributes 
+    @State var scrollAttribute: FixAreaAttributes 
 }
 ```
 ### 11.2 滚动固定容器布局组件 FixAreaAttributes
@@ -863,7 +863,7 @@ public class SingleLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var singleAttribute: FixAreaAttributes 
+    @State var singleAttribute: AbstractFullFillAttributes 
 }
 ```
 ### 12.2 通栏容器布局组件 AbstractFullFillAttributes 
@@ -927,7 +927,7 @@ public class StaggeredGridLayout {
     //数据源。
     var vLayoutData: Array<layoutDataType> 
     //属性。
-    @State var staggeredGridAttribute: FixAreaAttributes 
+    @State var staggeredGridAttribute: StaggeredGridAttributes 
     //组件标识，必传。
     @State var vLayoutId: String = '' 
 }

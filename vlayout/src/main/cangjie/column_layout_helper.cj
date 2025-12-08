@@ -6,7 +6,6 @@ package vlayout4cj
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Watch
 
 private const TAG = 'vlayout COLUMN_LAYOUT '
 

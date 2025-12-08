@@ -5,11 +5,8 @@ package vlayout4cj
 
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
-import ohos.state_macro_manage.Builder
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Watch
 import ohos.state_macro_manage.Prop
-
 
 private const TAG = 'vlayout STICKY_LAYOUT '
 

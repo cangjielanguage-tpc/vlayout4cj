@@ -59,10 +59,10 @@ public class BannerLayout {
         .opacity(bannerAttribute.bgOpacity)
         .zIndex(bannerAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin[0], bannerAttribute.topMargin),
-            right:  Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin[1], bannerAttribute.rightMargin),
-            bottom: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin[2], bannerAttribute.bottomMargin),
-            left: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin[3], bannerAttribute.leftMargin)
+            top: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 0, bannerAttribute.topMargin),
+            right:  Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 1, bannerAttribute.rightMargin),
+            bottom: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 2, bannerAttribute.bottomMargin),
+            left: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 3, bannerAttribute.leftMargin)
         )
     }
 }

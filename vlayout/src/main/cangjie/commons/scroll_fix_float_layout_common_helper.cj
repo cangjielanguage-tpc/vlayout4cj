@@ -70,17 +70,17 @@ public class ScrollFixFloatLayoutCommon {
             y: yOffset
         )
         .padding(
-            top: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding[0], vLayoutAttribute.topPadding),
-            right: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding[1], vLayoutAttribute.rightPadding),
-            bottom: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding[2], vLayoutAttribute.bottomPadding),
-            left: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding[3], vLayoutAttribute.leftPadding)
+            top: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding, 0, vLayoutAttribute.topPadding),
+            right: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding, 1, vLayoutAttribute.rightPadding),
+            bottom: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding, 2, vLayoutAttribute.bottomPadding),
+            left: Utils.binaryExpression(vLayoutAttribute.padding.size == 4, vLayoutAttribute.padding, 3, vLayoutAttribute.leftPadding)
         )
         .zIndex(vLayoutAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin[0], vLayoutAttribute.topMargin),
-            right: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin[1], vLayoutAttribute.rightMargin),
-            bottom: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin[2], vLayoutAttribute.bottomMargin),
-            left: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin[3], vLayoutAttribute.leftMargin)
+            top: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin, 0, vLayoutAttribute.topMargin),
+            right: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin, 1, vLayoutAttribute.rightMargin),
+            bottom: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin, 2, vLayoutAttribute.bottomMargin),
+            left: Utils.binaryExpression(vLayoutAttribute.margin.size == 4, vLayoutAttribute.margin, 3, vLayoutAttribute.leftMargin)
         )
     }
 }

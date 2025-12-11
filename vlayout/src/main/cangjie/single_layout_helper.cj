@@ -40,20 +40,20 @@ public class SingleLayout {
             .width(singleAttribute.layoutWidth)
             .height(singleAttribute.layoutHeight)
             .padding(
-                top: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[0], singleAttribute.topPadding),
-                right: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[1], singleAttribute.rightPadding),
-                bottom: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[2], singleAttribute.bottomPadding),
-                left: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[3], singleAttribute.leftPadding)
+                top: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding, 0, singleAttribute.topPadding),
+                right: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding, 1, singleAttribute.rightPadding),
+                bottom: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding, 2, singleAttribute.bottomPadding),
+                left: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding, 3, singleAttribute.leftPadding)
             )
         }
         .backgroundColor(singleAttribute.bgColor)
         .opacity(singleAttribute.bgOpacity)
         .zIndex(singleAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[0], singleAttribute.topMargin),
-            right:  Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[1], singleAttribute.rightMargin),
-            bottom: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[2], singleAttribute.bottomMargin),
-            left: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[3], singleAttribute.leftMargin)
+            top: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin, 0, singleAttribute.topMargin),
+            right:  Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin, 1, singleAttribute.rightMargin),
+            bottom: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin, 2, singleAttribute.bottomMargin),
+            left: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin, 3, singleAttribute.leftMargin)
         )
 
     }

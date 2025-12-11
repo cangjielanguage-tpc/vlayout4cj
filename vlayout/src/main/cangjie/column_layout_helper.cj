@@ -107,20 +107,20 @@ public class ColumnLayout {
             .height(columnAttribute.layoutHeight)
             .width(columnAttribute.layoutWidth)
             .padding(
-                top: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[0], columnAttribute.topPadding),
-                right: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[1], columnAttribute.rightPadding),
-                bottom: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[2], columnAttribute.bottomPadding),
-                left: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[3], columnAttribute.leftPadding)
+                top: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding, 0, columnAttribute.topPadding),
+                right: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding, 1, columnAttribute.rightPadding),
+                bottom: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding, 2, columnAttribute.bottomPadding),
+                left: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding, 3, columnAttribute.leftPadding)
             )
         }
         .backgroundColor(columnAttribute.bgColor)
         .opacity(columnAttribute.bgOpacity)
         .zIndex(columnAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[0], columnAttribute.topMargin),
-            right:  Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[1], columnAttribute.rightMargin),
-            bottom: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[2], columnAttribute.bottomMargin),
-            left: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[3], columnAttribute.leftMargin)
+            top: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin, 0, columnAttribute.topMargin),
+            right:  Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin, 1, columnAttribute.rightMargin),
+            bottom: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin, 2, columnAttribute.bottomMargin),
+            left: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin, 3, columnAttribute.leftMargin)
         )
 
     }

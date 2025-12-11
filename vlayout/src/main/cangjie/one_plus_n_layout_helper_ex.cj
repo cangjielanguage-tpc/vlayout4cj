@@ -150,7 +150,6 @@ public class OneExLayout {
             for (j in 0..3) {
               weightArray.add((100.0 - weightArray[0]) / 3.0)
             }
-//            weightArray.add(100.0 - weightArray[0])
             mWeight = 1
         }
         if (vLayoutData.size == 7) {
@@ -509,20 +508,20 @@ public class OneExLayout {
             .width(oneExAttribute.layoutWidth)
             .height(if(oneExAttribute.layoutHeight.value == 0.0) { layoutHeight.vp } else { oneExAttribute.layoutHeight })
             .padding(
-                top: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding[0], oneExAttribute.topPadding),
-                right: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding[1], oneExAttribute.rightPadding),
-                bottom: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding[2], oneExAttribute.bottomPadding),
-                left: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding[3], oneExAttribute.leftPadding)
+                top: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding, 0, oneExAttribute.topPadding),
+                right: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding, 1, oneExAttribute.rightPadding),
+                bottom: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding, 2, oneExAttribute.bottomPadding),
+                left: Utils.binaryExpression(oneExAttribute.padding.size == 4, oneExAttribute.padding, 3, oneExAttribute.leftPadding)
             )
         }
         .backgroundColor(oneExAttribute.bgColor)
         .opacity(oneExAttribute.bgOpacity)
         .zIndex(oneExAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin[0], oneExAttribute.topMargin),
-            right:  Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin[1], oneExAttribute.rightMargin),
-            bottom: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin[2], oneExAttribute.bottomMargin),
-            left: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin[3], oneExAttribute.leftMargin)
+            top: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin, 0, oneExAttribute.topMargin),
+            right:  Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin, 1, oneExAttribute.rightMargin),
+            bottom: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin, 2, oneExAttribute.bottomMargin),
+            left: Utils.binaryExpression(oneExAttribute.margin.size == 4, oneExAttribute.margin, 3, oneExAttribute.leftMargin)
         )
     }
 }

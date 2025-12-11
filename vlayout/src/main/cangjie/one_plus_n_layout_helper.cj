@@ -150,7 +150,6 @@ public class OneLayout {
                 }
             case _ =>
                 Hilog.error(0x000000, "computedColWeights", '${TAG}computedColWeights error')
-
         }
         return weightArray
     }
@@ -305,6 +304,41 @@ public class OneLayout {
         layoutHeight = layoutHeight + oneAttribute.bottomPadding
     }
 
+    func widthHeightAssignment(newValue: Area) {
+        itemWidth = px2vp(newValue.width.px)().value
+        itemHeight = px2vp(newValue.height.px)().value
+        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
+        computedSize()
+    }
+
+    func widthHeightAssignment1(newValue: Area) {
+        itemWidth = px2vp(newValue.width.px)().value
+        itemHeight1 = px2vp(newValue.height.px)().value
+        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
+        computedSize()
+    }
+
+    func widthHeightAssignment2(newValue: Area) {
+        itemWidth = px2vp(newValue.width.px)().value
+        itemHeight2 = px2vp(newValue.height.px)().value
+        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
+        computedSize()
+    }
+
+    func widthHeightAssignment3(newValue: Area) {
+        itemWidth = px2vp(newValue.width.px)().value
+        itemHeight3 = px2vp(newValue.height.px)().value
+        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
+        computedSize()
+    }
+
+    func widthHeightAssignment4(newValue: Area) {
+        itemWidth = px2vp(newValue.width.px)().value
+        itemHeight4 = px2vp(newValue.height.px)().value
+        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
+        computedSize()
+    }
+
     func build() {
         Column() {
             Row(){
@@ -312,71 +346,53 @@ public class OneLayout {
                     Row() {
                         Column() {vLayoutContent(vLayoutData[0])}
                         .onAreaChange({oldValue, newValue =>
-                            itemWidth = px2vp(newValue.width.px)().value
-                            itemHeight = px2vp(newValue.height.px)().value
-                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                            computedSize()
+                            widthHeightAssignment(newValue)
                         })
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {100.percent } else {colWeightArray[0].percent})
-                        .height(if(rowWeightArray.size == 0) {100.percent} else {rowWeightArray[0].percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                        .height(Utils.binaryExpression(rowWeightArray.size == 0, 100.0, rowWeightArray, 0).percent)
                     }
                 }
                 else if (vLayoutData.size == 2) {
                     Row() {
                         Column() {vLayoutContent(vLayoutData[0])}
                         .onAreaChange({oldValue, newValue =>
-                            itemWidth = px2vp(newValue.width.px)().value
-                            itemHeight1 = px2vp(newValue.height.px)().value
-                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                            computedSize()
+                            widthHeightAssignment1(newValue)
                         })
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[0].percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                         Column() {vLayoutContent(vLayoutData[1])}
                         .onAreaChange({oldValue, newValue =>
-                            itemWidth = px2vp(newValue.width.px)().value
-                            itemHeight2 =px2vp(newValue.height.px)().value
-                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                            computedSize()
+                            widthHeightAssignment2(newValue)
                         })
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
                     }
                 } else if (vLayoutData.size == 3) {
                     if (oneAttribute.hasHeader && !oneAttribute.hasFooter) {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if(colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else { Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent })
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight2 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                    computedSize()
+                                    widthHeightAssignment2(newValue)
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent  })
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1 } else {Int32(rowWeightArray[1]) })
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                         }.alignItems(HorizontalAlign.Start)
                     } else if(!oneAttribute.hasHeader && oneAttribute.hasFooter) {
@@ -384,98 +400,70 @@ public class OneLayout {
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[0])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                    computedSize()
+                                    widthHeightAssignment(newValue)
                                 })
-                                .width( if (colWeightArray.size == 0) {50.percent} else {colWeightArray[0].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})}
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)}
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() { vLayoutContent(vLayoutData[2]) }
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight2 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                computedSize()
+                                widthHeightAssignment2(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) { 100.percent } else { colWeightArray[2].percent })
-                            .layoutWeight(if (rowWeightArray.size == 0) { 1 } else { Int32(rowWeightArray[1]) })
+                            .width(Utils.binaryExpression(colWeightArray.size == 0,  100.0, colWeightArray, 2).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                         }.alignItems(HorizontalAlign.Start)
                     } else if(oneAttribute.hasHeader && oneAttribute.hasFooter) {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {vLayoutContent(vLayoutData[1])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight1 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                computedSize()
+                                widthHeightAssignment1(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[1].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 1).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                             Row() {vLayoutContent(vLayoutData[2])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight2 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                computedSize()
+                                widthHeightAssignment2(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[2].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 2).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
                         }.alignItems(HorizontalAlign.Start)
                     } else {
                         Row() {
                             Column() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
                             .alignItems(HorizontalAlign.Start)
-                            .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[0].percent})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                             Column() {
                                 Row() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
-                                .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                                 Row() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight2 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                    computedSize()
+                                    widthHeightAssignment2(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
-                                .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])}
-                                )
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                             }
                             .alignItems(HorizontalAlign.Start)
                         }
@@ -485,138 +473,100 @@ public class OneLayout {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {
                                     Row() {vLayoutContent(vLayoutData[2])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight2 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                        computedSize()
+                                        widthHeightAssignment2(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
-                                    .layoutWeight(if(oneAttribute.layoutHeight.value == 0.0) {0}else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
 
                                     Row() {vLayoutContent(vLayoutData[3])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight3 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                        computedSize()
+                                        widthHeightAssignment3(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[3].percent})
-                                    .layoutWeight(if(oneAttribute.layoutHeight.value == 0.0) {0}else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 3).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                                 }.alignItems(HorizontalAlign.Start)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[1])}
-                            )
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                         }.alignItems(HorizontalAlign.Start)
                     }else if (oneAttribute.hasHeader && oneAttribute.hasFooter) {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight2 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                    computedSize()
+                                    widthHeightAssignment2(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[1])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                             Row() {vLayoutContent(vLayoutData[3])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight3 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                computedSize()
+                                widthHeightAssignment3(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[3].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 3).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
                         }.alignItems(HorizontalAlign.Start)
                     }else {
                         Row() {
                             Column() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
                             .alignItems(HorizontalAlign.Start)
-                            .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[0].percent})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                             Column() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
                                 .alignItems(HorizontalAlign.Start)
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
-                                .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[0])})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                                 Row() {
                                     Column() {vLayoutContent(vLayoutData[2])}
                                     .onAreaChange({ oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight2 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                        computedSize()
+                                        widthHeightAssignment2(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
 
                                     Column() {vLayoutContent(vLayoutData[3])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight3 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                        computedSize()
+                                        widthHeightAssignment3(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[3].percent})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 3).percent)
                                 }
-                                .width(if (colWeightArray.size == 0) {50.percent} else {100.percent})
-                                .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[1])}
-                                )
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.percent, 100.percent))
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                             }
                             .alignItems(HorizontalAlign.Start)
                         }
@@ -627,236 +577,176 @@ public class OneLayout {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1}else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {
                                     Row() {vLayoutContent(vLayoutData[2])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight2 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                        computedSize()
+                                        widthHeightAssignment2(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
 
                                     Row() {
                                         Column() {vLayoutContent(vLayoutData[3])}
                                         .onAreaChange({oldValue, newValue =>
-                                            itemWidth = px2vp(newValue.width.px)().value
-                                            itemHeight3 = px2vp(newValue.height.px)().value
-                                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                            computedSize()
+                                            widthHeightAssignment3(newValue)
                                         })
-                                        .width(if (colWeightArray.size == 0) {25.percent} else {colWeightArray[3].percent})
+                                        .width(Utils.binaryExpression(colWeightArray.size == 0, 25.0, colWeightArray, 3).percent)
 
                                         Column() {vLayoutContent(vLayoutData[4])}
                                         .onAreaChange({oldValue, newValue =>
-                                            itemWidth = px2vp(newValue.width.px)().value
-                                            itemHeight4 = px2vp(newValue.height.px)().value
-                                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
-                                            computedSize()
+                                            widthHeightAssignment4(newValue)
                                         })
-                                        .width(if (colWeightArray.size == 0) {25.percent} else {colWeightArray[4].percent})
+                                        .width(Utils.binaryExpression(colWeightArray.size == 0, 25.0, colWeightArray, 4).percent)
                                     }
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                                 }
                                 .alignItems(HorizontalAlign.Start)
-                                .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                             }
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                         }.alignItems(HorizontalAlign.Start)
                     }else if (!oneAttribute.hasHeader && oneAttribute.hasFooter) {
                         Column() {
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[0])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, height = ${itemHeight}')
-                                    computedSize()
+                                    widthHeightAssignment(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[0].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                                 Column() {
                                     Row() {vLayoutContent(vLayoutData[1])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight1 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                        computedSize()
+                                        widthHeightAssignment1(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
 
                                     Row() {
                                         Column() {vLayoutContent(vLayoutData[2])}
                                         .onAreaChange({oldValue, newValue =>
-                                            itemWidth = px2vp(newValue.width.px)().value
-                                            itemHeight2 = px2vp(newValue.height.px)().value
-                                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                            computedSize()
+                                            widthHeightAssignment2(newValue)
                                         })
-                                        .width(if (colWeightArray.size == 0) {25.percent} else {colWeightArray[2].percent})
+                                        .width(Utils.binaryExpression(colWeightArray.size == 0, 25.0, colWeightArray, 2).percent)
 
                                         Column() {vLayoutContent(vLayoutData[3])}
                                         .onAreaChange({oldValue, newValue =>
-                                            itemWidth = px2vp(newValue.width.px)().value
-                                            itemHeight3 = px2vp(newValue.height.px)().value
-                                            Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                            computedSize()
+                                            widthHeightAssignment3(newValue)
                                         })
-                                        .width(if (colWeightArray.size == 0) {25.percent} else {colWeightArray[3].percent})
+                                        .width(Utils.binaryExpression(colWeightArray.size == 0, 25.0, colWeightArray, 3).percent)
                                     }
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                                 }
                                 .alignItems(HorizontalAlign.Start)
-                                .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                             }
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {vLayoutContent(vLayoutData[4])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight4 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
-                                computedSize()
+                                widthHeightAssignment4(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[4].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 4).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                         }.alignItems(HorizontalAlign.Start)
                     } else if (oneAttribute.hasHeader && oneAttribute.hasFooter) {
                         Column() {
                             Row() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[0].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 0).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
-                                .width(if (colWeightArray.size == 0) {50.percent } else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {
                                     Row() {vLayoutContent(vLayoutData[2])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight2 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                        computedSize()
+                                        widthHeightAssignment2(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
 
                                     Row() {vLayoutContent(vLayoutData[3])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight3 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight3 = ${itemHeight3}')
-                                        computedSize()
+                                        widthHeightAssignment3(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[3].percent})
-                                    .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 3).percent)
+                                    .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                                 }
                                 .alignItems(HorizontalAlign.Start)
-                                .layoutWeight(if (oneAttribute.layoutHeight.value == 0.0) {0} else {1})
+                                .layoutWeight(Utils.binaryExpression(oneAttribute.layoutHeight.value == 0.0, 0, 1))
                             }
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                             Row() {vLayoutContent(vLayoutData[4])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight4 = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
-                                computedSize()
+                                widthHeightAssignment4(newValue)
                             })
-                            .width(if (colWeightArray.size == 0) {100.percent} else {colWeightArray[4].percent})
-                            .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 100.0, colWeightArray, 4).percent)
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
                         }.alignItems(HorizontalAlign.Start)
                     }else {
                         Row() {
                             Column() {vLayoutContent(vLayoutData[0])}
                             .onAreaChange({oldValue, newValue =>
-                                itemWidth = px2vp(newValue.width.px)().value
-                                itemHeight = px2vp(newValue.height.px)().value
-                                Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
-                                computedSize()
+                                widthHeightAssignment(newValue)
                             })
                             .alignItems(HorizontalAlign.Start)
-                            .width(if (colWeightArray.size == 0) {50.percent } else {colWeightArray[0].percent})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                             Column() {
                                 Column() {vLayoutContent(vLayoutData[1])}
                                 .onAreaChange({oldValue, newValue =>
-                                    itemWidth = px2vp(newValue.width.px)().value
-                                    itemHeight1 = px2vp(newValue.height.px)().value
-                                    Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight1 = ${itemHeight1}')
-                                    computedSize()
+                                    widthHeightAssignment1(newValue)
                                 })
                                 .alignItems(HorizontalAlign.Start)
-                                .width(if (colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
-                                .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                                 Row() {
                                     Column() {vLayoutContent(vLayoutData[2])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight2 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight2 = ${itemHeight2}')
-                                        computedSize()
+                                        widthHeightAssignment2(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[2].percent})
-                                    .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 2).percent)
+                                    .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, 0))
 
                                     Column() {vLayoutContent(vLayoutData[3])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight3 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
-                                        computedSize()
+                                        widthHeightAssignment3(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[3].percent})
-                                    .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 3).percent)
+                                    .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, 0))
 
                                     Column() {vLayoutContent(vLayoutData[4])}
                                     .onAreaChange({oldValue, newValue =>
-                                        itemWidth = px2vp(newValue.width.px)().value
-                                        itemHeight4 = px2vp(newValue.height.px)().value
-                                        Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight4 = ${itemHeight4}')
-                                        computedSize()
+                                        widthHeightAssignment4(newValue)
                                     })
-                                    .width(if (colWeightArray.size == 0) {33.percent} else {colWeightArray[4].percent})
-                                    .layoutWeight(if (rowWeightArray.size == 0) {1} else {0})
+                                    .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 4).percent)
+                                    .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, 0))
 
                                 }
-                                .width(if (colWeightArray.size == 0) {50.percent} else {100.percent})
-                                .layoutWeight(if (rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.percent, 100.percent))
+                                .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                             }
                             .alignItems(HorizontalAlign.Start)
                         }
@@ -870,20 +760,20 @@ public class OneLayout {
             .width(oneAttribute.layoutWidth)
             .height(if(oneAttribute.layoutHeight.value == 0.0) { layoutHeight.vp } else { oneAttribute.layoutHeight })
             .padding(
-                top: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[0], oneAttribute.topPadding),
-                right: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[1], oneAttribute.rightPadding),
-                bottom: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[2], oneAttribute.bottomPadding),
-                left: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[3], oneAttribute.leftPadding)
+                top: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding, 0, oneAttribute.topPadding),
+                right: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding, 1, oneAttribute.rightPadding),
+                bottom: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding, 2, oneAttribute.bottomPadding),
+                left: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding, 3, oneAttribute.leftPadding)
             )
         }
         .backgroundColor(oneAttribute.bgColor)
         .opacity(oneAttribute.bgOpacity)
         .zIndex(oneAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[0], oneAttribute.topMargin),
-            right:  Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[1], oneAttribute.rightMargin),
-            bottom: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[2], oneAttribute.bottomMargin),
-            left: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[3], oneAttribute.leftMargin)
+            top: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin, 0, oneAttribute.topMargin),
+            right:  Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin, 1, oneAttribute.rightMargin),
+            bottom: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin, 2, oneAttribute.bottomMargin),
+            left: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin, 3, oneAttribute.leftMargin)
         )
     }
 }

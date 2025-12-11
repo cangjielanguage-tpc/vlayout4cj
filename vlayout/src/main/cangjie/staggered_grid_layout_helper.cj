@@ -221,20 +221,20 @@ public class StaggeredGridLayout {
                 }
             )
             .padding(
-                top: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding[0], staggeredGridAttribute.topPadding),
-                right: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding[1], staggeredGridAttribute.rightPadding),
-                bottom: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding[2], staggeredGridAttribute.bottomPadding),
-                left: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding[3], staggeredGridAttribute.leftPadding)
+                top: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 0, staggeredGridAttribute.topPadding),
+                right: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 1, staggeredGridAttribute.rightPadding),
+                bottom: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 2, staggeredGridAttribute.bottomPadding),
+                left: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 3, staggeredGridAttribute.leftPadding)
             )
         }
         .backgroundColor(staggeredGridAttribute.bgColor)
         .opacity(staggeredGridAttribute.bgOpacity)
         .zIndex(staggeredGridAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin[0], staggeredGridAttribute.topMargin),
-            right:  Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin[1], staggeredGridAttribute.rightMargin),
-            bottom: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin[2], staggeredGridAttribute.bottomMargin),
-            left: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin[3], staggeredGridAttribute.leftMargin)
+            top: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 0, staggeredGridAttribute.topMargin),
+            right:  Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 1, staggeredGridAttribute.rightMargin),
+            bottom: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 2, staggeredGridAttribute.bottomMargin),
+            left: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 3, staggeredGridAttribute.leftMargin)
         )
     }
 }

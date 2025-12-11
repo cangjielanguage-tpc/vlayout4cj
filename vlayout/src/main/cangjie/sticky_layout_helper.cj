@@ -81,17 +81,17 @@ public class StickyLayout {
                 .backgroundColor(stickyAttribute.bgColor)
                 .opacity(stickyAttribute.bgOpacity)
                 .padding(
-                    top: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding[0], stickyAttribute.topPadding),
-                    right: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding[1], stickyAttribute.rightPadding),
-                    bottom: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding[2], stickyAttribute.bottomPadding),
-                    left: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding[3], stickyAttribute.leftPadding)
+                    top: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding, 0, stickyAttribute.topPadding),
+                    right: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding, 1, stickyAttribute.rightPadding),
+                    bottom: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding, 2, stickyAttribute.bottomPadding),
+                    left: Utils.binaryExpression(stickyAttribute.padding.size == 4, stickyAttribute.padding, 3, stickyAttribute.leftPadding)
                 )
                 .zIndex(stickyAttribute.zIndex)
                 .margin(
-                    top: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin[0], stickyAttribute.topMargin),
-                    right:  Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin[1], stickyAttribute.rightMargin),
-                    bottom: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin[2], stickyAttribute.bottomMargin),
-                    left: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin[3], stickyAttribute.leftMargin)
+                    top: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin, 0, stickyAttribute.topMargin),
+                    right:  Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin, 1, stickyAttribute.rightMargin),
+                    bottom: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin, 2, stickyAttribute.bottomMargin),
+                    left: Utils.binaryExpression(stickyAttribute.margin.size == 4, stickyAttribute.margin, 3, stickyAttribute.leftMargin)
                 )
             }
 

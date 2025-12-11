@@ -116,17 +116,17 @@ public class FloatLayout {
             y: yOffset
         )
         .padding(
-            top: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding[0], floatAttribute.topPadding),
-            right: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding[1], floatAttribute.rightPadding),
-            bottom: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding[2], floatAttribute.bottomPadding),
-            left: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding[3], floatAttribute.leftPadding)
+            top: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 0, floatAttribute.topPadding),
+            right: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 1, floatAttribute.rightPadding),
+            bottom: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 2, floatAttribute.bottomPadding),
+            left: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 3, floatAttribute.leftPadding)
         )
         .zIndex(floatAttribute.zIndex)
         .margin(
-            top: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin[0], floatAttribute.topMargin),
-            right:  Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin[1], floatAttribute.rightMargin),
-            bottom: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin[2], floatAttribute.bottomMargin),
-            left: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin[3], floatAttribute.leftMargin)
+            top: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 0, floatAttribute.topMargin),
+            right:  Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 1, floatAttribute.rightMargin),
+            bottom: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 2, floatAttribute.bottomMargin),
+            left: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 3, floatAttribute.leftMargin)
         )
     }
 }

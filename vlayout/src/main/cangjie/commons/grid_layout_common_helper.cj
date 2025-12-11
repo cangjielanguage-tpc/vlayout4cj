@@ -281,19 +281,19 @@ public class GridLayoutCommon {
             .columnsGap(gridLayoutAttribute.hGap)
             .rowsGap(gridLayoutAttribute.vGap)
             .padding(
-                top: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding[0], gridLayoutAttribute.topPadding),
-                right: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding[1], gridLayoutAttribute.rightPadding),
-                bottom: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding[2], gridLayoutAttribute.bottomPadding),
-                left: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding[3], gridLayoutAttribute.leftPadding)
+                top: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 0, gridLayoutAttribute.topPadding),
+                right: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 1, gridLayoutAttribute.rightPadding),
+                bottom: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 2, gridLayoutAttribute.bottomPadding),
+                left: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 3, gridLayoutAttribute.leftPadding)
             )
             .backgroundColor(gridLayoutAttribute.bgColor)
             .opacity(gridLayoutAttribute.bgOpacity)
             .zIndex(gridLayoutAttribute.zIndex)
             .margin(
-                top: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin[0], gridLayoutAttribute.topMargin),
-                right: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin[1], gridLayoutAttribute.rightMargin),
-                bottom: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin[2], gridLayoutAttribute.bottomMargin),
-                left: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin[3], gridLayoutAttribute.leftMargin)
+                top: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 0, gridLayoutAttribute.topMargin),
+                right: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 1, gridLayoutAttribute.rightMargin),
+                bottom: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 2, gridLayoutAttribute.bottomMargin),
+                left: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 3, gridLayoutAttribute.leftMargin)
             )
 
     }

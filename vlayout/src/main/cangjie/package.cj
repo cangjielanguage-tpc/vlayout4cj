@@ -15,6 +15,7 @@ internal import std.convert.*
 internal import std.math.*
 internal import std.collection.ArrayList
 internal import vlayout4cj.commons.*
+internal import vlayout4cj.util.Utils
 
 extend<T> Option<T> {
     operator func ()(): T {

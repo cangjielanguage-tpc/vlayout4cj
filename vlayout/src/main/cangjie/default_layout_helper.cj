@@ -57,52 +57,20 @@ public class DefaultLayout {
         .height(defaultAttribute.layoutHeight)
         .edgeEffect(EdgeEffect.None)
         .padding(
-            top: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[0]
-            } else {
-                defaultAttribute.topPadding
-            },
-            right: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[1]
-            } else {
-                defaultAttribute.rightPadding
-            },
-            bottom: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[2]
-            } else {
-                defaultAttribute.bottomPadding
-            },
-            left: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[3]
-            } else {
-                defaultAttribute.leftPadding
-            }
+            top: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding[0], defaultAttribute.topPadding),
+            right: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding[1], defaultAttribute.rightPadding),
+            bottom: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding[2], defaultAttribute.bottomPadding),
+            left: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding[3], defaultAttribute.leftPadding)
         )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
         .backgroundColor(defaultAttribute.bgColor)
         .opacity(defaultAttribute.bgOpacity)
         .zIndex(defaultAttribute.zIndex)
         .margin(
-            top: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[0]
-            } else {
-                defaultAttribute.topMargin
-            },
-            right:  if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[1]
-            } else {
-                defaultAttribute.rightMargin
-            },
-            bottom: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[2]
-            } else {
-                defaultAttribute.bottomMargin
-            },
-            left: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[3]
-            } else {
-                defaultAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin[0], defaultAttribute.topMargin),
+            right:  Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin[1], defaultAttribute.rightMargin),
+            bottom: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin[2], defaultAttribute.bottomMargin),
+            left: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin[3], defaultAttribute.leftMargin)
         )
     }
 }

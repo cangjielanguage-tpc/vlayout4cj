@@ -870,52 +870,20 @@ public class OneLayout {
             .width(oneAttribute.layoutWidth)
             .height(if(oneAttribute.layoutHeight.value == 0.0) { layoutHeight.vp } else { oneAttribute.layoutHeight })
             .padding(
-                top: if(oneAttribute.padding.size == 4) {
-                    oneAttribute.padding[0]
-                } else {
-                    oneAttribute.topPadding
-                },
-                right: if(oneAttribute.padding.size == 4) {
-                    oneAttribute.padding[1]
-                } else {
-                    oneAttribute.rightPadding
-                },
-                bottom: if(oneAttribute.padding.size == 4) {
-                    oneAttribute.padding[2]
-                } else {
-                    oneAttribute.bottomPadding
-                },
-                left: if(oneAttribute.padding.size == 4) {
-                    oneAttribute.padding[3]
-                } else {
-                    oneAttribute.leftPadding
-                }
+                top: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[0], oneAttribute.topPadding),
+                right: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[1], oneAttribute.rightPadding),
+                bottom: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[2], oneAttribute.bottomPadding),
+                left: Utils.binaryExpression(oneAttribute.padding.size == 4, oneAttribute.padding[3], oneAttribute.leftPadding)
             )
         }
         .backgroundColor(oneAttribute.bgColor)
         .opacity(oneAttribute.bgOpacity)
         .zIndex(oneAttribute.zIndex)
         .margin(
-            top: if(this.oneAttribute.margin.size == 4) {
-                this.oneAttribute.margin[0]
-            } else {
-                this.oneAttribute.topMargin
-            },
-            right:  if(this.oneAttribute.margin.size == 4) {
-                this.oneAttribute.margin[1]
-            } else {
-                this.oneAttribute.rightMargin
-            },
-            bottom: if(this.oneAttribute.margin.size == 4) {
-                this.oneAttribute.margin[2]
-            } else {
-                this.oneAttribute.bottomMargin
-            },
-            left: if(this.oneAttribute.margin.size == 4) {
-                this.oneAttribute.margin[3]
-            } else {
-                this.oneAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[0], oneAttribute.topMargin),
+            right:  Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[1], oneAttribute.rightMargin),
+            bottom: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[2], oneAttribute.bottomMargin),
+            left: Utils.binaryExpression(oneAttribute.margin.size == 4, oneAttribute.margin[3], oneAttribute.leftMargin)
         )
     }
 }

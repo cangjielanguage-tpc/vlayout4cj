@@ -56,52 +56,20 @@ public class LinearLayout {
         .width(linearAttribute.layoutWidth)
         .edgeEffect(EdgeEffect.None)
         .padding(
-                top: if(linearAttribute.padding.size == 4) {
-                    linearAttribute.padding[0]
-                } else {
-                    linearAttribute.topPadding
-                },
-                right: if(linearAttribute.padding.size == 4) {
-                    linearAttribute.padding[1]
-                } else {
-                    linearAttribute.rightPadding
-                },
-                bottom: if(linearAttribute.padding.size == 4) {
-                    linearAttribute.padding[2]
-                } else {
-                    linearAttribute.bottomPadding
-                },
-                left: if(linearAttribute.padding.size == 4) {
-                    linearAttribute.padding[3]
-                } else {
-                    linearAttribute.leftPadding
-                }
-            )
+            top: Utils.binaryExpression(linearAttribute.padding.size == 4, linearAttribute.padding[0], linearAttribute.topPadding),
+            right: Utils.binaryExpression(linearAttribute.padding.size == 4, linearAttribute.padding[1], linearAttribute.rightPadding),
+            bottom: Utils.binaryExpression(linearAttribute.padding.size == 4, linearAttribute.padding[2], linearAttribute.bottomPadding),
+            left: Utils.binaryExpression(linearAttribute.padding.size == 4, linearAttribute.padding[3], linearAttribute.leftPadding)
+        )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
         .backgroundColor(linearAttribute.bgColor)
         .opacity(linearAttribute.bgOpacity)
         .zIndex(linearAttribute.zIndex)
         .margin(
-            top: if(linearAttribute.margin.size == 4) {
-                linearAttribute.margin[0]
-            } else {
-                linearAttribute.topMargin
-            },
-            right:  if(linearAttribute.margin.size == 4) {
-                linearAttribute.margin[1]
-            } else {
-                linearAttribute.rightMargin
-            },
-            bottom: if(linearAttribute.margin.size == 4) {
-                linearAttribute.margin[2]
-            } else {
-                linearAttribute.bottomMargin
-            },
-            left: if(linearAttribute.margin.size == 4) {
-                linearAttribute.margin[3]
-            } else {
-                linearAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(linearAttribute.margin.size == 4, linearAttribute.margin[0], linearAttribute.topMargin),
+            right:  Utils.binaryExpression(linearAttribute.margin.size == 4, linearAttribute.margin[1], linearAttribute.rightMargin),
+            bottom: Utils.binaryExpression(linearAttribute.margin.size == 4, linearAttribute.margin[2], linearAttribute.bottomMargin),
+            left: Utils.binaryExpression(linearAttribute.margin.size == 4, linearAttribute.margin[3], linearAttribute.leftMargin)
         )
 
     }

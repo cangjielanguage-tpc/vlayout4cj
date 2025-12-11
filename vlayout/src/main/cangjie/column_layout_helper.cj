@@ -6,6 +6,7 @@ package vlayout4cj
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
+import vlayout4cj.util.Utils
 
 private const TAG = 'vlayout COLUMN_LAYOUT '
 
@@ -24,6 +25,33 @@ public class ColumnLayout {
     protected override func aboutToAppear() {
         vLayoutData = CommonFunc.computedRange(columnAttribute.range, vLayoutData)
         computedColWeights()
+    }
+
+    func dataOperation(element: Float64): Float64 {
+        var elementTemp: Float64 = element
+        colWeightArray = columnAttribute.colWeights
+        var sum: Float64 = 0.0
+        var item: Float64 = 0.0
+        let count: Int64 = vLayoutData.size - colWeightArray.size
+        var otnerColWeightArray: Array<Float64> = Array<Float64>(count, repeat: 0.0)
+        if (colWeightArray.size == 0) {
+            colWeightArray = []
+        } else {
+            for (i in 0..colWeightArray.size) {
+                elementTemp = colWeightArray[i]
+                sum += elementTemp
+                if (sum < 100.0) {
+                    item = (100.0 - sum) / Float64(count)
+                } else {
+                    item = 0.0
+                }
+            }
+            for (j in 0..count) {
+                otnerColWeightArray[j] = item
+            }
+        }
+        colWeightArray = colWeightArray.concat(otnerColWeightArray)
+        return elementTemp
     }
 
     func computedColWeights() {
@@ -45,28 +73,7 @@ public class ColumnLayout {
                 }
                 colWeightArray = arr
             } else { //数据源数组长度大于列权重数组长度时
-                colWeightArray = columnAttribute.colWeights
-                var sum: Float64 = 0.0
-                var item: Float64 = 0.0
-                let count: Int64 = vLayoutData.size - colWeightArray.size
-                var otnerColWeightArray: Array<Float64> = Array<Float64>(count, repeat: 0.0)
-                if (colWeightArray.size == 0) {
-                    colWeightArray = []
-                } else {
-                    for (i in 0..colWeightArray.size) {
-                        element = colWeightArray[i]
-                        sum += element
-                        if (sum < 100.0) {
-                            item = (100.0 - sum) / Float64(count)
-                        } else {
-                            item = 0.0
-                        }
-                    }
-                    for (j in 0..count) {
-                        otnerColWeightArray[j] = item
-                    }
-                }
-                colWeightArray = colWeightArray.concat(otnerColWeightArray)
+                element = dataOperation(element)
             }
             Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${colWeightArray}')
         } else {
@@ -100,52 +107,20 @@ public class ColumnLayout {
             .height(columnAttribute.layoutHeight)
             .width(columnAttribute.layoutWidth)
             .padding(
-                top: if(columnAttribute.padding.size == 4) {
-                    columnAttribute.padding[0]
-                } else {
-                    columnAttribute.topPadding
-                },
-                right: if(columnAttribute.padding.size == 4) {
-                    columnAttribute.padding[1]
-                } else {
-                    columnAttribute.rightPadding
-                },
-                bottom: if(columnAttribute.padding.size == 4) {
-                    columnAttribute.padding[2]
-                } else {
-                    columnAttribute.bottomPadding
-                },
-                left: if(columnAttribute.padding.size == 4) {
-                    columnAttribute.padding[3]
-                } else {
-                    columnAttribute.leftPadding
-                }
+                top: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[0], columnAttribute.topPadding),
+                right: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[1], columnAttribute.rightPadding),
+                bottom: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[2], columnAttribute.bottomPadding),
+                left: Utils.binaryExpression(columnAttribute.padding.size == 4, columnAttribute.padding[3], columnAttribute.leftPadding)
             )
         }
         .backgroundColor(columnAttribute.bgColor)
         .opacity(columnAttribute.bgOpacity)
         .zIndex(columnAttribute.zIndex)
         .margin(
-            top: if(columnAttribute.margin.size == 4) {
-                columnAttribute.margin[0]
-            } else {
-                columnAttribute.topMargin
-            },
-            right:  if(columnAttribute.margin.size == 4) {
-                columnAttribute.margin[1]
-            } else {
-                columnAttribute.rightMargin
-            },
-            bottom: if(columnAttribute.margin.size == 4) {
-                columnAttribute.margin[2]
-            } else {
-                columnAttribute.bottomMargin
-            },
-            left: if(columnAttribute.margin.size == 4) {
-                columnAttribute.margin[3]
-            } else {
-                columnAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[0], columnAttribute.topMargin),
+            right:  Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[1], columnAttribute.rightMargin),
+            bottom: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[2], columnAttribute.bottomMargin),
+            left: Utils.binaryExpression(columnAttribute.margin.size == 4, columnAttribute.margin[3], columnAttribute.leftMargin)
         )
 
     }

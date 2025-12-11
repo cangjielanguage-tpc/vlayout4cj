@@ -12,6 +12,7 @@ internal import ohos.display.*
 
 internal import std.collection.ArrayList
 internal import std.math.*
+internal import vlayout4cj.util.Utils
 
 extend<T> Option<T> {
     operator func ()(): T {

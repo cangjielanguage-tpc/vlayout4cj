@@ -40,52 +40,20 @@ public class SingleLayout {
             .width(singleAttribute.layoutWidth)
             .height(singleAttribute.layoutHeight)
             .padding(
-                top: if(singleAttribute.padding.size == 4) {
-                    singleAttribute.padding[0]
-                } else {
-                    singleAttribute.topPadding
-                },
-                right: if(singleAttribute.padding.size == 4) {
-                    singleAttribute.padding[1]
-                } else {
-                    singleAttribute.rightPadding
-                },
-                bottom: if(singleAttribute.padding.size == 4) {
-                    singleAttribute.padding[2]
-                } else {
-                    singleAttribute.bottomPadding
-                },
-                left: if(singleAttribute.padding.size == 4) {
-                    singleAttribute.padding[3]
-                } else {
-                    singleAttribute.leftPadding
-                }
+                top: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[0], singleAttribute.topPadding),
+                right: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[1], singleAttribute.rightPadding),
+                bottom: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[2], singleAttribute.bottomPadding),
+                left: Utils.binaryExpression(singleAttribute.padding.size == 4, singleAttribute.padding[3], singleAttribute.leftPadding)
             )
         }
         .backgroundColor(singleAttribute.bgColor)
         .opacity(singleAttribute.bgOpacity)
         .zIndex(singleAttribute.zIndex)
         .margin(
-            top: if(singleAttribute.margin.size == 4) {
-                singleAttribute.margin[0]
-            } else {
-                singleAttribute.topMargin
-            },
-            right:  if(singleAttribute.margin.size == 4) {
-                singleAttribute.margin[1]
-            } else {
-                singleAttribute.rightMargin
-            },
-            bottom: if(singleAttribute.margin.size == 4) {
-                singleAttribute.margin[2]
-            } else {
-                singleAttribute.bottomMargin
-            },
-            left: if(singleAttribute.margin.size == 4) {
-                singleAttribute.margin[3]
-            } else {
-                singleAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[0], singleAttribute.topMargin),
+            right:  Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[1], singleAttribute.rightMargin),
+            bottom: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[2], singleAttribute.bottomMargin),
+            left: Utils.binaryExpression(singleAttribute.margin.size == 4, singleAttribute.margin[3], singleAttribute.leftMargin)
         )
 
     }

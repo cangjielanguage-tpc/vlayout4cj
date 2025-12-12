@@ -6,7 +6,7 @@
 <img alt="" src="https://img.shields.io/badge/release-v1.0.1-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/build-pass-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/cjc-v1.0.3-brightgreen" style="display: inline-block;" />
-<img alt="" src="https://img.shields.io/badge/cjcov-97-brightgreen" style="display: inline-block;" />
+<img alt="" src="https://img.shields.io/badge/cjcov-97%25-brightgreen" style="display: inline-block;" />
 <img alt="" src="https://img.shields.io/badge/project-open-brightgreen" style="display: inline-block;" />
 </p>
 
@@ -17,7 +17,7 @@ vlayout4cj 能够处理列表、网格和其它布局在同一个视图的复杂
 ## 效果展示
 
 <p align="left">
-<img src="./doc/assets/example.gif"  width="30%">
+<img src="../doc/assets/example.gif"  width="30%">
 </p>
   
 ## 特性

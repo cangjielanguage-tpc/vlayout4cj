@@ -68,4 +68,12 @@ public class Utils {
             return resultRight
         }
     }
+
+    public static func binaryExpression(condition: Bool, resultLeft: Array<Float64>, resultRight: Array<Float64>): Array<Float64> {
+        if(condition) {
+            return resultLeft
+        } else {
+            return resultRight
+        }
+    }
 }

@@ -40,11 +40,7 @@ public class ColumnLayout {
             for (i in 0..colWeightArray.size) {
                 elementTemp = colWeightArray[i]
                 sum += elementTemp
-                if (sum < 100.0) {
-                    item = (100.0 - sum) / Float64(count)
-                } else {
-                    item = 0.0
-                }
+                item = Utils.binaryExpression(sum < 100.0, (100.0 - sum) / Float64(count), 0.0)
             }
             for (j in 0..count) {
                 otnerColWeightArray[j] = item
@@ -54,28 +50,32 @@ public class ColumnLayout {
         return elementTemp
     }
 
-    func computedColWeights() {
+    func computedColWeightsImpl() {
         var element: Float64 = 0.0
+        for (idx in 0..columnAttribute.colWeights.size) {
+            element = columnAttribute.colWeights[idx]
+            if (element < 0.0) {
+                columnAttribute.colWeights[idx] = 0.0
+            }
+        }
+        if (vLayoutData.size == columnAttribute.colWeights.size) { //数据源数组长度等于列权重数组长度时
+            colWeightArray = columnAttribute.colWeights
+        } else if (vLayoutData.size < columnAttribute.colWeights.size) { //数据源数组长度小于列权重数组长度时
+            colWeightArray = columnAttribute.colWeights
+            var arr: Array<Float64> = Array<Float64>(colWeightArray.size, repeat: 0.0)
+            for (i in 0..vLayoutData.size) {
+                arr[i] = colWeightArray[i]
+            }
+            colWeightArray = arr
+        } else { //数据源数组长度大于列权重数组长度时
+            element = dataOperation(element)
+        }
+        Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${colWeightArray}')
+    }
+
+    func computedColWeights() {
         if (columnAttribute.colWeights.size != 0) {
-            for (idx in 0..columnAttribute.colWeights.size) {
-                element = columnAttribute.colWeights[idx]
-                if (element < 0.0) {
-                    columnAttribute.colWeights[idx] = 0.0
-                }
-            }
-            if (vLayoutData.size == columnAttribute.colWeights.size) { //数据源数组长度等于列权重数组长度时
-                colWeightArray = columnAttribute.colWeights
-            } else if (vLayoutData.size < columnAttribute.colWeights.size) { //数据源数组长度小于列权重数组长度时
-                colWeightArray = columnAttribute.colWeights
-                var arr: Array<Float64> = Array<Float64>(colWeightArray.size, repeat: 0.0)
-                for (i in 0..vLayoutData.size) {
-                    arr[i] = colWeightArray[i]
-                }
-                colWeightArray = arr
-            } else { //数据源数组长度大于列权重数组长度时
-                element = dataOperation(element)
-            }
-            Hilog.info(0x000000, "computedColWeights", '${TAG} colWeightArray = ${colWeightArray}')
+            computedColWeightsImpl()
         } else {
             if(vLayoutData.size != 0) {
                 colWeightArray = Array<Float64>(vLayoutData.size, repeat: Float64(100/vLayoutData.size))

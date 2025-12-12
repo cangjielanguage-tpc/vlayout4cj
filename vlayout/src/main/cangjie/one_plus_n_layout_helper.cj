@@ -91,29 +91,30 @@ public class OneLayout {
     }
 
     func computedColWeights() {
-        if (oneAttribute.colWeights.size != 0) {
-            var weightArray: ArrayList<Float64> = ArrayList<Float64>(vLayoutData.size)
-            weightArray.add(all: oneAttribute.colWeights)
-
-            if (vLayoutData.size > oneAttribute.colWeights.size) { //数据源数组长度大于列权重数组长度时
-                match (oneAttribute.colWeights.size) {
-                	case 1 =>
-                        weightArray = computedColWeightsSize1(weightArray)
-                    case 2 =>
-                        weightArray = computedColWeightsSize2(weightArray)
-                    case 3 =>
-                        weightArray = computedColWeightsSize3(weightArray)
-                    case 4 =>
-                        weightArray = computedColWeightsSize4(weightArray)
-                    case _ =>
-                        Hilog.error(0x000000, "computedColWeights", '${TAG}computedColWeights else')
-                }
-            } else { //数据源数组长度小于等于列权重数组长度时
-                Hilog.error(0x000000, "computedColWeights", '${TAG}colWeightArray = ${colWeightArray}')
-            }
-            colWeightArray = weightArray.toArray()
-            Hilog.info(0x000000, "computedColWeights", '${TAG}colWeightArray = ${colWeightArray}')
+        if (oneAttribute.colWeights.size == 0) {
+            return
         }
+        var weightArray: ArrayList<Float64> = ArrayList<Float64>(vLayoutData.size)
+        weightArray.add(all: oneAttribute.colWeights)
+
+        if (vLayoutData.size > oneAttribute.colWeights.size) { //数据源数组长度大于列权重数组长度时
+            match (oneAttribute.colWeights.size) {
+                case 1 =>
+                    weightArray = computedColWeightsSize1(weightArray)
+                case 2 =>
+                    weightArray = computedColWeightsSize2(weightArray)
+                case 3 =>
+                    weightArray = computedColWeightsSize3(weightArray)
+                case 4 =>
+                    weightArray = computedColWeightsSize4(weightArray)
+                case _ =>
+                    Hilog.error(0x000000, "computedColWeights", '${TAG}computedColWeights else')
+            }
+        } else { //数据源数组长度小于等于列权重数组长度时
+            Hilog.error(0x000000, "computedColWeights", '${TAG}colWeightArray = ${colWeightArray}')
+        }
+        colWeightArray = weightArray.toArray()
+        Hilog.info(0x000000, "computedColWeights", '${TAG}colWeightArray = ${colWeightArray}')
     }
 
     func computedColWeightsSize1(weightArrays: ArrayList<Float64>): ArrayList<Float64>{
@@ -152,6 +153,10 @@ public class OneLayout {
                 Hilog.error(0x000000, "computedColWeights", '${TAG}computedColWeights error')
         }
         return weightArray
+    }
+
+    func traverseOperation() {
+
     }
 
     func computedColWeightsSize2(weightArrays: ArrayList<Float64>): ArrayList<Float64>{
@@ -194,20 +199,21 @@ public class OneLayout {
     }
 
     func computedRowWeights() {
-        if (oneAttribute.rowWeights.size != 0) {
-            var weightArray: ArrayList<Float64> = ArrayList<Float64>()
-            weightArray.add(all: oneAttribute.rowWeights)
-
-            if (oneAttribute.rowWeights.size == 1) {
-                if (vLayoutData.size == 3 || vLayoutData.size == 4 || vLayoutData.size == 5) {
-                    weightArray.add(100.0 - oneAttribute.rowWeights[0])
-                }
-            } else {
-                Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')
-            }
-            rowWeightArray = weightArray.toArray()
-            Hilog.info(0x000000, "computedRowWeights", '${TAG}rowWeightArray = ${rowWeightArray}')
+        if (oneAttribute.rowWeights.size == 0) {
+            return
         }
+        var weightArray: ArrayList<Float64> = ArrayList<Float64>()
+        weightArray.add(all: oneAttribute.rowWeights)
+
+        if (oneAttribute.rowWeights.size == 1) {
+            if (vLayoutData.size == 3 || vLayoutData.size == 4 || vLayoutData.size == 5) {
+                weightArray.add(100.0 - oneAttribute.rowWeights[0])
+            }
+        } else {
+            Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')
+        }
+        rowWeightArray = weightArray.toArray()
+        Hilog.info(0x000000, "computedRowWeights", '${TAG}rowWeightArray = ${rowWeightArray}')
     }
 
     func computedSize() {
@@ -232,70 +238,38 @@ public class OneLayout {
     }
 
     func computedLayoutHeight3() {
-        if (oneAttribute.hasHeader && !oneAttribute.hasFooter) {
-            layoutHeight = max(itemHeight1, itemHeight2) + itemHeight
-        } else if (!oneAttribute.hasHeader && oneAttribute.hasFooter) {
-            layoutHeight = max(itemHeight, itemHeight1) + itemHeight2
-        } else if (oneAttribute.hasHeader && oneAttribute.hasFooter) {
-            layoutHeight = itemHeight + itemHeight1 + itemHeight2
-        } else {
-            if (itemHeight1 + itemHeight2 >= itemHeight) {
-                layoutHeight = itemHeight1 + itemHeight2
-            } else {
-                layoutHeight = max(max(itemHeight, itemHeight1), itemHeight2)
-            }
+        var hasHeaderValue = Utils.binaryExpression(oneAttribute.hasHeader, 0, 1)
+        var hasFooterValue = Utils.binaryExpression(oneAttribute.hasFooter, 2, 4)
+        var value = hasHeaderValue + hasFooterValue
+        match (value) {
+            case 4 => layoutHeight = max(itemHeight1, itemHeight2) + itemHeight
+            case 3 => layoutHeight = max(itemHeight, itemHeight1) + itemHeight2
+            case 2 => layoutHeight = itemHeight + itemHeight1 + itemHeight2
+            case _ => layoutHeight = Utils.binaryExpression(itemHeight1 + itemHeight2 >= itemHeight, itemHeight1 + itemHeight2, max(max(itemHeight, itemHeight1), itemHeight2))
         }
     }
 
     func computedLayoutHeight4() {
         if (itemHeight1 >= itemHeight2 + itemHeight3) {
-            if (oneAttribute.hasHeader && !oneAttribute.hasFooter) {
-                layoutHeight = itemHeight + itemHeight1
-            } else {
-                layoutHeight = itemHeight + itemHeight2 + itemHeight3
-            }
+            layoutHeight = Utils.binaryExpression(oneAttribute.hasHeader && !oneAttribute.hasFooter, itemHeight + itemHeight1, itemHeight + itemHeight2 + itemHeight3)
         } else if (!oneAttribute.hasHeader && oneAttribute.hasFooter) {
-            if (itemHeight1 + itemHeight2 >= itemHeight) {
-                layoutHeight = itemHeight1 + itemHeight2 + itemHeight3
-            } else {
-                layoutHeight = itemHeight + itemHeight3
-            }
+            layoutHeight = Utils.binaryExpression(itemHeight1 + itemHeight2 >= itemHeight, itemHeight1 + itemHeight2 + itemHeight3, itemHeight + itemHeight3)
         } else if (oneAttribute.hasHeader && oneAttribute.hasFooter) {
             layoutHeight = itemHeight + max(itemHeight1, itemHeight2) + itemHeight3
         } else {
-            if (itemHeight1 + max(itemHeight2, itemHeight3) >= itemHeight) {
-                layoutHeight = itemHeight1 + max(itemHeight2, itemHeight3)
-            } else {
-                layoutHeight = max(max(itemHeight, itemHeight1), max(itemHeight2, itemHeight3))
-            }
+            layoutHeight = Utils.binaryExpression(itemHeight1 + max(itemHeight2, itemHeight3) >= itemHeight, itemHeight1 + max(itemHeight2, itemHeight3), max(max(itemHeight, itemHeight1), max(itemHeight2, itemHeight3)))
         }
     }
 
     func computedLayoutHeight5() {
-        if (oneAttribute.hasHeader && !oneAttribute.hasFooter) {
-            if (itemHeight2 + max(itemHeight3, itemHeight4) >= itemHeight1) {
-                layoutHeight = itemHeight + itemHeight2 + max(itemHeight3, itemHeight4)
-            } else {
-                layoutHeight = itemHeight + itemHeight1
-            }
-        } else if (!oneAttribute.hasHeader && oneAttribute.hasFooter) {
-            if (itemHeight1 + max(itemHeight2, itemHeight3) >= itemHeight) {
-                layoutHeight = itemHeight1 + max(itemHeight2, itemHeight3) + itemHeight4
-            } else {
-                layoutHeight = itemHeight + itemHeight4
-            }
-        } else if (oneAttribute.hasHeader && oneAttribute.hasFooter) {
-            if (itemHeight2 + itemHeight3 >= itemHeight1) {
-                layoutHeight = itemHeight + itemHeight2 + itemHeight3 + itemHeight4
-            } else {
-                layoutHeight = itemHeight + itemHeight1 + itemHeight4
-            }
-        } else {
-            if (itemHeight1 + max(max(itemHeight2, itemHeight3), itemHeight4) >= itemHeight) {
-                layoutHeight = itemHeight1 + max(max(itemHeight2, itemHeight3), itemHeight4)
-            } else {
-                layoutHeight = max(max(itemHeight, itemHeight1),max(max(itemHeight2, itemHeight3), itemHeight4))
-            }
+        var hasHeaderValue = Utils.binaryExpression(oneAttribute.hasHeader, 0, 1)
+        var hasFooterValue = Utils.binaryExpression(oneAttribute.hasFooter, 2, 4)
+        var value = hasHeaderValue + hasFooterValue
+        match (value) {
+            case 4 => layoutHeight = Utils.binaryExpression(itemHeight2 + max(itemHeight3, itemHeight4) >= itemHeight1, itemHeight + itemHeight2 + max(itemHeight3, itemHeight4), itemHeight + itemHeight1)
+            case 3 => layoutHeight = Utils.binaryExpression(itemHeight1 + max(itemHeight2, itemHeight3) >= itemHeight, itemHeight1 + max(itemHeight2, itemHeight3) + itemHeight4, itemHeight + itemHeight4)
+            case 2 => layoutHeight = Utils.binaryExpression(itemHeight2 + itemHeight3 >= itemHeight1, itemHeight + itemHeight2 + itemHeight3 + itemHeight4, itemHeight + itemHeight1 + itemHeight4)
+            case _ => layoutHeight = Utils.binaryExpression(itemHeight1 + max(max(itemHeight2, itemHeight3), itemHeight4) >= itemHeight, itemHeight1 + max(max(itemHeight2, itemHeight3), itemHeight4), max(max(itemHeight, itemHeight1),max(max(itemHeight2, itemHeight3), itemHeight4)))
         }
     }
 

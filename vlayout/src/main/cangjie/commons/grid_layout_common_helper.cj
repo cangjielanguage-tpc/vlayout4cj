@@ -169,11 +169,7 @@ public class GridLayoutCommon {
                         Hilog.error(0x000000, "computedRowsTemplate", '${TAG} colsSpan = ${vLayoutData[i].colsSpan}')
                     }
                     var colsSpan: Int64 = 0
-                    if (vLayoutData[i].colsSpan == 0) {
-                        colsSpan = 1
-                    } else {
-                        colsSpan = vLayoutData[i].colsSpan
-                    }
+                    colsSpan = Utils.binaryExpression(vLayoutData[i].colsSpan == 0, 1, vLayoutData[i].colsSpan)
                     sum = sum + colsSpan
                     if (temp + colsSpan > spanCount) {
                         sum = sum + spanCount - temp
@@ -217,24 +213,27 @@ public class GridLayoutCommon {
 
     func computedHeight() {
         let rowCount: Int64 = rowsTemplate.size / 4
-        if (gridLayoutAttribute.layoutHeight == 0.0 && gridLayoutAttribute.aspectRatio == 0.0) {
-            oneRowHeight = screenHeight
-            layoutHeight = oneRowHeight * Float64(rowCount)
-            computedExtraHeight(rowCount)
-
-        } else if (gridLayoutAttribute.layoutHeight == 0.0 && gridLayoutAttribute.aspectRatio > 0.0) {
-            gridWidth = screenWidth
-            oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
-            layoutHeight = oneRowHeight * Float64(rowCount)
-            computedExtraHeight(rowCount)
-        } else if (gridLayoutAttribute.layoutHeight != 0.0 && gridLayoutAttribute.aspectRatio > 0.0) {
-            gridWidth = screenWidth
-            oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
-        } else if (gridLayoutAttribute.layoutHeight != 0.0 && gridLayoutAttribute.aspectRatio == 0.0) {
-            oneRowHeight = gridLayoutAttribute.layoutHeight
-            layoutHeight = gridLayoutAttribute.layoutHeight
-        } else {
-            Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
+        var HeightValue = Utils.binaryExpression(gridLayoutAttribute.layoutHeight == 0.0, 0, 1)
+        var aspectRatioValue = Utils.binaryExpression(gridLayoutAttribute.aspectRatio > 0.0, 2, Utils.binaryExpression(gridLayoutAttribute.aspectRatio == 0.0, 4, 6))
+        var value = HeightValue + aspectRatioValue
+        match (value) {
+            case 4 =>
+                oneRowHeight = screenHeight
+                layoutHeight = oneRowHeight * Float64(rowCount)
+                computedExtraHeight(rowCount)
+            case 2 =>
+                gridWidth = screenWidth
+                oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
+                layoutHeight = oneRowHeight * Float64(rowCount)
+                computedExtraHeight(rowCount)
+            case 3 =>
+                gridWidth = screenWidth
+                oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
+            case 5 =>
+                oneRowHeight = gridLayoutAttribute.layoutHeight
+                layoutHeight = gridLayoutAttribute.layoutHeight
+            case _ =>
+                Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
         }
     }
 

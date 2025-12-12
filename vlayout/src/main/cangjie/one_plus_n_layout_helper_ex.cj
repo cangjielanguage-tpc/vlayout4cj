@@ -222,30 +222,31 @@ public class OneExLayout {
     }
 
     func computedRowWeights() {
-        if (oneExAttribute.rowWeights.size != 0) {
-            var weightArray: ArrayList<Float64> = ArrayList<Float64>()
-            weightArray.add(all: oneExAttribute.rowWeights)
-
-            if (oneExAttribute.rowWeights.size == 1) {
-                if (vLayoutData.size == 5 || vLayoutData.size == 6) {
-                    weightArray.add(oneExAttribute.rowWeights[0])
-                }
-                if (vLayoutData.size == 7) {
-                    for (j in 0..2) {
-                        weightArray.add(weightArray[0])
-                    }
-                    weightArray.add(oneExAttribute.rowWeights[0])
-                }
-            } else if(oneExAttribute.rowWeights.size == 2) {
-                if (vLayoutData.size == 7) {
-                    weightArray.add(oneExAttribute.rowWeights[0])
-                }
-            } else {
-                Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')
-            }
-            rowWeightArray = weightArray.toArray()
-            Hilog.info(0x000000, "computedRowWeights", '${TAG}rowWeightArray = ${rowWeightArray}')
+        if (oneExAttribute.rowWeights.size == 0) {
+            return
         }
+        var weightArray: ArrayList<Float64> = ArrayList<Float64>()
+        weightArray.add(all: oneExAttribute.rowWeights)
+
+        if (oneExAttribute.rowWeights.size == 1) {
+            if (vLayoutData.size == 5 || vLayoutData.size == 6) {
+                weightArray.add(oneExAttribute.rowWeights[0])
+            }
+            if (vLayoutData.size == 7) {
+                for (j in 0..2) {
+                    weightArray.add(weightArray[0])
+                }
+                weightArray.add(oneExAttribute.rowWeights[0])
+            }
+        } else if(oneExAttribute.rowWeights.size == 2) {
+            if (vLayoutData.size == 7) {
+                weightArray.add(oneExAttribute.rowWeights[0])
+            }
+        } else {
+            Hilog.error(0x000000, "computedRowWeights", '${TAG}computedRowWeights else')
+        }
+        rowWeightArray = weightArray.toArray()
+        Hilog.info(0x000000, "computedRowWeights", '${TAG}rowWeightArray = ${rowWeightArray}')
     }
 
     func computedSize() {
@@ -297,8 +298,8 @@ public class OneExLayout {
                             computedSize()
                         })
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {34.percent} else {colWeightArray[0].percent})
-                        .height(if(rowWeightArray.size == 0) {100.percent} else {rowWeightArray[0].percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 34.0, colWeightArray, 0).percent)
+                        .height(Utils.binaryExpression(rowWeightArray.size == 0, 100.0, rowWeightArray, 0).percent)
 
                         Column() {
                             Row() {
@@ -309,7 +310,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight1}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent}else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Row() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
@@ -318,9 +319,9 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight2}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent}else {colWeightArray[2].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Row() {vLayoutContent(vLayoutData[3])}
@@ -330,7 +331,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight2}')
                                     computedSize()
                                 })
-                                .width( if(colWeightArray.size == 0) {50.percent}else {colWeightArray[3].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 3).percent)
 
                                 Row() {vLayoutContent(vLayoutData[4])}
                                 .onAreaChange({oldValue, newValue =>
@@ -339,12 +340,12 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight4}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent}else {colWeightArray[4].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 4).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
                         }
                         .alignItems(HorizontalAlign.Start)
-                        .width( if(colWeightArray.size == 0) {66.percent} else {100.percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 66.0, 100.0).percent)
                     }
                 }
                 else if(vLayoutData.size == 6) {
@@ -358,7 +359,7 @@ public class OneExLayout {
                                 computedSize()
                             })
                             .alignItems(HorizontalAlign.Start)
-                            .width(if(colWeightArray.size == 0) {50.percent}else {colWeightArray[0].percent})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 0).percent)
 
                             Column() {
                                 Row() {vLayoutContent(vLayoutData[1])}
@@ -368,7 +369,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
                                 .layoutWeight(1)
 
                                 Row() {vLayoutContent(vLayoutData[2])}
@@ -378,12 +379,12 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight2}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
                                 .layoutWeight(1)
                             }
                             .alignItems(HorizontalAlign.Start)
                         }
-                        .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                        .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                         Row() {
                             Column() {vLayoutContent(vLayoutData[3])}
@@ -393,8 +394,8 @@ public class OneExLayout {
                                 Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight3}')
                                 computedSize()
                             })
-                            .width(if(colWeightArray.size == 0) {33.percent} else {colWeightArray[3].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {mWeight})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 3).percent)
+                            .layoutWeight(Utils.binaryExpression(colWeightArray.size == 0, 1, mWeight))
 
                             Column() {vLayoutContent(vLayoutData[4])}
                             .onAreaChange({oldValue, newValue =>
@@ -403,8 +404,8 @@ public class OneExLayout {
                                 Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight4}')
                                 computedSize()
                             })
-                            .width(if(colWeightArray.size == 0) {33.percent} else {colWeightArray[4].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {mWeight})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 4).percent)
+                            .layoutWeight(Utils.binaryExpression(colWeightArray.size == 0, 1, mWeight))
 
                             Column() {vLayoutContent(vLayoutData[5])}
                             .onAreaChange({oldValue, newValue =>
@@ -413,10 +414,10 @@ public class OneExLayout {
                                 Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight5}')
                                 computedSize()
                             })
-                            .width(if(colWeightArray.size == 0) {33.percent} else {colWeightArray[5].percent})
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {mWeight})
+                            .width(Utils.binaryExpression(colWeightArray.size == 0, 33.0, colWeightArray, 5).percent)
+                            .layoutWeight(Utils.binaryExpression(colWeightArray.size == 0, 1, mWeight))
                         }
-                        .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                        .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                     }.alignItems(HorizontalAlign.Start)
                 }
@@ -430,7 +431,7 @@ public class OneExLayout {
                             computedSize()
                         })
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {34.percent} else {colWeightArray[0].percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 34.0, colWeightArray, 0).percent)
 
                         Column() {
                             Row() {
@@ -441,7 +442,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight1}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[1].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 1).percent)
 
                                 Column() {vLayoutContent(vLayoutData[2])}
                                 .onAreaChange({oldValue, newValue =>
@@ -450,9 +451,9 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight2}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[2].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 2).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[0])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 0))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[3])}
@@ -462,7 +463,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight3}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[3].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 3).percent)
 
                                 Column() {vLayoutContent(vLayoutData[4])}
                                 .onAreaChange({oldValue, newValue =>
@@ -471,9 +472,9 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight4}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[4].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 4).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[1])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 1))
 
                             Row() {
                                 Column() {vLayoutContent(vLayoutData[5])}
@@ -483,7 +484,7 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight5}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[5].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 5).percent)
 
                                 Column() {vLayoutContent(vLayoutData[6])}
                                 .onAreaChange({oldValue, newValue =>
@@ -492,12 +493,12 @@ public class OneExLayout {
                                     Hilog.info(0x000000, "item", '${TAG} itemWidth = ${itemWidth}, itemHeight = ${itemHeight6}')
                                     computedSize()
                                 })
-                                .width(if(colWeightArray.size == 0) {50.percent} else {colWeightArray[6].percent})
+                                .width(Utils.binaryExpression(colWeightArray.size == 0, 50.0, colWeightArray, 6).percent)
                             }
-                            .layoutWeight(if(rowWeightArray.size == 0) {1} else {Int32(rowWeightArray[2])})
+                            .layoutWeight(Utils.binaryExpression(rowWeightArray.size == 0, 1, rowWeightArray, 2))
                         }
                         .alignItems(HorizontalAlign.Start)
-                        .width(if(colWeightArray.size == 0) {66.percent}else {100.percent})
+                        .width(Utils.binaryExpression(colWeightArray.size == 0, 66.0, 100.0).percent)
                     }
                 }
                 else {

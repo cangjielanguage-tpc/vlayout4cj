@@ -1,9 +1,8 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package ohos_app_cangjie_entry
 
 import ohos.state_macro_manage.*
+import ohos.display.Display
+import ohos.display.getDefaultDisplaySync
 
 @Entry
 @Component

@@ -1,12 +1,8 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package vlayout4cj
 
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Watch
 
 private const TAG = "vlayout BANNER_LAYOUT "
 
@@ -60,26 +56,10 @@ public class BannerLayout {
         .opacity(bannerAttribute.bgOpacity)
         .zIndex(bannerAttribute.zIndex)
         .margin(
-            top: if(bannerAttribute.margin.size == 4) {
-                bannerAttribute.margin[0]
-            } else {
-                bannerAttribute.topMargin
-            },
-            right:  if(bannerAttribute.margin.size == 4) {
-                bannerAttribute.margin[1]
-            } else {
-                bannerAttribute.rightMargin
-            },
-            bottom: if(bannerAttribute.margin.size == 4) {
-                bannerAttribute.margin[2]
-            } else {
-                bannerAttribute.bottomMargin
-            },
-            left: if(bannerAttribute.margin.size == 4) {
-                bannerAttribute.margin[3]
-            } else {
-                bannerAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 0, bannerAttribute.topMargin),
+            right:  Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 1, bannerAttribute.rightMargin),
+            bottom: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 2, bannerAttribute.bottomMargin),
+            left: Utils.binaryExpression(bannerAttribute.margin.size == 4, bannerAttribute.margin, 3, bannerAttribute.leftMargin)
         )
     }
 }

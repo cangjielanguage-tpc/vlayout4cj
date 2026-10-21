@@ -1,12 +1,8 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package vlayout4cj
 
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Watch
 
 private const TAG = 'vlayout DEFAULT_LAYOUT '
 
@@ -31,34 +27,6 @@ public class DefaultLayout {
         vLayoutData = CommonFunc.computedRange(defaultAttribute.range, vLayoutData)
     }
 
-    func computedHeight() {
-        let rowCount: Int64 = vLayoutData.size
-         if (defaultAttribute.layoutHeight.value != 0.0) {
-            match (defaultAttribute.layoutHeight.unitType) {
-            	case percent => layoutHeight = defaultAttribute.layoutHeight.value * screenHeight
-                case _ => layoutHeight = defaultAttribute.layoutHeight.value
-            }
-            oneRowHeight = layoutHeight / Float64(rowCount)
-        } else {
-            Hilog.error(0x000000, "computedHeight", TAG + 'something else computedHeight')
-        }
-    }
-
-    func computedExtraHeight(rowCount: Int64) {
-        if (defaultAttribute.dividerHeight > 0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + Float64(defaultAttribute.dividerHeight * (rowCount - 1))
-        }
-
-        if (defaultAttribute.topPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + defaultAttribute.topPadding
-        }
-
-        if (defaultAttribute.bottomPadding > 0.0 && layoutHeight > 0.0) {
-            layoutHeight = layoutHeight + defaultAttribute.bottomPadding
-        }
-    }
-
-
     func build() {
         List(space: defaultAttribute.dividerHeight) {
             ForEach(vLayoutData, itemGeneratorFunc: {item: layoutDataType, position: Int64 =>
@@ -69,67 +37,37 @@ public class DefaultLayout {
                 .onAreaChange({oldValue, newValue =>
                     listItemWidth = px2vp(newValue.width.px)().value
                     listItemHeight = px2vp(newValue.height.px)().value
-                    computedHeight()
-                     Hilog.info(0x000000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
+                    layoutHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[0]
+                    oneRowHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[1]
+                    Hilog.info(0x000000, "listItem", TAG + 'ListItem listItemWidth = ${listItemWidth}, listItemHeight = ${listItemHeight}')
                 })
             })
         }
         .onAreaChange({oldValue, newValue =>
             listWidth = px2vp(newValue.width.px)().value
             listHeight = px2vp(newValue.height.px)().value
-            computedHeight()
+            layoutHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[0]
+            oneRowHeight = CommonFunc.computedHeight(vLayoutData, defaultAttribute.layoutHeight, screenHeight, TAG)[1]
             Hilog.info(0x000000, "list", TAG + 'List listWidth = ${listWidth}, listHeight = ${listHeight}')
         })
         .width(defaultAttribute.layoutWidth)
         .height(defaultAttribute.layoutHeight)
         .edgeEffect(EdgeEffect.None)
         .padding(
-            top: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[0]
-            } else {
-                defaultAttribute.topPadding
-            },
-            right: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[1]
-            } else {
-                defaultAttribute.rightPadding
-            },
-            bottom: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[2]
-            } else {
-                defaultAttribute.bottomPadding
-            },
-            left: if(defaultAttribute.padding.size == 4) {
-                defaultAttribute.padding[3]
-            } else {
-                defaultAttribute.leftPadding
-            }
+            top: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding, 0, defaultAttribute.topPadding),
+            right: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding, 1, defaultAttribute.rightPadding),
+            bottom: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding, 2, defaultAttribute.bottomPadding),
+            left: Utils.binaryExpression(defaultAttribute.padding.size == 4, defaultAttribute.padding, 3, defaultAttribute.leftPadding)
         )
         .nestedScroll(NestedScrollOptions(NestedScrollMode.SELF_FIRST, NestedScrollMode.SELF_FIRST))
         .backgroundColor(defaultAttribute.bgColor)
         .opacity(defaultAttribute.bgOpacity)
         .zIndex(defaultAttribute.zIndex)
         .margin(
-            top: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[0]
-            } else {
-                defaultAttribute.topMargin
-            },
-            right:  if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[1]
-            } else {
-                defaultAttribute.rightMargin
-            },
-            bottom: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[2]
-            } else {
-                defaultAttribute.bottomMargin
-            },
-            left: if(defaultAttribute.margin.size == 4) {
-                defaultAttribute.margin[3]
-            } else {
-                defaultAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin, 0, defaultAttribute.topMargin),
+            right:  Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin, 1, defaultAttribute.rightMargin),
+            bottom: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin, 2, defaultAttribute.bottomMargin),
+            left: Utils.binaryExpression(defaultAttribute.margin.size == 4, defaultAttribute.margin, 3, defaultAttribute.leftMargin)
         )
     }
 }

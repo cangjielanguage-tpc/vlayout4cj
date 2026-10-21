@@ -1,6 +1,3 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package vlayout4cj
 
 import ohos.state_macro_manage.Component
@@ -116,49 +113,17 @@ public class FloatLayout {
             y: yOffset
         )
         .padding(
-            top: if(floatAttribute.padding.size == 4) {
-                floatAttribute.padding[0]
-            } else {
-                floatAttribute.topPadding
-            },
-            right: if(floatAttribute.padding.size == 4) {
-                floatAttribute.padding[1]
-            } else {
-                floatAttribute.rightPadding
-            },
-            bottom: if(floatAttribute.padding.size == 4) {
-                floatAttribute.padding[2]
-            } else {
-                floatAttribute.bottomPadding
-            },
-            left: if(floatAttribute.padding.size == 4) {
-                floatAttribute.padding[3]
-            } else {
-                floatAttribute.leftPadding
-            }
+            top: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 0, floatAttribute.topPadding),
+            right: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 1, floatAttribute.rightPadding),
+            bottom: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 2, floatAttribute.bottomPadding),
+            left: Utils.binaryExpression(floatAttribute.padding.size == 4, floatAttribute.padding, 3, floatAttribute.leftPadding)
         )
         .zIndex(floatAttribute.zIndex)
         .margin(
-            top: if(this.floatAttribute.margin.size == 4) {
-                this.floatAttribute.margin[0]
-            } else {
-                this.floatAttribute.topMargin
-            },
-            right: if(this.floatAttribute.margin.size == 4) {
-                this.floatAttribute.margin[1]
-            } else {
-                this.floatAttribute.rightMargin
-            },
-            bottom: if(this.floatAttribute.margin.size == 4) {
-                this.floatAttribute.margin[2]
-            } else {
-                this.floatAttribute.bottomMargin
-            },
-            left: if(this.floatAttribute.margin.size == 4) {
-                this.floatAttribute.margin[3]
-            } else {
-                this.floatAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 0, floatAttribute.topMargin),
+            right:  Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 1, floatAttribute.rightMargin),
+            bottom: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 2, floatAttribute.bottomMargin),
+            left: Utils.binaryExpression(floatAttribute.margin.size == 4, floatAttribute.margin, 3, floatAttribute.leftMargin)
         )
     }
 }

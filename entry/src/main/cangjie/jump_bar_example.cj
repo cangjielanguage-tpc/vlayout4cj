@@ -1,10 +1,8 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package ohos_app_cangjie_entry
 
 import ohos.state_macro_manage.*
 import std.collection.ArrayList
+import std.convert.*
 
 @Entry
 @Component
@@ -484,7 +482,7 @@ class JumpBarExample {
                 //获取Count
                 var afArr: ArrayList<Int64> = ArrayList<Int64>()
                 for (i in start..=end) {
-                    afArr.append(this.data[Int64(i)].size)
+                    afArr.add(this.data[Int64(i)].size)
                 }
                 if (this.num == 0) {
                     this.beArr = afArr.toArray()

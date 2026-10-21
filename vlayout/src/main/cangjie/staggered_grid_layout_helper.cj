@@ -1,16 +1,11 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package vlayout4cj
 
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Watch
 import std.collection.ArrayList
 
 private const TAG = 'vlayout STAGGEREDGRID_LAYOUT '
-
 
 @Component
 public class StaggeredGridLayout {
@@ -22,7 +17,7 @@ public class StaggeredGridLayout {
 
     private var displayClass: Display = getDefaultDisplaySync()
     private var screenWidth: Float64 = px2vp(Float64(displayClass.width).px)().value
-    @State var itemHeightArray: Array<Float64> = Array<Float64>(0, item: 0.0) //item高度数组
+    @State var itemHeightArray: Array<Float64> = Array<Float64>(0, repeat: 0.0) //item高度数组
     @State var itemWidth: Float64 = 0.0 //每个item的宽度
     @State var itemHeight: Float64 = 0.0//每个item的高度
     @State var staggeredWidth: Float64 = 0.0 //瀑布流的宽度
@@ -32,7 +27,7 @@ public class StaggeredGridLayout {
     private var layoutCount: Int64 = 0
 
     protected override func aboutToAppear() {
-        itemHeightArray = Array<Float64>(vLayoutData.size, item: 0.0)
+        itemHeightArray = Array<Float64>(vLayoutData.size, repeat: 0.0)
         staggeredWidth = if(staggeredGridAttribute.staggeredWidth != 0.0) {
             staggeredGridAttribute.staggeredWidth
         } else {
@@ -79,31 +74,39 @@ public class StaggeredGridLayout {
     }
 
     func computedPositionFirstLine(colHeightArr: ArrayList<Float64>, index: Int64): ArrayList<Float64>{
+        var gapValue = 300
+        var vGapValue = 30
+        var hGapValue = 3
+        gapValue = Utils.binaryExpression(staggeredGridAttribute.gap != 0.0, 100, 200)
+        vGapValue = Utils.binaryExpression(staggeredGridAttribute.vGap != 0.0, 10, 20)
+        hGapValue = Utils.binaryExpression(staggeredGridAttribute.hGap != 0.0, 1, 2)
         var colHeightArray = colHeightArr
-        if (staggeredGridAttribute.gap != 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap == 0.0) { //gap行列间距定义了
-            vLayoutData[index].top = staggeredGridAttribute.gap
-            vLayoutData[index].left = (itemWidth + staggeredGridAttribute.gap) * Float64(index) + staggeredGridAttribute.gap
-            colHeightArray.append(itemHeightArray[index] + staggeredGridAttribute.gap)
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap != 0.0 && staggeredGridAttribute.hGap == 0.0) { //vGap行间距定义了
-            vLayoutData[index].top = staggeredGridAttribute.vGap
-            vLayoutData[index].left = itemWidth * Float64(index)
-            colHeightArray.append(itemHeightArray[index] + staggeredGridAttribute.vGap)
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap != 0.0) { //hGap列间距定义了
-            vLayoutData[index].top = 0.0
-            vLayoutData[index].left = (itemWidth + staggeredGridAttribute.hGap) * Float64(index) + staggeredGridAttribute.hGap
-            colHeightArray.append(itemHeightArray[index])
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap != 0.0 && staggeredGridAttribute.hGap != 0.0) { //vGap行间距、hGap列间距同时定义了
-            vLayoutData[index].top = staggeredGridAttribute.vGap
-            vLayoutData[index].left = (itemWidth + staggeredGridAttribute.hGap) * Float64(index) + staggeredGridAttribute.hGap
-            colHeightArray.append(itemHeightArray[index] + staggeredGridAttribute.vGap)
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap == 0.0) { //gap、vGap、hGap同时未定义
-            vLayoutData[index].top = 0.0
-            vLayoutData[index].left = itemWidth * Float64(index)
-            colHeightArray.append(itemHeightArray[index])
-        } else if (staggeredGridAttribute.gap != 0.0) { //三个都定义，只走gap
-            vLayoutData[index].top = staggeredGridAttribute.gap
-            vLayoutData[index].left = (itemWidth + staggeredGridAttribute.gap) * Float64(index) + staggeredGridAttribute.gap
-            colHeightArray.append(itemHeightArray[index] + staggeredGridAttribute.gap)
+        var value = gapValue + vGapValue + hGapValue
+        match (value) {
+        	case 122 => //gap行列间距定义了
+                vLayoutData[index].top = staggeredGridAttribute.gap
+                vLayoutData[index].left = (itemWidth + staggeredGridAttribute.gap) * Float64(index) + staggeredGridAttribute.gap
+                colHeightArray.add(itemHeightArray[index] + staggeredGridAttribute.gap)
+        	case 212 => //vGap行间距定义了
+                vLayoutData[index].top = staggeredGridAttribute.vGap
+                vLayoutData[index].left = itemWidth * Float64(index)
+                colHeightArray.add(itemHeightArray[index] + staggeredGridAttribute.vGap)
+        	case 221 => //hGap列间距定义了
+                vLayoutData[index].top = 0.0
+                vLayoutData[index].left = (itemWidth + staggeredGridAttribute.hGap) * Float64(index) + staggeredGridAttribute.hGap
+                colHeightArray.add(itemHeightArray[index])
+        	case 211 => //vGap行间距、hGap列间距同时定义了
+                vLayoutData[index].top = staggeredGridAttribute.vGap
+                vLayoutData[index].left = (itemWidth + staggeredGridAttribute.hGap) * Float64(index) + staggeredGridAttribute.hGap
+                colHeightArray.add(itemHeightArray[index] + staggeredGridAttribute.vGap)
+        	case 222 => //gap、vGap、hGap同时未定义
+                vLayoutData[index].top = 0.0
+                vLayoutData[index].left = itemWidth * Float64(index)
+                colHeightArray.add(itemHeightArray[index])
+        	case _ => //三个都定义，只走gap
+                vLayoutData[index].top = staggeredGridAttribute.gap
+                vLayoutData[index].left = (itemWidth + staggeredGridAttribute.gap) * Float64(index) + staggeredGridAttribute.gap
+                colHeightArray.add(itemHeightArray[index] + staggeredGridAttribute.gap)
         }
         return colHeightArray
     }
@@ -118,30 +121,38 @@ public class StaggeredGridLayout {
                 idx = j
             }
         }
-        if (staggeredGridAttribute.gap != 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap == 0.0) { //gap行列间距定义了
-            vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.gap
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.gap
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap != 0.0 && staggeredGridAttribute.hGap == 0.0) { //vGap行间距定义了
-            vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.vGap
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.vGap
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap != 0.0) { //hGap列间距定义了
-            vLayoutData[index].top = colHeightArray[idx]
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index]
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap != 0.0 && staggeredGridAttribute.hGap != 0.0) { //vGap行间距、hGap列间距同时定义了
-            vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.vGap
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.vGap
-        } else if (staggeredGridAttribute.gap == 0.0 && staggeredGridAttribute.vGap == 0.0 && staggeredGridAttribute.hGap == 0.0) { //gap、vGap、hGap同时未定义
-            vLayoutData[index].top = colHeightArray[idx]
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index]
-        } else if (staggeredGridAttribute.gap != 0.0) { //三个都定义，只走gap
-            vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.gap
-            vLayoutData[index].left = vLayoutData[idx].left
-            colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.gap
+        var gapValue = 300
+        var vGapValue = 30
+        var hGapValue = 3
+        gapValue = Utils.binaryExpression(staggeredGridAttribute.gap != 0.0, 100, 200)
+        vGapValue = Utils.binaryExpression(staggeredGridAttribute.vGap != 0.0, 10, 20)
+        hGapValue = Utils.binaryExpression(staggeredGridAttribute.hGap != 0.0, 1, 2)
+        var value = gapValue + vGapValue + hGapValue
+        match (value) {
+        	case 122 => //gap行列间距定义了
+                vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.gap
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.gap
+        	case 212 => //vGap行间距定义了
+                vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.vGap
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.vGap
+        	case 221 => //hGap列间距定义了
+                vLayoutData[index].top = colHeightArray[idx]
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index]
+        	case 211 => //vGap行间距、hGap列间距同时定义了
+                vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.vGap
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.vGap
+        	case 222 => //gap、vGap、hGap同时未定义
+                vLayoutData[index].top = colHeightArray[idx]
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index]
+        	case _ => //三个都定义，只走gap
+                vLayoutData[index].top = colHeightArray[idx] + staggeredGridAttribute.gap
+                vLayoutData[index].left = vLayoutData[idx].left
+                colHeightArray[idx] = colHeightArray[idx] + itemHeightArray[index] + staggeredGridAttribute.gap
         }
         return colHeightArray
     }
@@ -223,52 +234,20 @@ public class StaggeredGridLayout {
                 }
             )
             .padding(
-                top: if(staggeredGridAttribute.padding.size == 4) {
-                    staggeredGridAttribute.padding[0]
-                } else {
-                    staggeredGridAttribute.topPadding
-                },
-                right: if(staggeredGridAttribute.padding.size == 4) {
-                    staggeredGridAttribute.padding[1]
-                } else {
-                    staggeredGridAttribute.rightPadding
-                },
-                bottom: if(staggeredGridAttribute.padding.size == 4) {
-                    staggeredGridAttribute.padding[2]
-                } else {
-                    staggeredGridAttribute.bottomPadding
-                },
-                left: if(staggeredGridAttribute.padding.size == 4) {
-                    staggeredGridAttribute.padding[3]
-                } else {
-                    staggeredGridAttribute.leftPadding
-                }
+                top: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 0, staggeredGridAttribute.topPadding),
+                right: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 1, staggeredGridAttribute.rightPadding),
+                bottom: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 2, staggeredGridAttribute.bottomPadding),
+                left: Utils.binaryExpression(staggeredGridAttribute.padding.size == 4, staggeredGridAttribute.padding, 3, staggeredGridAttribute.leftPadding)
             )
         }
         .backgroundColor(staggeredGridAttribute.bgColor)
         .opacity(staggeredGridAttribute.bgOpacity)
         .zIndex(staggeredGridAttribute.zIndex)
         .margin(
-            top: if(this.staggeredGridAttribute.margin.size == 4) {
-                this.staggeredGridAttribute.margin[0]
-            } else {
-                this.staggeredGridAttribute.topMargin
-            },
-            right: if(this.staggeredGridAttribute.margin.size == 4) {
-                this.staggeredGridAttribute.margin[1]
-            } else {
-                this.staggeredGridAttribute.rightMargin
-            },
-            bottom: if(this.staggeredGridAttribute.margin.size == 4) {
-                this.staggeredGridAttribute.margin[2]
-            } else {
-                this.staggeredGridAttribute.bottomMargin
-            },
-            left: if(this.staggeredGridAttribute.margin.size == 4) {
-                this.staggeredGridAttribute.margin[3]
-            } else {
-                this.staggeredGridAttribute.leftMargin
-            }
+            top: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 0, staggeredGridAttribute.topMargin),
+            right:  Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 1, staggeredGridAttribute.rightMargin),
+            bottom: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 2, staggeredGridAttribute.bottomMargin),
+            left: Utils.binaryExpression(staggeredGridAttribute.margin.size == 4, staggeredGridAttribute.margin, 3, staggeredGridAttribute.leftMargin)
         )
     }
 }

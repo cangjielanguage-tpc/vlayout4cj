@@ -1,7 +1,3 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
-
 package vlayout4cj.commons
 
 internal import ohos.base.*
@@ -12,6 +8,7 @@ internal import ohos.display.*
 
 internal import std.collection.ArrayList
 internal import std.math.*
+internal import vlayout4cj.util.Utils
 
 extend<T> Option<T> {
     operator func ()(): T {

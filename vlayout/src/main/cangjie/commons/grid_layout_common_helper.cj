@@ -1,12 +1,8 @@
-/*
- * Copyright (c) Huawei Technologies Co., Ltd. 2025-2025. All rights reserved.
- */
 package vlayout4cj.commons
 
 import ohos.state_macro_manage.Component
 import ohos.state_macro_manage.BuilderParam
 import ohos.state_macro_manage.State
-import ohos.state_macro_manage.Link
 
 @Component
 public class GridLayoutCommon {
@@ -54,7 +50,7 @@ public class GridLayoutCommon {
     func computedColumnsTemplate() {
         var element: Float64 = 0.0
         if (weights.size != 0 && spanCount != 0) { //当weights定义了，autoExpand失效
-            var cols: Array<String> = Array<String>(weights.size, item: "")
+            var cols: Array<String> = Array<String>(weights.size, repeat: "")
             if (weights.size == spanCount) { //当weights数组长度等于列数时，若数组内元素之和小于100，右侧则空出剩余部分，否则不进行空出
                 computedColumnsTemplateWeightEqualSpanCount()
             } else if (weights.size < spanCount) { //当weights数组长度小于列数时，若数组内元素之和小于100，则自动填充剩余占比
@@ -64,7 +60,7 @@ public class GridLayoutCommon {
             }
         } else { //当weight未定义时，autoExpand才有效
             if (spanCount != 0) {
-                let cols: Array<String> = Array<String>(spanCount, item: "")
+                let cols: Array<String> = Array<String>(spanCount, repeat: "")
                 for (i in 0..spanCount) {
                     element = 100.0 / Float64(spanCount)
                     cols[i] = round(Float64(element)).toString() + 'fr'
@@ -79,7 +75,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightEqualSpanCount(){
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(weights.size, item: "")
+        var cols: Array<String> = Array<String>(weights.size, repeat: "")
         for (i in 0..weights.size) {
             cols[i] = round(Float64(weights[i])).toString() + 'fr'
             element += weights[i]
@@ -95,7 +91,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightLessSpanCount(){
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(spanCount, item: "")
+        var cols: Array<String> = Array<String>(spanCount, repeat: "")
         for (i in 0..weights.size) {
             cols[i] = round(Float64(weights[i])).toString() + 'fr'
             element += weights[i]
@@ -114,7 +110,7 @@ public class GridLayoutCommon {
 
     func computedColumnsTemplateWeightElseSpanCount() {
         var element: Float64 = 0.0
-        var cols: Array<String> = Array<String>(weights.size, item: "")
+        var cols: Array<String> = Array<String>(weights.size, repeat: "")
         for (i in 0..spanCount) {
             cols[i] = (round(Float64(weights[i])).toString() + 'fr')
             element += weights[i]
@@ -136,7 +132,7 @@ public class GridLayoutCommon {
                 columnsTemplate = String.join(cols, delimiter: ' ')
             } else {
                 let temp: Int64 = spanCount * mod //列数和余子项数的公倍数
-                let newCols: Array<String> = Array<String>(temp, item: '')
+                let newCols: Array<String> = Array<String>(temp, repeat: '')
                 for (i in 0..temp) {
                     newCols[i] = trunc(Float64(100 / temp)).toString() + 'fr'
                 }
@@ -144,7 +140,7 @@ public class GridLayoutCommon {
                 columnsTemplate = String.join(cols, delimiter: ' ')
             }
             let count: Int64 = Int64(ceil(Float64(vLayoutData.size / spanCount)))
-            let rows: Array<String> = Array<String>(count, item: '1fr ')
+            let rows: Array<String> = Array<String>(count, repeat: '1fr ')
             rowsTemplate = String.join(rows, delimiter: ' ')
         } else {
             Hilog.error(0x000000, "computedColumnsTemplate", '${TAG} autoExpand false')
@@ -170,11 +166,7 @@ public class GridLayoutCommon {
                         Hilog.error(0x000000, "computedRowsTemplate", '${TAG} colsSpan = ${vLayoutData[i].colsSpan}')
                     }
                     var colsSpan: Int64 = 0
-                    if (vLayoutData[i].colsSpan == 0) {
-                        colsSpan = 1
-                    } else {
-                        colsSpan = vLayoutData[i].colsSpan
-                    }
+                    colsSpan = Utils.binaryExpression(vLayoutData[i].colsSpan == 0, 1, vLayoutData[i].colsSpan)
                     sum = sum + colsSpan
                     if (temp + colsSpan > spanCount) {
                         sum = sum + spanCount - temp
@@ -189,7 +181,7 @@ public class GridLayoutCommon {
             }
             if(sum != 0) {
                 let count: Int64 = Int64(ceil(Float64(sum / spanCount))) //获得实际行数
-                let rows: Array<String> = Array<String>(count, item: '1fr ')
+                let rows: Array<String> = Array<String>(count, repeat: '1fr ')
                 rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
             }
         }
@@ -204,7 +196,7 @@ public class GridLayoutCommon {
                 let colsSpan: Int64 = min(max(item.colsSpan, 1), columnCount)
                 item.colsSpan = colsSpan
                 if (line[line.size -1] + colsSpan > columnCount) {
-                    lines.append(colsSpan)
+                    lines.add(colsSpan)
                 } else {
                     lines[lines.size-1] += colsSpan
                 }
@@ -212,30 +204,33 @@ public class GridLayoutCommon {
             }
         }
 
-        let rows: Array<String> = Array<String>(line.size, item: '1fr ')
+        let rows: Array<String> = Array<String>(line.size, repeat: '1fr ')
         rowsTemplate = String.join(rows, delimiter: ' ') //行数为1:1
     }
 
     func computedHeight() {
         let rowCount: Int64 = rowsTemplate.size / 4
-        if (gridLayoutAttribute.layoutHeight == 0.0 && gridLayoutAttribute.aspectRatio == 0.0) {
-            oneRowHeight = screenHeight
-            layoutHeight = oneRowHeight * Float64(rowCount)
-            computedExtraHeight(rowCount)
-
-        } else if (gridLayoutAttribute.layoutHeight == 0.0 && gridLayoutAttribute.aspectRatio > 0.0) {
-            gridWidth = screenWidth
-            oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
-            layoutHeight = oneRowHeight * Float64(rowCount)
-            computedExtraHeight(rowCount)
-        } else if (gridLayoutAttribute.layoutHeight != 0.0 && gridLayoutAttribute.aspectRatio > 0.0) {
-            gridWidth = screenWidth
-            oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
-        } else if (gridLayoutAttribute.layoutHeight != 0.0 && gridLayoutAttribute.aspectRatio == 0.0) {
-            oneRowHeight = gridLayoutAttribute.layoutHeight
-            layoutHeight = gridLayoutAttribute.layoutHeight
-        } else {
-            Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
+        var HeightValue = Utils.binaryExpression(gridLayoutAttribute.layoutHeight == 0.0, 0, 1)
+        var aspectRatioValue = Utils.binaryExpression(gridLayoutAttribute.aspectRatio > 0.0, 2, Utils.binaryExpression(gridLayoutAttribute.aspectRatio == 0.0, 4, 6))
+        var value = HeightValue + aspectRatioValue
+        match (value) {
+            case 4 =>
+                oneRowHeight = screenHeight
+                layoutHeight = oneRowHeight * Float64(rowCount)
+                computedExtraHeight(rowCount)
+            case 2 =>
+                gridWidth = screenWidth
+                oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
+                layoutHeight = oneRowHeight * Float64(rowCount)
+                computedExtraHeight(rowCount)
+            case 3 =>
+                gridWidth = screenWidth
+                oneRowHeight = gridWidth / gridLayoutAttribute.aspectRatio
+            case 5 =>
+                oneRowHeight = gridLayoutAttribute.layoutHeight
+                layoutHeight = gridLayoutAttribute.layoutHeight
+            case _ =>
+                Hilog.error(0x000000, "computedHeight", '${TAG} something else computedHeight')
         }
     }
 
@@ -282,51 +277,19 @@ public class GridLayoutCommon {
             .columnsGap(gridLayoutAttribute.hGap)
             .rowsGap(gridLayoutAttribute.vGap)
             .padding(
-                top: if(gridLayoutAttribute.padding.size == 4) {
-                    gridLayoutAttribute.padding[0]
-                } else {
-                    gridLayoutAttribute.topPadding
-                },
-                right: if(gridLayoutAttribute.padding.size == 4) {
-                    gridLayoutAttribute.padding[1]
-                } else {
-                    gridLayoutAttribute.rightPadding
-                },
-                bottom: if(gridLayoutAttribute.padding.size == 4) {
-                    gridLayoutAttribute.padding[2]
-                } else {
-                    gridLayoutAttribute.bottomPadding
-                },
-                left: if(gridLayoutAttribute.padding.size == 4) {
-                    gridLayoutAttribute.padding[3]
-                } else {
-                    gridLayoutAttribute.leftPadding
-                }
+                top: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 0, gridLayoutAttribute.topPadding),
+                right: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 1, gridLayoutAttribute.rightPadding),
+                bottom: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 2, gridLayoutAttribute.bottomPadding),
+                left: Utils.binaryExpression(gridLayoutAttribute.padding.size == 4, gridLayoutAttribute.padding, 3, gridLayoutAttribute.leftPadding)
             )
             .backgroundColor(gridLayoutAttribute.bgColor)
             .opacity(gridLayoutAttribute.bgOpacity)
             .zIndex(gridLayoutAttribute.zIndex)
             .margin(
-                top: if(this.gridLayoutAttribute.margin.size == 4) {
-                    this.gridLayoutAttribute.margin[0]
-                } else {
-                    this.gridLayoutAttribute.topMargin
-                },
-                right: if(this.gridLayoutAttribute.margin.size == 4) {
-                    this.gridLayoutAttribute.margin[1]
-                } else {
-                    this.gridLayoutAttribute.rightMargin
-                },
-                bottom: if(this.gridLayoutAttribute.margin.size == 4) {
-                    this.gridLayoutAttribute.margin[2]
-                } else {
-                    this.gridLayoutAttribute.bottomMargin
-                },
-                left: if(this.gridLayoutAttribute.margin.size == 4) {
-                    this.gridLayoutAttribute.margin[3]
-                } else {
-                    this.gridLayoutAttribute.leftMargin
-                }
+                top: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 0, gridLayoutAttribute.topMargin),
+                right: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 1, gridLayoutAttribute.rightMargin),
+                bottom: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 2, gridLayoutAttribute.bottomMargin),
+                left: Utils.binaryExpression(gridLayoutAttribute.margin.size == 4, gridLayoutAttribute.margin, 3, gridLayoutAttribute.leftMargin)
             )
 
     }
